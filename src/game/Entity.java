@@ -192,6 +192,24 @@ public class Entity {
 		case Globals.ASSET_TYPE_PARKINGLOT_TRUCK:
 			imageName = Globals.PARKINGLOT_TRUCK;
 			break;
+		case Globals.ASSET_TYPE_OFFICE_BACKGROUND:
+			imageName = Globals.OFFICE_BACKGROUND;
+			break;
+		case Globals.ASSET_TYPE_OFFICE_BOSS_DESK:
+			imageName = Globals.OFFICE_BOSS_DESK;
+			break;
+		case Globals.ASSET_TYPE_OFFICE_CUBICAL_1:
+			imageName = Globals.OFFICE_CUBICAL_1;
+			break;
+		case Globals.ASSET_TYPE_OFFICE_CUBICAL_2:
+			imageName = Globals.OFFICE_CUBICAL_2;
+			break;
+		case Globals.ASSET_TYPE_OFFICE_PLANT:
+			imageName = Globals.OFFICE_PLANT;
+			break;
+		case Globals.ASSET_TYPE_OFFICE_TABLE:
+			imageName = Globals.OFFICE_TABLE;
+			break;
 		default:
 			System.out.println("INVALID ASSET TYPE! ("+entityType+")");
 		}

@@ -109,9 +109,12 @@ public class ClientConnection implements Runnable {
 					map = packet[0];
 					break;
 				case Protocol.PTYPE_DISCONNECT:
-					socketIn.read(packet, 2, 1);
+					packet[0] = Protocol.PTYPE_DESPAWN;
 					packet[1] = id;
+					packet[2] = Protocol.DESPAWN_TYPE_DISCONNECT;
 					floodMap(packet, 0, 3);
+					
+					socket.close();
 					break;
 				}
 				

@@ -36,9 +36,9 @@ public class Room {
 				r = new Bathroom();
 				r.id = Globals.ROOM_BATHROOM;
 				rooms.add(Globals.ROOM_BATHROOM, r);
-				//r  = new Office();
-				//r.id = Globals.ROOM_OFFICE;
-				//rooms.add(Globals.ROOM_OFFICE, r);
+				r  = new Office();
+				r.id = Globals.ROOM_OFFICE;
+				rooms.add(Globals.ROOM_OFFICE, r);
 			} catch (IOException e) {
 				System.out.println(e);
 			}

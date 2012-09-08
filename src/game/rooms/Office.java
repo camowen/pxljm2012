@@ -113,16 +113,34 @@ public class Office extends Room{
 			vertiRot = -Math.PI/2.0;
 			break;
 		}
-		// TODO extract these out and set IDs
-		entities.add(new Entity(reflectX(0,quarter,1)*50,reflectY(0,quarter,1)*50, 0.00, 1.0, plant));
-		entities.add(new Entity(reflectX(4,quarter,1)*50,reflectY(2,quarter,1)*50, 0.00, 1.0, plant));
-		entities.add(new Entity(reflectX(2,quarter,1)*50,reflectY(2,quarter,1)*50, 0.00, 1.0, plant));
-		entities.add(new Entity(reflectX(2,quarter,1)*50,reflectY(4,quarter,1)*50, 0.00, 1.0, plant));
-		entities.add(new Entity(reflectX(3,quarter,2)*50,reflectY(3,quarter,2)*50, 0.00,1.0,table));
-		entities.add(new Entity(reflectX(1,quarter,2)*50,reflectY(0,quarter,1)*50, horizRot,1.0,cubical2));
-		entities.add(new Entity(reflectX(3,quarter,2)*50,reflectY(0,quarter,1)*50, horizRot,1.0,cubical2));
-		entities.add(new Entity(reflectX(0,quarter,1)*50,reflectY(1,quarter,2)*50, vertiRot,1.0,cubical2));
-		entities.add(new Entity(reflectX(0,quarter,1)*50,reflectY(3,quarter,2)*50, vertiRot,1.0,cubical2));
+		
+		Entity e = new Entity(reflectX(0,quarter,1)*50,reflectY(0,quarter,1)*50, 0.00, 1.0, plant);
+		e.type = Globals.ASSET_TYPE_OFFICE_PLANT;
+		entities.add(e);
+		e = new Entity(reflectX(4,quarter,1)*50,reflectY(2,quarter,1)*50, 0.00, 1.0, plant);
+		e.type = Globals.ASSET_TYPE_OFFICE_PLANT;
+		entities.add(e);
+		e = new Entity(reflectX(2,quarter,1)*50,reflectY(2,quarter,1)*50, 0.00, 1.0, plant);
+		e.type = Globals.ASSET_TYPE_OFFICE_PLANT;
+		entities.add(e);
+		e = new Entity(reflectX(2,quarter,1)*50,reflectY(4,quarter,1)*50, 0.00, 1.0, plant);
+		e.type = Globals.ASSET_TYPE_OFFICE_PLANT;
+		entities.add(e);
+		e = new Entity(reflectX(3,quarter,2)*50,reflectY(3,quarter,2)*50, 0.00,1.0,table);
+		e.type = Globals.ASSET_TYPE_OFFICE_TABLE;
+		entities.add(e);
+		e = new Entity(reflectX(1,quarter,2)*50,reflectY(0,quarter,1)*50, horizRot,1.0,cubical2);
+		e.type = Globals.ASSET_TYPE_OFFICE_CUBICAL_2;
+		entities.add(e);
+		e = new Entity(reflectX(3,quarter,2)*50,reflectY(0,quarter,1)*50, horizRot,1.0,cubical2);
+		e.type = Globals.ASSET_TYPE_OFFICE_CUBICAL_2;
+		entities.add(e);
+		e = new Entity(reflectX(0,quarter,1)*50,reflectY(1,quarter,2)*50, vertiRot,1.0,cubical2);
+		e.type = Globals.ASSET_TYPE_OFFICE_CUBICAL_2;
+		entities.add(e);
+		e = new Entity(reflectX(0,quarter,1)*50,reflectY(3,quarter,2)*50, vertiRot,1.0,cubical2);
+		e.type = Globals.ASSET_TYPE_OFFICE_CUBICAL_2;
+		entities.add(e);
 	}
 	
 	private void style2(int quarter){
@@ -146,16 +164,34 @@ public class Office extends Room{
 			vertiRot = -Math.PI/2.0;
 			break;
 		}
-		// TODO extract these out and set IDs
-		entities.add(new Entity(reflectX(0,quarter,1)*50,reflectY(0,quarter,2)*50, vertiRot,1.0,cubical2));
-		entities.add(new Entity(reflectX(0,quarter,1)*50,reflectY(2,quarter,1)*50, vertiRot,1.0,cubical1));
-		entities.add(new Entity(reflectX(0,quarter,1)*50,reflectY(3,quarter,2)*50, vertiRot,1.0,cubical2));
-		entities.add(new Entity(reflectX(2,quarter,1)*50,reflectY(0,quarter,2)*50, -vertiRot,1.0,cubical2));
-		entities.add(new Entity(reflectX(2,quarter,1)*50,reflectY(2,quarter,1)*50, -vertiRot,1.0,cubical1));
-		entities.add(new Entity(reflectX(2,quarter,1)*50,reflectY(3,quarter,2)*50, -vertiRot,1.0,cubical2));
-		entities.add(new Entity(reflectX(3,quarter,1)*50,reflectY(0,quarter,2)*50, vertiRot,1.0,cubical2));
-		entities.add(new Entity(reflectX(3,quarter,1)*50,reflectY(2,quarter,1)*50, vertiRot,1.0,cubical1));
-		entities.add(new Entity(reflectX(3,quarter,1)*50,reflectY(3,quarter,2)*50, vertiRot,1.0,cubical2));
+		
+		Entity e = new Entity(reflectX(0,quarter,1)*50,reflectY(0,quarter,2)*50, vertiRot,1.0,cubical2);
+		e.type = Globals.ASSET_TYPE_OFFICE_CUBICAL_2;
+		entities.add(e);
+		e = new Entity(reflectX(0,quarter,1)*50,reflectY(2,quarter,1)*50, vertiRot,1.0,cubical1);
+		e.type = Globals.ASSET_TYPE_OFFICE_CUBICAL_1;
+		entities.add(e);
+		e = new Entity(reflectX(0,quarter,1)*50,reflectY(3,quarter,2)*50, vertiRot,1.0,cubical2);
+		e.type = Globals.ASSET_TYPE_OFFICE_CUBICAL_2;
+		entities.add(e);
+		e = new Entity(reflectX(2,quarter,1)*50,reflectY(0,quarter,2)*50, -vertiRot,1.0,cubical2);
+		e.type = Globals.ASSET_TYPE_OFFICE_CUBICAL_2;
+		entities.add(e);
+		e = new Entity(reflectX(2,quarter,1)*50,reflectY(2,quarter,1)*50, -vertiRot,1.0,cubical1);
+		e.type = Globals.ASSET_TYPE_OFFICE_CUBICAL_1;
+		entities.add(e);
+		e = new Entity(reflectX(2,quarter,1)*50,reflectY(3,quarter,2)*50, -vertiRot,1.0,cubical2);
+		e.type = Globals.ASSET_TYPE_OFFICE_CUBICAL_2;
+		entities.add(e);
+		e = new Entity(reflectX(3,quarter,1)*50,reflectY(0,quarter,2)*50, vertiRot,1.0,cubical2);
+		e.type = Globals.ASSET_TYPE_OFFICE_CUBICAL_2;
+		entities.add(e);
+		e = new Entity(reflectX(3,quarter,1)*50,reflectY(2,quarter,1)*50, vertiRot,1.0,cubical1);
+		e.type = Globals.ASSET_TYPE_OFFICE_CUBICAL_1;
+		entities.add(e);
+		e = new Entity(reflectX(3,quarter,1)*50,reflectY(3,quarter,2)*50, vertiRot,1.0,cubical2);
+		e.type = Globals.ASSET_TYPE_OFFICE_CUBICAL_2;
+		entities.add(e);
 	}
 	
 	private void style3(int quarter){
@@ -179,13 +215,25 @@ public class Office extends Room{
 			vertiRot = -Math.PI/2.0;
 			break;
 		}
-		// TODO extract these out and set IDs
-		entities.add(new Entity(reflectX(0,quarter,1)*50,reflectY(1,quarter,1)*50, 0.00,1.0,plant));
-		entities.add(new Entity(reflectX(1,quarter,2)*50,reflectY(1,quarter,1)*50, horizRot,1.0,bossDesk));
-		entities.add(new Entity(reflectX(3,quarter,1)*50,reflectY(1,quarter,1)*50, 0.00,1.0,plant));
-		entities.add(new Entity(reflectX(1,quarter,2)*50,reflectY(3,quarter,2)*50, 0.00,1.0,table));
-		entities.add(new Entity(reflectX(4,quarter,1)*50,reflectY(2,quarter,2)*50, vertiRot,1.0,cubical2));
-		entities.add(new Entity(reflectX(4,quarter,1)*50,reflectY(4,quarter,1)*50, vertiRot,1.0,cubical1));
+		
+		Entity e = new Entity(reflectX(0,quarter,1)*50,reflectY(1,quarter,1)*50, 0.00,1.0,plant);
+		e.type = Globals.ASSET_TYPE_OFFICE_PLANT;
+		entities.add(e);
+		e = new Entity(reflectX(1,quarter,2)*50,reflectY(1,quarter,1)*50, horizRot,1.0,bossDesk);
+		e.type = Globals.ASSET_TYPE_OFFICE_BOSS_DESK;
+		entities.add(e);
+		e = new Entity(reflectX(3,quarter,1)*50,reflectY(1,quarter,1)*50, 0.00,1.0,plant);
+		e.type = Globals.ASSET_TYPE_OFFICE_PLANT;
+		entities.add(e);
+		e = new Entity(reflectX(1,quarter,2)*50,reflectY(3,quarter,2)*50, 0.00,1.0,table);
+		e.type = Globals.ASSET_TYPE_OFFICE_TABLE;
+		entities.add(e);
+		e = new Entity(reflectX(4,quarter,1)*50,reflectY(2,quarter,2)*50, vertiRot,1.0,cubical2);
+		e.type = Globals.ASSET_TYPE_OFFICE_CUBICAL_2;
+		entities.add(e);
+		e = new Entity(reflectX(4,quarter,1)*50,reflectY(4,quarter,1)*50, vertiRot,1.0,cubical1);
+		e.type = Globals.ASSET_TYPE_OFFICE_CUBICAL_1;
+		entities.add(e);
 	}
 	
 	private void style4(int quarter){
@@ -209,19 +257,40 @@ public class Office extends Room{
 			vertiRot = -Math.PI/2.0;
 			break;
 		}
-		// TODO extract these out and set IDs
-		entities.add(new Entity(reflectX(0,quarter,1)*50,reflectY(0,quarter,1)*50, 0.00,1.0,plant));
-		entities.add(new Entity(reflectX(4,quarter,1)*50,reflectY(0,quarter,1)*50, 0.00,1.0,plant));
-		entities.add(new Entity(reflectX(0,quarter,1)*50,reflectY(4,quarter,1)*50, 0.00,1.0,plant));
-		entities.add(new Entity(reflectX(4,quarter,1)*50,reflectY(4,quarter,1)*50, 0.00,1.0,plant));
-		entities.add(new Entity(reflectX(2,quarter,1)*50,reflectY(2,quarter,1)*50, 0.00,1.0,plant));
-		// TODO extract these out and set IDs
-		entities.add(new Entity(reflectX(1,quarter,1)*50,reflectY(0,quarter,1)*50, horizRot,1.0,cubical1));
-		entities.add(new Entity(reflectX(3,quarter,1)*50,reflectY(0,quarter,1)*50, horizRot,1.0,cubical1));
-		entities.add(new Entity(reflectX(0,quarter,1)*50,reflectY(2,quarter,1)*50, vertiRot,1.0,cubical1));
-		entities.add(new Entity(reflectX(4,quarter,1)*50,reflectY(2,quarter,1)*50, -vertiRot,1.0,cubical1));
-		entities.add(new Entity(reflectX(1,quarter,1)*50,reflectY(4,quarter,1)*50, -horizRot,1.0,cubical1));
-		entities.add(new Entity(reflectX(3,quarter,1)*50,reflectY(4,quarter,1)*50, -horizRot,1.0,cubical1));
+		
+		Entity e = new Entity(reflectX(0,quarter,1)*50,reflectY(0,quarter,1)*50, 0.00,1.0,plant);
+		e.type = Globals.ASSET_TYPE_OFFICE_PLANT;
+		entities.add(e);
+		e = new Entity(reflectX(4,quarter,1)*50,reflectY(0,quarter,1)*50, 0.00,1.0,plant);
+		e.type = Globals.ASSET_TYPE_OFFICE_PLANT;
+		entities.add(e);
+		e = new Entity(reflectX(0,quarter,1)*50,reflectY(4,quarter,1)*50, 0.00,1.0,plant);
+		e.type = Globals.ASSET_TYPE_OFFICE_PLANT;
+		entities.add(e);
+		e = new Entity(reflectX(4,quarter,1)*50,reflectY(4,quarter,1)*50, 0.00,1.0,plant);
+		e.type = Globals.ASSET_TYPE_OFFICE_PLANT;
+		entities.add(e);
+		e = new Entity(reflectX(2,quarter,1)*50,reflectY(2,quarter,1)*50, 0.00,1.0,plant);
+		e.type = Globals.ASSET_TYPE_OFFICE_PLANT;
+		entities.add(e);
+		e = new Entity(reflectX(1,quarter,1)*50,reflectY(0,quarter,1)*50, horizRot,1.0,cubical1);
+		e.type = Globals.ASSET_TYPE_OFFICE_CUBICAL_1;
+		entities.add(e);
+		e = new Entity(reflectX(3,quarter,1)*50,reflectY(0,quarter,1)*50, horizRot,1.0,cubical1);
+		e.type = Globals.ASSET_TYPE_OFFICE_CUBICAL_1;
+		entities.add(e);
+		e = new Entity(reflectX(0,quarter,1)*50,reflectY(2,quarter,1)*50, vertiRot,1.0,cubical1);
+		e.type = Globals.ASSET_TYPE_OFFICE_CUBICAL_1;
+		entities.add(e);
+		e = new Entity(reflectX(4,quarter,1)*50,reflectY(2,quarter,1)*50, -vertiRot,1.0,cubical1);
+		e.type = Globals.ASSET_TYPE_OFFICE_CUBICAL_1;
+		entities.add(e);
+		e = new Entity(reflectX(1,quarter,1)*50,reflectY(4,quarter,1)*50, -horizRot,1.0,cubical1);
+		e.type = Globals.ASSET_TYPE_OFFICE_CUBICAL_1;
+		entities.add(e);
+		e = new Entity(reflectX(3,quarter,1)*50,reflectY(4,quarter,1)*50, -horizRot,1.0,cubical1);
+		e.type = Globals.ASSET_TYPE_OFFICE_CUBICAL_1;
+		entities.add(e);
 	}
 
 }

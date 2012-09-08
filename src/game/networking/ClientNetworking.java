@@ -101,9 +101,9 @@ public class ClientNetworking {
 		byte pid = data[0];
 		byte despawnType = data[1];
 		
-		// TODO remove mob {pid}
-		//if(despawnType == Protocol.DESPAWN_TYPE_DEATH)
-			// draw blood splatter
+		Enemies.mobMap.remove(pid);
+		if(despawnType == Protocol.DESPAWN_TYPE_DEATH);
+			// TODO draw blood splatter
 	}
 	
 	private static void getRoomSync() throws IOException {
@@ -175,6 +175,13 @@ public class ClientNetworking {
 		packet[1] = roomID;
 		
 		sendPacket(packet, 0, 2);
+	}
+	
+	public static void sendDisconnect() throws IOException {
+		byte[] packet = new byte[1];
+		packet[0] = Protocol.PTYPE_DISCONNECT;
+		
+		sendPacket(packet, 0, 1);
 	}
 	
 	private static void sendPacket(byte[] packet, int off, int len) throws IOException {

@@ -53,7 +53,7 @@ public class GameFrame extends JFrame {
 			
 			Player p = new Player("Daniel");
 			
-			Room r = Room.getRooms().get((int) (1+Math.random()*2));
+			Room r = Room.getRooms().get((int) (1+Math.random()*3));
 			p.setCurrentRoom(r);
 			r.addPlayer(p, 300, 300);
 			

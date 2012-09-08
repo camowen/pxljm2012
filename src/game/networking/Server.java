@@ -30,7 +30,7 @@ public class Server {
 			rooms.add(Globals.ROOM_PARKINGLOT, new ParkingLot());
 			rooms.add(Globals.ROOM_LIBRARY, new Library());
 			rooms.add(Globals.ROOM_BATHROOM, new Bathroom());
-			//rooms.add(Globals.ROOM_OFFICE, new Office());
+			rooms.add(Globals.ROOM_OFFICE, new Office());
 			
 			ServerSocket ss = new ServerSocket(PORT);
 			System.out.println("Server Listening on port "+ss.getLocalPort());

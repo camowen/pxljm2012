@@ -2,6 +2,7 @@ package game.ui;
 
 import game.Globals;
 import game.Player;
+import game.networking.ClientNetworking;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -103,7 +104,9 @@ public class InputHandler implements KeyListener, MouseListener,
 			mob.shoot();
 		}
 		if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
-			//Exit code
+			//TODO Exit code
+			if(Globals.CONNECTED)
+				//ClientNetworking.
 			System.exit(0);
 		}
 	}
