@@ -2,13 +2,13 @@ package game.rooms;
 
 import game.Entity;
 import game.Globals;
+import game.Mob;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-
 public class Office extends Room{
 	
 	private BufferedImage bossDesk;
@@ -57,6 +57,8 @@ public class Office extends Room{
 				break;
 			}
 		}
+		
+		entities.add(new Mob(300,150));
 	}
 	
 	/*   0  1

@@ -3,6 +3,7 @@ package game.ui;
 import game.Globals;
 import game.Player;
 import game.networking.ClientNetworking;
+import game.rooms.Bathroom;
 import game.rooms.Library;
 import game.rooms.Office;
 import game.rooms.ParkingLot;
@@ -56,8 +57,29 @@ public class GameFrame extends JFrame {
 			
 			Player p = new Player("Daniel");
 			Room r = new Office();
-			Room l = new Library();
-			Room q = new ParkingLot();
+			Room s = new Library();
+			Room t = new ParkingLot();
+			Room u = new Bathroom();
+			
+			r.setNorth(r);
+			r.setEast(s);
+			r.setSouth(t);
+			r.setWest(u);
+			
+			s.setNorth(r);
+			s.setEast(s);
+			s.setSouth(t);
+			s.setWest(u);
+			
+			t.setNorth(r);
+			t.setEast(s);
+			t.setSouth(t);
+			t.setWest(u);
+			
+			u.setNorth(r);
+			u.setEast(s);
+			u.setSouth(t);
+			u.setWest(u);
 			
 			p.setCurrentRoom(r);
 			r.addPlayer(p, 300, 300);
