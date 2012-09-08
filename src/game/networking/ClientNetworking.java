@@ -169,6 +169,14 @@ public class ClientNetworking {
 		sendPacket(packet, 0, 19);
 	}
 	
+	public static void sendChangeRoom(byte roomID) throws IOException {
+		byte[] packet = new byte[2];
+		packet[0] = Protocol.PTYPE_ROOM;
+		packet[1] = roomID;
+		
+		sendPacket(packet, 0, 2);
+	}
+	
 	private static void sendPacket(byte[] packet, int off, int len) throws IOException {
 		socketOut.write(packet, off, len);
 		socketOut.flush();

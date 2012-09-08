@@ -3,6 +3,7 @@ package game.networking;
 import game.Globals;
 import game.rooms.Bathroom;
 import game.rooms.Library;
+import game.rooms.Office;
 import game.rooms.ParkingLot;
 import game.rooms.Room;
 

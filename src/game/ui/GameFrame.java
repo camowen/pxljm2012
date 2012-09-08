@@ -3,10 +3,6 @@ package game.ui;
 import game.Globals;
 import game.Player;
 import game.networking.ClientNetworking;
-import game.rooms.Bathroom;
-import game.rooms.Library;
-import game.rooms.Office;
-import game.rooms.ParkingLot;
 import game.rooms.Room;
 
 import java.awt.Color;
@@ -56,33 +52,23 @@ public class GameFrame extends JFrame {
 			Globals.CONNECTED = ClientNetworking.init("192.168.0.130", 8008);
 			
 			Player p = new Player("Daniel");
-			Room r = new Office();
-			Room s = new Library();
-			Room t = new ParkingLot();
-			Room u = new Bathroom();
 			
-			r.setNorth(r);
-			r.setEast(s);
-			r.setSouth(t);
-			r.setWest(u);
-			
-			s.setNorth(r);
-			s.setEast(s);
-			s.setSouth(t);
-			s.setWest(u);
-			
-			t.setNorth(r);
-			t.setEast(s);
-			t.setSouth(t);
-			t.setWest(u);
-			
-			u.setNorth(r);
-			u.setEast(s);
-			u.setSouth(t);
-			u.setWest(u);
-			
+			Room r = Room.getRooms().get((int) (1+Math.random()*2));
 			p.setCurrentRoom(r);
 			r.addPlayer(p, 300, 300);
+			
+			for(int room=0; room<Room.getRooms().size(); room++) {
+				int westExit = (int) Math.random()*Room.getRooms().size();
+				int eastExit = (int) Math.random()*Room.getRooms().size();
+				int northExit = (int) Math.random()*Room.getRooms().size();
+				int southExit = (int) Math.random()*Room.getRooms().size();
+				
+				Room.getRooms().get(room).setWest(Room.getRooms().get(westExit));
+				Room.getRooms().get(room).setEast(Room.getRooms().get(eastExit));
+				Room.getRooms().get(room).setNorth(Room.getRooms().get(northExit));
+				Room.getRooms().get(room).setSouth(Room.getRooms().get(southExit));
+			}
+			
 			InputHandler ih = new InputHandler(p);
 			g.addKeyListener(ih);
 			g.addMouseListener(ih);

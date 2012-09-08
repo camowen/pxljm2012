@@ -14,20 +14,31 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import game.networking.ClientNetworking;
 import game.networking.Enemies;
 
 public class Room {
 
+	public byte id = 0;
+	
 	private static List<Room> rooms;
 
 	public static List<Room> getRooms() {
 		if (rooms == null) {
 			rooms = new ArrayList<Room>(6);
 			try {
-				rooms.add(Globals.ROOM_PARKINGLOT, new ParkingLot());
-				rooms.add(Globals.ROOM_LIBRARY, new Library());
-				rooms.add(Globals.ROOM_BATHROOM, new Bathroom());
-				// rooms.add(Globals.ROOM_OFFICE, new Office());
+				Room r = new ParkingLot();
+				r.id = Globals.ROOM_PARKINGLOT;
+				rooms.add(Globals.ROOM_PARKINGLOT, r);
+				r = new Library();
+				r.id = Globals.ROOM_LIBRARY;
+				rooms.add(Globals.ROOM_LIBRARY, r);
+				r = new Bathroom();
+				r.id = Globals.ROOM_BATHROOM;
+				rooms.add(Globals.ROOM_BATHROOM, r);
+				//r  = new Office();
+				//r.id = Globals.ROOM_OFFICE;
+				//rooms.add(Globals.ROOM_OFFICE, r);
 			} catch (IOException e) {
 				System.out.println(e);
 			}
@@ -172,7 +183,12 @@ public class Room {
     	this.players.add(p);
     	this.hasPlayer = true;
     	p.setCurrentRoom(this);
-    	populate();
+    	try {
+    		ClientNetworking.sendChangeRoom(id);
+    	} catch (IOException e) {
+    		System.out.println(e);
+    	}
+    	//populate();
     	p.setPositionInRoom(x, y);
     }
     

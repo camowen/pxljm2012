@@ -71,7 +71,7 @@ public class Entity {
 		return passable;
 	}
 
-	public Entity(double x, double y) {
+	protected Entity(double x, double y) {
 		this.x = x;
 		this.y = y;
 	}
@@ -189,9 +189,34 @@ public class Entity {
 			System.out.println("INVALID ASSET TYPE! ("+entityType+")");
 		}
 		
-		BufferedImage spr = ImageIO.read(new File(imageName));
+		BufferedImage sprite = ImageIO.read(new File(imageName));
 		
-		new Entity(x, y, rotation, 1.0, spr);
+		this.x = x;
+		this.y = y;
+		this.angle = rotation;
+		this.scale = 1.0;
+
+		Point2D p = new Point(sprite.getWidth(), sprite.getHeight());
+		Point2D op = new Point();
+
+		AffineTransform at = new AffineTransform();
+		at.scale(scale, scale);
+		at.rotate(rotation);
+		at.transform(p, op);
+
+		at = new AffineTransform();
+		at.scale(scale, scale);
+		at.translate(sprite.getWidth() / 2.0, sprite.getHeight() / 2.0);
+		at.rotate(rotation);
+		at.translate(-sprite.getWidth() / 2.0, -sprite.getHeight() / 2.0);
+		affine = at;
+//		this.sprite = new BufferedImage((int) Math.abs(op.getX()),
+//				(int) Math.abs(op.getY()), sprite.getType());
+//		Graphics2D s = this.sprite.createGraphics();
+//		s.drawImage(sprite, at, null);
+		this.sprite=sprite;
+		hitbox = new Rectangle((int) x, (int) y, (int) Math.abs(op.getX()),
+				(int) Math.abs(op.getY()));
 	}
 
 }
