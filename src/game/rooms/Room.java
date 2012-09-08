@@ -2,6 +2,8 @@ package game.rooms;
 
 import game.Entity;
 import game.Globals;
+import game.Mob;
+import game.networking.Enemies;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -56,6 +58,11 @@ public class Room {
 		for(Entity e : entities){
 			e.render(g,roomx,roomy);
 		}
+
+		for(Mob networkPlayer : Enemies.mobMap.values()) {
+			networkPlayer.render(g, roomx, roomy);
+		}
+
 		if(Globals.DEBUG_MODE){
 			g.setColor(Color.GREEN);
 			for(int x=0;x<12;x++){

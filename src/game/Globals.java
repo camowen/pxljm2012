@@ -26,5 +26,7 @@ public class Globals {
 	public static final String CHARACTER_FEET_2 = "img/char/char_feet2_blue.png";
 	
 	public static final boolean DEBUG_MODE = true;
+	
+	public static boolean CONNECTED = false;
 
 }

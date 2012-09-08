@@ -30,7 +30,7 @@ public class ClientConnection implements Runnable {
 	
 	private void floodMap(byte[] packet, int off, int len) throws IOException {
 		for(ClientConnection c : Server.clients)
-			if(c.map == map) // && c != this
+			if(c.map == map && c != this)
 				c.sendPacket(packet, off, len);
 	}
 	
@@ -46,7 +46,7 @@ public class ClientConnection implements Runnable {
 			
 			try{
 				socketIn.read(packet, 0, 1);
-				System.out.printf("GOT %02x\n", packet[0]);
+				//System.out.printf("GOT %02x\n", packet[0]);
 				switch(packet[0]) {
 				case Protocol.PTYPE_UPDATE:
 					packet[1] = id;
