@@ -1,7 +1,6 @@
 package game.ui;
 
 import game.Globals;
-import game.Mob;
 import game.Player;
 
 import java.awt.event.KeyEvent;
