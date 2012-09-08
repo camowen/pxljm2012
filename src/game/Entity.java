@@ -112,6 +112,7 @@ public class Entity {
 		switch(entityType) {
 		case Globals.ASSET_TYPE_BATHROOM_BACKROUND:
 			imageName = Globals.BATHROOM_BACKGROUND;
+			passable = true;
 			break;
 		case Globals.ASSET_TYPE_BATHROOM_BENCH:
 			imageName = Globals.BATHROOM_BENCH;
@@ -139,12 +140,15 @@ public class Entity {
 			break;
 		case Globals.ASSET_TYPE_LIBRARY_BACKGROUND:
 			imageName = Globals.LIBRARY_BACKGROUND;
+			passable = true;
 			break;
 		case Globals.ASSET_TYPE_LIBRARY_BOOKS_1:
 			imageName = Globals.LIBRARY_BOOKS_1;
+			passable = true;
 			break;
 		case Globals.ASSET_TYPE_LIBRARY_BOOKS_2:
 			imageName = Globals.LIBRARY_BOOKS_2;
+			passable = true;
 			break;
 		case Globals.ASSET_TYPE_LIBRARY_BOOKSHELF_1:
 			imageName = Globals.LIBRARY_BOOKSHELF_1;
@@ -169,15 +173,18 @@ public class Entity {
 			break;
 		case Globals.ASSET_TYPE_PARKINGLOT_BACKGROUND:
 			imageName = Globals.PARKINGLOT_BACKGROUND;
+			passable = true;
 			break;
 		case Globals.ASSET_TYPE_PARKINGLOT_CAR:
 			imageName = Globals.PARKINGLOT_CAR;
 			break;
 		case Globals.ASSET_TYPE_PARKINGLOT_NOPARKING:
 			imageName = Globals.PARKINGLOT_NOPARKING;
+			passable = true;
 			break;
 		case Globals.ASSET_TYPE_PARKINGLOT_PARKINGSPACE:
 			imageName = Globals.PARKINGLOT_PARKINGSPACE;
+			passable = true;
 			break;
 		case Globals.ASSET_TYPE_PARKINGLOT_RUBBISHTIP:
 			imageName = Globals.PARKINGLOT_RUBBISHTIP;
