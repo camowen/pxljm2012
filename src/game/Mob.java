@@ -26,11 +26,16 @@ public class Mob extends Entity {
 		scale = 1.0;
 		this.angle = angle;
 		passable = true;
-		sprite = new BufferedImage(Globals.PLAYER_WIDTH, Globals.PLAYER_HEIGHT,
-				BufferedImage.TYPE_4BYTE_ABGR);
+		sprite = new BufferedImage(50, 50, BufferedImage.TYPE_4BYTE_ABGR);
+		Graphics2D g = sprite.createGraphics();
+		g.setColor(Color.GREEN);
+		g.fillOval(12, 12, 25, 25);
+		g.setColor(Color.white);
+		g.fillOval(20, 0, 10, 10);
+
 		hitbox = new Rectangle((int) x, (int) y, sprite.getWidth(),
 				sprite.getHeight());
-		setImage();
+		//setImage();
 	}
 
 	// Make zombies
