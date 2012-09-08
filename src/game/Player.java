@@ -41,6 +41,7 @@ public class Player extends Mob {
 			armsIdle = ImageIO.read(new File(Globals.CHARACTER_ARMS_IDLE));
 			armsShoot = ImageIO.read(new File(Globals.CHARACTER_ARMS_SHOOT));
 			character = ImageIO.read(new File(Globals.CHARACTER_BODY));
+			sprite = new BufferedImage(Globals.PLAYER_WIDTH,Globals.PLAYER_WIDTH,BufferedImage.TYPE_4BYTE_ABGR);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
