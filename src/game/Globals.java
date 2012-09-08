@@ -3,7 +3,7 @@ package game;
 public class Globals {
 	
 	public static final String GAMENAME = "TIME FLUX";
-	public static final boolean DEBUG_MODE = false;
+	public static final boolean DEBUG_MODE = true;
 	
 	public static final int WINDOW_HEIGHT = 600;
 	public static final int WINDOW_WIDTH = 600;
@@ -57,6 +57,7 @@ public class Globals {
 	
 	public static final String FURNACE_BACKGROUND = "img/furnace/bg_furnace.png";
 	public static final String FURNACE_TILE ="img/furnace/furnace_tile1_50x50.png";
+	public static final String FURNACE_DOORS = "img/fx/doors.png";
 	
 	public static final String WAREHOUSE_BACKGROUND = "img/warehouse/bg_warehouse.png";
 	public static final String WAREHOUSE_CCUBE = "img/warehouse/warehouse_companionCube_50x50.png";
