@@ -7,10 +7,7 @@ import game.rooms.Room;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.io.File;
 
-import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 
