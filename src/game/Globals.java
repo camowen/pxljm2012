@@ -39,6 +39,13 @@ public class Globals {
 	public static final String BATHROOM_TOILET_3 = "img/bathroom/bathroom_toilet3_50x50.png";
 	public static final String BATHROOM_TOILET_4 = "img/bathroom/bathroom_toilet4_50x50.png";
 	
+	public static final String OFFICE_BACKGROUND = "img/office/bg_office.png";
+	public static final String OFFICE_BOSS_DESK = "img/office/office_bossDesk_100x50.png";
+	public static final String OFFICE_CUBICAL_1 = "img/office/office_cubical_50x50.png";
+	public static final String OFFICE_CUBICAL_2 = "img/office/office_cubical_100x50.png";
+	public static final String OFFICE_TABLE = "img/office/office_glassTable_100x100.png";
+	public static final String OFFICE_PLANT = "img/office/office_plant_50x50.png";
+	
 	public static final String CHARACTER_ARMS_IDLE = "img/char/char_arms_blue.png";
 	public static final String CHARACTER_ARMS_SHOOT = "img/char/char_armsShot_blue.png";
 	public static final String CHARACTER_BODY = "img/char/char_body_blue.png";
