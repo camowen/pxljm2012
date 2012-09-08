@@ -58,10 +58,10 @@ public class GameFrame extends JFrame {
 			r.addPlayer(p, 300, 300);
 			
 			for(int room=0; room<Room.getRooms().size(); room++) {
-				int westExit = (int) Math.random()*Room.getRooms().size();
-				int eastExit = (int) Math.random()*Room.getRooms().size();
-				int northExit = (int) Math.random()*Room.getRooms().size();
-				int southExit = (int) Math.random()*Room.getRooms().size();
+				int westExit = (int) (Math.random()*Room.getRooms().size());
+				int eastExit = (int) (Math.random()*Room.getRooms().size());
+				int northExit = (int) (Math.random()*Room.getRooms().size());
+				int southExit = (int) (Math.random()*Room.getRooms().size());
 				
 				Room.getRooms().get(room).setWest(Room.getRooms().get(westExit));
 				Room.getRooms().get(room).setEast(Room.getRooms().get(eastExit));
