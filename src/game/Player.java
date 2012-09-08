@@ -16,7 +16,7 @@ import javax.imageio.ImageIO;
 
 public class Player extends Mob {
 
-	private String name;
+//	private String name;
 
 	private BufferedImage feetIdle;
 	private BufferedImage feetStep1;

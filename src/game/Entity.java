@@ -5,24 +5,22 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.awt.Shape;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
-import java.awt.image.BufferedImageOp;
 
 public class Entity {
 
-	private double x;
-	private double y;
-	private double angle;
-	private double scale;
+	protected double x;
+	protected double y;
+	protected double angle;
+	protected double scale;
 
 	protected boolean passable;
 
-	private boolean hit = false;
+	protected boolean hit = false;
 
-	private int health = 100;
+	protected int health = 100;
 
 	protected BufferedImage sprite;
 	protected Rectangle hitbox;
@@ -82,6 +80,7 @@ public class Entity {
 		hit = true;
 	}
 
+	@SuppressWarnings("unused")
 	public void render(Graphics g, int roomx, int roomy) {
 		if (Globals.DEBUG_MODE && !passable) {
 			g.setColor(Color.RED);

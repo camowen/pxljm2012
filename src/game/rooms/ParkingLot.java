@@ -55,7 +55,6 @@ public class ParkingLot extends Room {
 		for (int i = 0; i < validDumpster.length; i++) {
 			if (Math.random() <= dumpsterChance) {
 				// Rotation?[i]
-				double rot = 0.00;
 				double scale = 0.5;
 				BufferedImage d = new BufferedImage(dumpster.getWidth(),
 						dumpster.getHeight(), dumpster.getType());

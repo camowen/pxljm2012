@@ -36,40 +36,7 @@ public class Room {
 	}
 	
 	public void render(Graphics g, int roomx, int roomy){
-		double scaleFactor = (double)Globals.WINDOW_WIDTH/(double)background.getWidth();
-		AffineTransform at = new AffineTransform();
-		at.translate(roomx, roomy);
-		at.scale(scaleFactor, scaleFactor);
-		Graphics2D g2d = (Graphics2D)g;
-		g2d.drawImage(background, at, null);
-		for(Entity e : entities){
-			e.render(g,roomx,roomy);
-		}
-
-		for(Mob networkPlayer : Enemies.mobMap.values()) {
-			networkPlayer.render(g, roomx, roomy);
-		}
-		
-		
-		if(Globals.DEBUG_MODE){
-			g.setColor(Color.GREEN);
-			for(int x=0;x<12;x++){
-				for(int y=0;y<12;y++){
-					g.drawRect(roomx+x*50,roomy+y*50,50,50);
-				}
-			}
-		}
-		
-		for(Player p : players){
-			p.render(g);
-		}
-		
-//		if(hasPlayer){
-//		 north.render(g,roomx,roomy-600,false);
-//		 east.render(g,roomx+600,roomy,false);
-//		 south.render(g,roomx,roomy+600,false);
-//		 west.render(g,roomx-600,roomy,false);
-//		}
+		render(g,roomx,roomy,false);
 	}
 	
 

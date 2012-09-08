@@ -5,9 +5,6 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 public class Mob extends Entity {
-
-	protected double x;
-	protected double y;
 	
 	protected double vx = 0;
 	protected double vy = 0;
@@ -16,8 +13,6 @@ public class Mob extends Entity {
 	
 	protected double targetX = 0.00;
 	protected double targetY = 0.00;
-	
-	//protected BufferedImage sprite;
 	
 	public Mob(double x, double y, double angle){
 		super(x,y);

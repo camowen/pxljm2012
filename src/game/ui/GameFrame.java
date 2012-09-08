@@ -1,10 +1,8 @@
 package game.ui;
 
 import game.Globals;
-import game.Mob;
 import game.Player;
 import game.networking.ClientNetworking;
-import game.networking.Enemies;
 import game.rooms.ParkingLot;
 import game.rooms.Room;
 
@@ -16,7 +14,7 @@ import javax.swing.JFrame;
 
 public class GameFrame extends JFrame {
 
-	private int p = 100;
+	private static final long serialVersionUID = 8185632274067402428L;
 
 	public GameFrame() {
 		super(Globals.GAMENAME);
@@ -63,12 +61,9 @@ public class GameFrame extends JFrame {
 			g.addMouseListener(ih);
 			g.addMouseMotionListener(ih);
 			long start = System.currentTimeMillis();
-			long allTime = 0l;
-			int frame = 0;
 			while (true) {
 				long now = System.currentTimeMillis();
 				p.move(now - start);
-				allTime += (now - start);
 				start = now;
 				g.render(p, r);
 				
