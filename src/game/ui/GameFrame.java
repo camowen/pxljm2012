@@ -4,15 +4,11 @@ import game.Globals;
 import game.Player;
 import game.networking.ClientNetworking;
 import game.rooms.Room;
-import game.rooms.Warehouse;
 
 import java.awt.Color;
 import java.awt.Graphics;
 
 import javax.swing.JFrame;
-
-import game.rooms.Stairs;
-
 
 public class GameFrame extends JFrame {
 
@@ -38,7 +34,14 @@ public class GameFrame extends JFrame {
 	}
 
 	public void render(Player p) {
-		Graphics g = getBufferStrategy().getDrawGraphics();
+		boolean done = false;
+		Graphics g = null;
+		while(!done){
+			try{
+				g = getBufferStrategy().getDrawGraphics();
+				done = true;
+			} catch(Exception e){}
+		}
 
 		g.clearRect(0, 0, Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT);
 		p.getCurrentRoom().render(g, Globals.WINDOW_WIDTH/2-p.getX(), Globals.WINDOW_HEIGHT/2-p.getY());
