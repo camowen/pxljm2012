@@ -3,6 +3,7 @@ package game.ui;
 import game.Globals;
 import game.Player;
 import game.networking.ClientNetworking;
+import game.rooms.Library;
 import game.rooms.ParkingLot;
 import game.rooms.Room;
 
@@ -35,11 +36,11 @@ public class GameFrame extends JFrame {
 		getBufferStrategy().show();
 	}
 
-	public void render(Player p, Room r) {
+	public void render(Player p) {
 		Graphics g = getBufferStrategy().getDrawGraphics();
 
 		g.clearRect(0, 0, Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT);
-		r.render(g, Globals.WINDOW_WIDTH/2-p.getX(), Globals.WINDOW_HEIGHT/2-p.getY());
+		p.getCurrentRoom().render(g, Globals.WINDOW_WIDTH/2-p.getX(), Globals.WINDOW_HEIGHT/2-p.getY());
 		//p.render(g);
 		g.dispose();
 		getBufferStrategy().show();
@@ -53,7 +54,14 @@ public class GameFrame extends JFrame {
 			Globals.CONNECTED = ClientNetworking.init("192.168.0.130", 8008);
 			
 			Player p = new Player("Daniel");
-			Room r = new ParkingLot();
+			Room r = new Library();
+			Room q = new ParkingLot();
+			
+			r.setNorth(q);
+			r.setSouth(q);
+			q.setEast(r);
+			q.setWest(r);
+			
 			p.setCurrentRoom(r);
 			r.addPlayer(p, 300, 300);
 			InputHandler ih = new InputHandler(p);
@@ -65,7 +73,7 @@ public class GameFrame extends JFrame {
 				long now = System.currentTimeMillis();
 				p.move(now - start);
 				start = now;
-				g.render(p, r);
+				g.render(p);
 				
 				if(Globals.CONNECTED)
 					ClientNetworking.poll();
