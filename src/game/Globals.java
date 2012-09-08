@@ -3,6 +3,8 @@ package game;
 public class Globals {
 	
 	public static final String GAMENAME = "TIME FLUX";
+	public static final boolean DEBUG_MODE = false;
+	
 	public static final int WINDOW_HEIGHT = 600;
 	public static final int WINDOW_WIDTH = 600;
 	
@@ -51,14 +53,24 @@ public class Globals {
 	public static final String OFFICE_TABLE = "img/office/office_glassTable_100x100.png";
 	public static final String OFFICE_PLANT = "img/office/office_plant_50x50.png";
 	
+	public static final String STAIRS_BACKGROUND = "img/stair/bg_stairs.png";
+	
+	public static final String FURNACE_BACKGROUND = "img/furnace/bg_furnace.png";
+	public static final String FURNACE_TILE ="img/furnace/furnace_tile1_50x50.png";
+	
+	public static final String WAREHOUSE_BACKGROUND = "img/warehouse/bg_warehouse.png";
+	public static final String WAREHOUSE_CCUBE = "img/warehouse/warehouse_companionCube_50x50.png";
+	public static final String WAREHOUSE_CRATE_1 ="img/warehouse/warehouse_crate01_50x50.png";
+	public static final String WAREHOUSE_CRATE_2 = "img/warehouse/warehouse_crate02_50x50.png";
+	public static final String WAREHOUSE_CRATE_3= "img/warehouse/warehouse_crateMetal01_50x50.png";
+	public static final String WAREHOUSE_FLOOR = "img/warehouse/warehouse_floorWarning_50x50.png";
+	
 	public static final String CHARACTER_ARMS_IDLE = "img/char/char_arms_blue.png";
 	public static final String CHARACTER_ARMS_SHOOT = "img/char/char_armsShot_blue.png";
 	public static final String CHARACTER_BODY = "img/char/char_body_blue.png";
 	public static final String CHARACTER_FEET_IDLE = "img/char/char_feetStand_blue.png";
 	public static final String CHARACTER_FEET_1 = "img/char/char_feet1_blue.png";
 	public static final String CHARACTER_FEET_2 = "img/char/char_feet2_blue.png";
-	
-	public static final boolean DEBUG_MODE = true;
 	
 	public static boolean CONNECTED = false;
 
@@ -99,6 +111,19 @@ public class Globals {
 	public static final byte ASSET_TYPE_OFFICE_CUBICAL_2 = 0x1d;
 	public static final byte ASSET_TYPE_OFFICE_TABLE = 0x1e;
 	public static final byte ASSET_TYPE_OFFICE_PLANT = 0x1f;
+	
+	public static final byte ASSET_TYPE_STAIRS_BACKGROUND = 0x20;
+	
+	public static final byte ASSET_TYPE_FURNACE_BACKGROUND = 0x21;
+	public static final byte ASSET_TYPE_FURNACE_TILE = 0x22;
+	
+	public static final byte ASSET_TYPE_WAREHOUSE_BACKGROUND = 0x23;
+	public static final byte ASSET_TYPE_WAREHOUSE_CCUBE = 0x24;
+	public static final byte ASSET_TYPE_WAREHOUSE_CRATE_1 = 0x25;
+	public static final byte ASSET_TYPE_WAREHOUSE_CRATE_2 = 0x26;
+	public static final byte ASSET_TYPE_WAREHOUSE_CRATE_3= 0x27;
+	public static final byte ASSET_TYPE_WAREHOUSE_FLOOR = 0x28;
+	
 	
 	// TODO remaining ASSET_TYPE finals
 }
