@@ -151,11 +151,7 @@ public class Player extends Mob {
 		pointAt();
 		
 		if(Globals.CONNECTED) {
-			try{
-				ClientNetworking.sendUpdate((float) x, (float) y, (float) vx, (float) vy, (float) angle);
-			} catch (IOException e) {
-				System.out.println(e);
-			}
+			ClientNetworking.sendUpdate((float) x, (float) y, (float) vx, (float) vy, (float) angle);
 		}
 		
 	}
