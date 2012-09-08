@@ -21,7 +21,7 @@ public class Room {
 		this.background = null;
 		entities = new ArrayList<Entity>();
 		
-		BufferedImage wall = new BufferedImage(265,5,BufferedImage.TYPE_4BYTE_ABGR);
+		BufferedImage wall = new BufferedImage(265,10,BufferedImage.TYPE_4BYTE_ABGR);
 		Graphics2D w = wall.createGraphics();
 		w.setColor(Color.black);
 		w.fillRect(0, 0, 265, 5);
@@ -30,7 +30,7 @@ public class Room {
 		entities.add(new Entity(0, 595,0,1.0, wall));
 		entities.add(new Entity(335, 595,0,1.0, wall));
 		
-		wall = new BufferedImage(5,265,BufferedImage.TYPE_4BYTE_ABGR);
+		wall = new BufferedImage(10,265,BufferedImage.TYPE_4BYTE_ABGR);
 		w = wall.createGraphics();
 		w.setColor(Color.black);
 		w.fillRect(0, 0, 5, 265);
@@ -50,6 +50,14 @@ public class Room {
 		g2d.drawImage(background, at, null);
 		for(Entity e : entities){
 			e.render(g,roomx,roomy);
+		}
+		if(Globals.DEBUG_MODE){
+			g.setColor(Color.GREEN);
+			for(int x=0;x<12;x++){
+				for(int y=0;y<12;y++){
+					g.drawRect(roomx+x*50,roomy+y*50,50,50);
+				}
+			}
 		}
 	}
 	
