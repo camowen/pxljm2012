@@ -1,6 +1,7 @@
 package game;
 
 import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
@@ -18,11 +19,29 @@ public class Mob extends Entity {
 		super(x,y);
 		this.x=x;
 		this.y=y;
+		scale = 1.0;
 		this.angle = angle;
 		passable = true;
 		sprite = new BufferedImage(Globals.PLAYER_WIDTH, Globals.PLAYER_HEIGHT, BufferedImage.TYPE_4BYTE_ABGR);
 		hitbox = new Rectangle((int)x,(int)y,sprite.getWidth(), sprite.getHeight());
 		setImage();
+	}
+	
+	//Make zombies
+	public Mob(double x, double y){
+		super(x,y);
+		this.x=x;
+		this.y=y;
+		scale = 1.0;
+		passable = false;
+		sprite = new BufferedImage(Globals.PLAYER_WIDTH, Globals.PLAYER_HEIGHT, BufferedImage.TYPE_4BYTE_ABGR);
+		Graphics2D g = sprite.createGraphics();
+		g.setColor(Color.GREEN);
+		g.fillOval(0, 0, 50,50);
+		g.setColor(Color.white);
+		g.fillOval(20, 0, 10, 10);
+		
+		hitbox = new Rectangle((int)x,(int)y,sprite.getWidth(), sprite.getHeight());
 	}
 	
 	public void move(long deltat){
@@ -60,6 +79,11 @@ public class Mob extends Entity {
 	public void pointAt(int x, int y){
 		targetX = x;
 		targetY = y;
+	}
+	
+	public void pointAt(Player p){
+		this.pointAt(p.getX(),p.getY());
+		pointAt();
 	}
 	
 	public void addVX(double vx){

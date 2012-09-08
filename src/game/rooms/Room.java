@@ -69,6 +69,9 @@ public class Room {
 		Graphics2D g2d = (Graphics2D)g;
 		g2d.drawImage(background, at, null);
 		for(Entity e : entities){
+			if(e instanceof Mob){
+				((Mob)e).pointAt(players.get(0));
+			}
 			e.render(g,roomx,roomy);
 		}
 
