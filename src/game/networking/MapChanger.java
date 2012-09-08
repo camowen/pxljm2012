@@ -1,5 +1,7 @@
 package game.networking;
 
+import game.Entity;
+
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
@@ -36,9 +38,9 @@ public class MapChanger implements Runnable {
 		
 		for(int i=0; i<numEntities; i++) {
 			Entity e = mapMap.get(map).get(i);
-			packet[3 + i*3] = e.id;
-			packet[4 + i*3] = e.xLocation;
-			packet[5 + i*3] = e.yLocation;
+			packet[3 + i*3] = e.type;
+			packet[4 + i*3] = (byte) (e.x / 50.0);
+			packet[5 + i*3] = (byte) (e.y / 50.0);
 		}
 		
 		Server.floodClients(packet, 0, 3 + numEntities*3);
@@ -46,7 +48,6 @@ public class MapChanger implements Runnable {
 	
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
 		while(true) {
 			//jumbleMap();
 			// Sleep for a little while before randomly shuffling maps again

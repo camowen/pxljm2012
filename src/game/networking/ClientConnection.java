@@ -7,6 +7,7 @@ import java.net.Socket;
 
 public class ClientConnection implements Runnable {
 
+	private Socket socket;
 	
 	private OutputStream socketOut;
 	private InputStream socketIn;
@@ -17,6 +18,9 @@ public class ClientConnection implements Runnable {
 	public ClientConnection(Socket s, byte id) {
 		
 		try{
+			socket = s;
+			this.id = id;
+			
 			socketOut = s.getOutputStream();
 			socketIn = s.getInputStream();
 			
@@ -29,9 +33,11 @@ public class ClientConnection implements Runnable {
 	}
 	
 	private void floodMap(byte[] packet, int off, int len) throws IOException {
-		for(ClientConnection c : Server.clients)
-			if(c.map == map && c != this)
+		for(ClientConnection c : Server.clients) {
+			if((c.map == map) && (c.id != id)) {
 				c.sendPacket(packet, off, len);
+			}
+		}
 	}
 	
 	public void sendPacket(byte[] packet, int off, int len) throws IOException {
@@ -41,7 +47,7 @@ public class ClientConnection implements Runnable {
 
 	@Override
 	public void run() {
-		while(true) {
+		while(socket.isConnected()) {
 			byte[] packet = new byte[50];
 			
 			try{
@@ -51,7 +57,7 @@ public class ClientConnection implements Runnable {
 				case Protocol.PTYPE_UPDATE:
 					packet[1] = id;
 					socketIn.read(packet, 2, 20);
-					floodMap(packet, 0, 22);
+					floodMap(packet, 0, 20);
 					break;
 				case Protocol.PTYPE_DESPAWN:
 					socketIn.read(packet, 1, 2);
@@ -59,6 +65,10 @@ public class ClientConnection implements Runnable {
 					break;
 				case Protocol.PTYPE_SHOT:
 					socketIn.read(packet, 1, 18);
+					if(packet[1] == id)
+						packet[1] = 0x0f;
+					else
+						packet[1] = 0x00;
 					floodMap(packet, 0, 19);
 					break;
 				case Protocol.PTYPE_ROOM:
@@ -76,6 +86,7 @@ public class ClientConnection implements Runnable {
 				System.out.println(e);
 			}
 		}
+		System.out.println("ClientConnection "+id+" disconnected.");
 	}
 	
 }

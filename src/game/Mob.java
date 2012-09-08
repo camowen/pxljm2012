@@ -35,8 +35,8 @@ public class Mob extends Entity {
 	}
 	
 	public void setImage() {
-		sprite.getGraphics().setColor(Color.RED);
-		sprite.getGraphics().fillRect(0, 0, 50, 50);
+		sprite.getGraphics().setColor(new Color(255, 255, 255, 255));
+		sprite.getGraphics().fillRect(0, 0, Globals.PLAYER_WIDTH, Globals.PLAYER_HEIGHT);
 	}
 	
 	public void networkUpdate(double xLoc, double yLoc, double dX, double dY, double orientation) {
