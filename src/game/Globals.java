@@ -57,4 +57,12 @@ public class Globals {
 	
 	public static boolean CONNECTED = false;
 
+	// ASSET TYPE FINALS
+	public static final byte ASSET_TYPE_PARKINGLOT_BACKGROUND = 0x01;
+	public static final byte ASSET_TYPE_PARKINGLOT_CAR = 0x02;
+	public static final byte ASSET_TYPE_PARKINGLOT_NOPARKING = 0x03;
+	public static final byte ASSET_TYPE_PARKINGLOT_PARKINGSPACE = 0x04;
+	public static final byte ASSET_TYPE_PARKINGLOT_RUBBISHTIP = 0x05;
+	public static final byte ASSET_TYPE_PARKINGLOT_TRUCK = 0x06;
+	
 }

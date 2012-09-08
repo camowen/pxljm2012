@@ -116,8 +116,8 @@ public class ClientNetworking {
 		socketIn.read(data, 0, numAssets * 3);
 		for(int i=0; i<numAssets; i++) {
 			byte assetID = data[i * 3];
-			byte assetX  = data[i * 3 + 1];
-			byte assetY  = data[i * 3  +2];
+			double assetX  = data[i * 3 + 1] * 50.0;
+			double assetY  = data[i * 3  +2] * 50.0;
 			
 			// TODO create Asset, add to map
 		}

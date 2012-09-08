@@ -10,9 +10,10 @@ import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 
 public class Entity {
-
-	protected double x;
-	protected double y;
+	
+	public byte type;
+	public double x;
+	public double y;
 	protected double angle;
 	protected double scale;
 

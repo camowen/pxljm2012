@@ -18,6 +18,9 @@ import game.networking.Enemies;
 public class Room {
 	
 	protected List<Entity> entities;
+	public List<Entity> getEntities() {
+		return entities;
+	}
 	protected List<Player> players;
 	protected BufferedImage background;
 	
@@ -53,6 +56,7 @@ public class Room {
 
 		for(Mob networkPlayer : Enemies.mobMap.values()) {
 			networkPlayer.render(g, roomx, roomy);
+			System.out.println("ENEMY!");
 		}
 		
 		
