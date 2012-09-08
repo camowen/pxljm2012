@@ -3,6 +3,8 @@ package game.ui;
 import game.Globals;
 import game.Player;
 import game.networking.ClientNetworking;
+import game.rooms.Library;
+import game.rooms.Office;
 import game.rooms.ParkingLot;
 import game.rooms.Room;
 
@@ -10,8 +12,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import javax.swing.JFrame;
-
-import game.rooms.*;
 
 
 public class GameFrame extends JFrame {
@@ -55,18 +55,9 @@ public class GameFrame extends JFrame {
 			Globals.CONNECTED = ClientNetworking.init("192.168.0.130", 8008);
 			
 			Player p = new Player("Daniel");
-			Room r = new Bathroom();
+			Room r = new Office();
 			Room l = new Library();
 			Room q = new ParkingLot();
-			
-			r.setNorth(q);
-			r.setSouth(q);
-			r.setEast(l);
-			r.setWest(l);
-			q.setEast(r);
-			q.setWest(r);
-			q.setNorth(l);
-			q.setSouth(l);
 			
 			p.setCurrentRoom(r);
 			r.addPlayer(p, 300, 300);
