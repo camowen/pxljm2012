@@ -39,6 +39,12 @@ public class Room {
 				r  = new Office();
 				r.id = Globals.ROOM_OFFICE;
 				rooms.add(Globals.ROOM_OFFICE, r);
+				r = new Warehouse();
+				r.id = Globals.ROOM_WAREHOUSE;
+				rooms.add(Globals.ROOM_WAREHOUSE, r);
+				r = new Stairs();
+				r.id = Globals.ROOM_STAIRS;
+				rooms.add(Globals.ROOM_STAIRS, r);
 			} catch (IOException e) {
 				System.out.println(e);
 			}

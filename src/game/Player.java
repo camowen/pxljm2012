@@ -18,12 +18,12 @@ public class Player extends Mob {
 
 //	private String name;
 
-	private BufferedImage feetIdle;
-	private BufferedImage feetStep1;
-	private BufferedImage feetStep2;
-	private BufferedImage armsIdle;
-	private BufferedImage armsShoot;
-	private BufferedImage character;
+	public static BufferedImage feetIdle;
+	public static BufferedImage feetStep1;
+	public static BufferedImage feetStep2;
+	public static BufferedImage armsIdle;
+	public static BufferedImage armsShoot;
+	public static BufferedImage character;
 	
 	private Room currentRoom;
 	

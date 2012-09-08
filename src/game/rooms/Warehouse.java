@@ -39,8 +39,6 @@ public class Warehouse extends Room {
 		south = this;
 		west = this;
 		east = this;
-		System.out.println("Done");
-		
 	}
 
 	public void populate() {

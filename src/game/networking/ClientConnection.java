@@ -105,6 +105,7 @@ public class ClientConnection implements Runnable {
 				case Protocol.PTYPE_ROOM:
 					socketIn.read(packet, 0, 1);
 					map = packet[0];
+					System.out.println("["+id+"] now in Room "+map);
 					break;
 				case Protocol.PTYPE_DISCONNECT:
 					packet[0] = Protocol.PTYPE_DESPAWN;

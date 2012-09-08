@@ -20,6 +20,8 @@ public class Mob extends Entity {
 	protected double targetY = 0.00;
 
 	protected boolean dead = false;
+	
+	private int walkFrame = 0;
 
 	public Mob(double x, double y, double angle) {
 		super(x, y);
@@ -152,15 +154,54 @@ public class Mob extends Entity {
 		return false;
 	}
 
+//	public void render(Graphics g, int roomx, int roomy) {
+//		if (!dead) {
+//			AffineTransform at = new AffineTransform();
+//			at.translate(roomx+x, roomy+y);
+//			at.translate(25, 25);
+//			at.rotate(angle);
+//			at.translate(-25, -25);
+//			Graphics2D g2d = (Graphics2D) g;
+//			g2d.drawImage(sprite, at, null);
+//		}
+//	}
+	
 	public void render(Graphics g, int roomx, int roomy) {
-		if (!dead) {
-			AffineTransform at = new AffineTransform();
-			at.translate(roomx+x, roomy+y);
-			at.translate(25, 25);
-			at.rotate(angle);
-			at.translate(-25, -25);
-			Graphics2D g2d = (Graphics2D) g;
-			g2d.drawImage(sprite, at, null);
+		if(dead) return;
+		
+		Graphics2D s = (Graphics2D) sprite.getGraphics();
+		s.setBackground(new Color(0, 0, 0, 0));
+		s.clearRect(0, 0, Globals.PLAYER_WIDTH, Globals.PLAYER_HEIGHT);
+		if(vx != 0.0 || vy != 0.0){
+			if(walkFrame < 10){
+				s.drawImage(Player.feetStep1, 0, 0, null);
+				walkFrame++;
+			} else {
+				s.drawImage(Player.feetStep2, 0, 0, null);
+				walkFrame++;
+				if(walkFrame >=20){
+					walkFrame = 0;
+				}
+			}
+		} else {
+			s.drawImage(Player.feetIdle,0,0,null);
 		}
+		
+		s.drawImage(Player.armsIdle, 0, 0, null);
+		
+		s.drawImage(Player.character,0,0,null);
+		
+		if(Globals.DEBUG_MODE){
+			s.setColor(Color.red);
+			s.drawOval(Globals.PLAYER_WIDTH/4, Globals.PLAYER_HEIGHT/4, Globals.PLAYER_WIDTH/2, Globals.PLAYER_HEIGHT/2);
+		}
+		
+		AffineTransform at = new AffineTransform();
+		at.translate(roomx+x, roomy+y);
+		at.translate(25, 25);
+		at.rotate(angle);
+		at.translate(-25, -25);
+		Graphics2D g2d = (Graphics2D) g;
+		g2d.drawImage(sprite, at, null);
 	}
 }
