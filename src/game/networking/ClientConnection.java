@@ -1,5 +1,7 @@
 package game.networking;
 
+import game.Entity;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -25,11 +27,42 @@ public class ClientConnection implements Runnable {
 			socketIn = s.getInputStream();
 			
 			System.out.println("Spawned ClientConnection "+id);
+			
+			syncMaps();
 		} catch(IOException e) {
 			System.out.println("Some Shit Happened! OHNOEZ! "+e);
 		}
 		
 		new Thread(this).start();
+	}
+	
+	private void syncMaps() throws IOException {
+		System.out.println("["+id+"]Syncing Maps...");
+		for(byte i=0; i < Server.rooms.size(); i++)
+			syncRoom(i);
+	}
+	
+	public void syncRoom(byte room) throws IOException {
+		byte numEntities = (byte) Server.rooms.get(room).getEntities().size();
+		
+		byte[] packet = new byte[3 + numEntities*4];
+		packet[0] = Protocol.PTYPE_SYNC_ROOM;
+		packet[1] = room;
+		packet[2] = numEntities;
+		
+		System.out.println("ROOM: "+room);
+		
+		for(int i=0; i<numEntities; i++) {
+			Entity e = Server.rooms.get(room).getEntities().get(i);
+			packet[3 + i*4] = e.type;
+			packet[4 + i*4] = (byte) (e.x / 25.0);
+			packet[5 + i*4] = (byte) (e.y / 25.0);
+			packet[6 + i*4] = (byte) (e.angle * 2 / Math.PI);
+			
+			System.out.println(e.type+" : "+e.x+", "+e.y+" @ "+e.angle);
+		}
+		
+		sendPacket(packet, 0, 3 + numEntities*3);
 	}
 	
 	private void floodMap(byte[] packet, int off, int len) throws IOException {

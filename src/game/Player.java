@@ -157,8 +157,6 @@ public class Player extends Mob {
 			}
 		}
 		
-		System.out.println(x+", "+y);
-		
 	}
 
 	//x within current room

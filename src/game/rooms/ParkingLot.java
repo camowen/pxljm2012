@@ -28,11 +28,11 @@ public class ParkingLot extends Room {
 	public ParkingLot() throws IOException {
 		super();
 		background = ImageIO.read(new File(Globals.PARKINGLOT_BACKGROUND));
-		dumpster = ImageIO.read(new File(Globals.PARKINGLOT_RUBBISHTIP));
 		car = ImageIO.read(new File(Globals.PARKINGLOT_CAR));
 		truck = ImageIO.read(new File(Globals.PARKINGLOT_TRUCK));
 		parkingSpace = ImageIO.read(new File(Globals.PARKINGLOT_PARKINGSPACE));
 		noParking = ImageIO.read(new File(Globals.PARKINGLOT_NOPARKING));
+		dumpster = ImageIO.read(new File(Globals.PARKINGLOT_RUBBISHTIP));
 
 		populate(); // To populate, put a creature token into play that is a
 					// copy of a creature token you control.

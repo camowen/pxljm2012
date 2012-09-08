@@ -4,6 +4,7 @@ package game.networking;
 
 import game.Entity;
 import game.Mob;
+import game.rooms.Room;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -111,7 +112,9 @@ public class ClientNetworking {
 		byte map = data[0];
 		byte numAssets = data[1];
 		
-		// TODO clear map asset list
+		Room.getRooms().get(map).getEntities().clear();
+		
+		System.out.println("GOT MAP! "+map);
 		
 		data = new byte[numAssets * 4];
 		socketIn.read(data, 0, numAssets * 4);
@@ -121,8 +124,10 @@ public class ClientNetworking {
 			double assetY  = data[i * 4 + 2] * 25.0;
 			double rotation = data[i * 4 + 3] * Math.PI / 2;
 			
+			System.out.println(assetID + " : "+assetX+", "+assetY+" @ "+rotation);
+			
 			Entity e = new Entity(assetX, assetY, rotation, assetID);
-			// TODO add entity to map
+			Room.getRooms().get(map).getEntities().add(e);
 		}
 	}
 	

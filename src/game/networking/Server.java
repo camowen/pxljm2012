@@ -1,22 +1,36 @@
 package game.networking;
 
+import game.Globals;
+import game.rooms.Bathroom;
+import game.rooms.Library;
+import game.rooms.ParkingLot;
+import game.rooms.Room;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
 public class Server {
 	public static final int PORT = 8008;
 	
+	public static List<Room> rooms = new ArrayList<Room>(6);
 	public static Set<ClientConnection> clients = new HashSet<ClientConnection>();
 	
 	// ARGS Port (Optional)
 	public static void main(String args[]) {
 		byte newClientID = 1;
-		
-		try{ 
+			
+		try{
+			rooms.add(Globals.ROOM_PARKINGLOT, new ParkingLot());
+			rooms.add(Globals.ROOM_LIBRARY, new Library());
+			rooms.add(Globals.ROOM_BATHROOM, new Bathroom());
+			//rooms.add(Globals.ROOM_OFFICE, new Office());
+			
 			ServerSocket ss = new ServerSocket(PORT);
 			System.out.println("Server Listening on port "+ss.getLocalPort());
 			

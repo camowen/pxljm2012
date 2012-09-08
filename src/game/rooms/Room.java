@@ -10,6 +10,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,8 +21,15 @@ public class Room {
 	private static List<Room> rooms;
 	public static List<Room> getRooms() {
 		if(rooms == null) {
-			rooms = new ArrayList(6);
-			// TODO finish this shit!
+			rooms = new ArrayList<Room>(6);
+			try {
+				rooms.add(Globals.ROOM_PARKINGLOT, new ParkingLot());
+				rooms.add(Globals.ROOM_LIBRARY, new Library());
+				rooms.add(Globals.ROOM_BATHROOM, new Bathroom());
+				//rooms.add(Globals.ROOM_OFFICE, new Office());
+			} catch (IOException e) {
+				System.out.println(e);
+			}
 		}
 		
 		return rooms;
@@ -66,7 +74,6 @@ public class Room {
 
 		for(Mob networkPlayer : Enemies.mobMap.values()) {
 			networkPlayer.render(g, roomx, roomy);
-			System.out.println("ENEMY!");
 		}
 		
 		

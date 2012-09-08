@@ -11,6 +11,11 @@ public class Globals {
 	public static final double MAX_VELOCITY = 150.00;
 	public static final double ONE_OVER_ROOT_2 = 1.00/Math.sqrt(2);
 	
+	public static final int ROOM_PARKINGLOT = 0;
+	public static final int ROOM_LIBRARY = 1;
+	public static final int ROOM_BATHROOM = 2;
+	public static final int ROOM_OFFICE = 3;
+	
 	public static final String PARKINGLOT_BACKGROUND = "img/parkinglot/bg_carpark.png";
 	public static final String PARKINGLOT_CAR = "img/parkinglot/carpark_car_100x50.png";
 	public static final String PARKINGLOT_NOPARKING = "img/parkinglot/carpark_noParking_100x100.png";
