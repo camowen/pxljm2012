@@ -71,10 +71,7 @@ public class GameFrame extends JFrame {
 				allTime += (now - start);
 				start = now;
 				g.render(p, r);
-				frame++;
-				if(frame%10==0){
-					System.out.printf("FPS: %f\n",frame/(allTime/1000.00));
-				}
+				
 				if(Globals.CONNECTED)
 					ClientNetworking.poll();
 			}

@@ -2,8 +2,7 @@ package game.rooms;
 
 import game.Entity;
 import game.Globals;
-import game.Mob;
-import game.networking.Enemies;
+import game.Player;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -12,8 +11,6 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
-
-import game.Player;
 
 public class Room {
 	
@@ -33,25 +30,6 @@ public class Room {
 		this.background = null;
 		entities = new ArrayList<Entity>();
 		players = new ArrayList<Player>();
-		
-		BufferedImage wall = new BufferedImage(265,10,BufferedImage.TYPE_4BYTE_ABGR);
-		Graphics2D w = wall.createGraphics();
-		w.setColor(Color.black);
-		w.fillRect(0, 0, 265, 5);
-		entities.add(new Entity(0, 0,0,1.0, wall));
-		entities.add(new Entity(335, 0,0,1.0, wall));
-		entities.add(new Entity(0, 595,0,1.0, wall));
-		entities.add(new Entity(335, 595,0,1.0, wall));
-		
-		wall = new BufferedImage(10,265,BufferedImage.TYPE_4BYTE_ABGR);
-		w = wall.createGraphics();
-		w.setColor(Color.black);
-		w.fillRect(0, 0, 5, 265);
-		entities.add(new Entity(0, 0,0,1.0, wall));
-		entities.add(new Entity(0, 335,0,1.0, wall));
-		entities.add(new Entity(595, 0,0,1.0, wall));
-		entities.add(new Entity(595, 335,0,1.0, wall));
-		
 	}
 	
 	public void render(Graphics g, int roomx, int roomy){
@@ -191,7 +169,29 @@ public class Room {
     public void addPlayer(Player p, double x, double y){
     	this.players.add(p);
     	this.hasPlayer = true;
+    	populate();
     	p.setPositionInRoom(x, y);
+    }
+    
+    public void populate(){
+    	entities.clear();
+    	BufferedImage wall = new BufferedImage(265,10,BufferedImage.TYPE_4BYTE_ABGR);
+		Graphics2D w = wall.createGraphics();
+		w.setColor(Color.black);
+		w.fillRect(0, 0, 265, 5);
+		entities.add(new Entity(0, 0,0,1.0, wall));
+		entities.add(new Entity(335, 0,0,1.0, wall));
+		entities.add(new Entity(0, 595,0,1.0, wall));
+		entities.add(new Entity(335, 595,0,1.0, wall));
+		
+		wall = new BufferedImage(10,265,BufferedImage.TYPE_4BYTE_ABGR);
+		w = wall.createGraphics();
+		w.setColor(Color.black);
+		w.fillRect(0, 0, 5, 265);
+		entities.add(new Entity(0, 0,0,1.0, wall));
+		entities.add(new Entity(0, 335,0,1.0, wall));
+		entities.add(new Entity(595, 0,0,1.0, wall));
+		entities.add(new Entity(595, 335,0,1.0, wall));
     }
 	
 }
