@@ -8,13 +8,17 @@ import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 public class Entity {
 	
 	public byte type;
 	public double x;
 	public double y;
-	protected double angle;
+	public double angle;
 	protected double scale;
 
 	protected boolean passable;
@@ -28,8 +32,7 @@ public class Entity {
 	
     protected AffineTransform affine;
 
-	public Entity(double x, double y, double rotation, double scale,
-			BufferedImage sprite) {
+	public Entity(double x, double y, double rotation, double scale, BufferedImage sprite) {
 		this.x = x;
 		this.y = y;
 		this.angle = rotation;
@@ -102,6 +105,93 @@ public class Entity {
 		at.rotate(angle);
 		at.translate(-sprite.getWidth() / 2.0, -sprite.getHeight() / 2.0);
 		g2d.drawImage(sprite, at, null);
+	}
+	
+	public Entity(double x, double y, double rotation, byte entityType) throws IOException {
+		String imageName = "";
+		switch(entityType) {
+		case Globals.ASSET_TYPE_BATHROOM_BACKROUND:
+			imageName = Globals.BATHROOM_BACKGROUND;
+			break;
+		case Globals.ASSET_TYPE_BATHROOM_BENCH:
+			imageName = Globals.BATHROOM_BENCH;
+			break;
+		case Globals.ASSET_TYPE_BATHROOM_LOCKER:
+			imageName = Globals.BATHROOM_LOCKER;
+			break;
+		case Globals.ASSET_TYPE_BATHROOM_SINK:
+			imageName = Globals.BATHROOM_SINK;
+			break;
+		case Globals.ASSET_TYPE_BATHROOM_SINK2:
+			imageName = Globals.BATHROOM_SINK2;
+			break;
+		case Globals.ASSET_TYPE_BATHROOM_TOILET_1:
+			imageName = Globals.BATHROOM_TOILET_1;
+			break;
+		case Globals.ASSET_TYPE_BATHROOM_TOILET_2:
+			imageName = Globals.BATHROOM_TOILET_2;
+			break;
+		case Globals.ASSET_TYPE_BATHROOM_TOILET_3:
+			imageName = Globals.BATHROOM_TOILET_3;
+			break;
+		case Globals.ASSET_TYPE_BATHROOM_TOILET_4:
+			imageName = Globals.BATHROOM_TOILET_4;
+			break;
+		case Globals.ASSET_TYPE_LIBRARY_BACKGROUND:
+			imageName = Globals.LIBRARY_BACKGROUND;
+			break;
+		case Globals.ASSET_TYPE_LIBRARY_BOOKS_1:
+			imageName = Globals.LIBRARY_BOOKS_1;
+			break;
+		case Globals.ASSET_TYPE_LIBRARY_BOOKS_2:
+			imageName = Globals.LIBRARY_BOOKS_2;
+			break;
+		case Globals.ASSET_TYPE_LIBRARY_BOOKSHELF_1:
+			imageName = Globals.LIBRARY_BOOKSHELF_1;
+			break;
+		case Globals.ASSET_TYPE_LIBRARY_BOOKSHELF_2:
+			imageName = Globals.LIBRARY_BOOKSHELF_2;
+			break;
+		case Globals.ASSET_TYPE_LIBRARY_BOOKSHELF_MESS:
+			imageName = Globals.LIBRARY_BOOKSHELF_MESS;
+			break;
+		case Globals.ASSET_TYPE_LIBRARY_COFFEETABLE:
+			imageName = Globals.LIBRARY_COFFEETABLE;
+			break;
+		case Globals.ASSET_TYPE_LIBRARY_COUCH_1:
+			imageName = Globals.LIBRARY_COUCH_1;
+			break;
+		case Globals.ASSET_TYPE_LIBRARY_COUCH_2:
+			imageName = Globals.LIBRARY_COUCH_2;
+			break;
+		case Globals.ASSET_TYPE_LIBRARY_DESK:
+			imageName = Globals.LIBRARY_DESK;
+			break;
+		case Globals.ASSET_TYPE_PARKINGLOT_BACKGROUND:
+			imageName = Globals.PARKINGLOT_BACKGROUND;
+			break;
+		case Globals.ASSET_TYPE_PARKINGLOT_CAR:
+			imageName = Globals.PARKINGLOT_CAR;
+			break;
+		case Globals.ASSET_TYPE_PARKINGLOT_NOPARKING:
+			imageName = Globals.PARKINGLOT_NOPARKING;
+			break;
+		case Globals.ASSET_TYPE_PARKINGLOT_PARKINGSPACE:
+			imageName = Globals.PARKINGLOT_PARKINGSPACE;
+			break;
+		case Globals.ASSET_TYPE_PARKINGLOT_RUBBISHTIP:
+			imageName = Globals.PARKINGLOT_RUBBISHTIP;
+			break;
+		case Globals.ASSET_TYPE_PARKINGLOT_TRUCK:
+			imageName = Globals.PARKINGLOT_TRUCK;
+			break;
+		default:
+			System.out.println("INVALID ASSET TYPE! ("+entityType+")");
+		}
+		
+		BufferedImage spr = ImageIO.read(new File(imageName));
+		
+		new Entity(x, y, rotation, 1.0, spr);
 	}
 
 }

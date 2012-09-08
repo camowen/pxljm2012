@@ -58,4 +58,26 @@ public class Globals {
 	public static final byte ASSET_TYPE_PARKINGLOT_RUBBISHTIP = 0x05;
 	public static final byte ASSET_TYPE_PARKINGLOT_TRUCK = 0x06;
 	
+	public static final byte ASSET_TYPE_LIBRARY_BACKGROUND = 0x07;
+	public static final byte ASSET_TYPE_LIBRARY_BOOKS_1 = 0x08;
+	public static final byte ASSET_TYPE_LIBRARY_BOOKS_2 = 0x09;
+	public static final byte ASSET_TYPE_LIBRARY_BOOKSHELF_1 = 0x0a;
+	public static final byte ASSET_TYPE_LIBRARY_BOOKSHELF_2 = 0x0b;
+	public static final byte ASSET_TYPE_LIBRARY_BOOKSHELF_MESS = 0x0c;
+	public static final byte ASSET_TYPE_LIBRARY_COFFEETABLE = 0x0d;
+	public static final byte ASSET_TYPE_LIBRARY_COUCH_1 = 0x0e;
+	public static final byte ASSET_TYPE_LIBRARY_COUCH_2 = 0x0f;
+	public static final byte ASSET_TYPE_LIBRARY_DESK = 0x10;
+	
+	public static final byte ASSET_TYPE_BATHROOM_BACKROUND = 0x11;
+	public static final byte ASSET_TYPE_BATHROOM_BENCH = 0x12;
+	public static final byte ASSET_TYPE_BATHROOM_LOCKER = 0x13;
+	public static final byte ASSET_TYPE_BATHROOM_SINK = 0x14;
+	public static final byte ASSET_TYPE_BATHROOM_SINK2 = 0x15;
+	public static final byte ASSET_TYPE_BATHROOM_TOILET_1 = 0x16;
+	public static final byte ASSET_TYPE_BATHROOM_TOILET_2 = 0x17;
+	public static final byte ASSET_TYPE_BATHROOM_TOILET_3 = 0x18;
+	public static final byte ASSET_TYPE_BATHROOM_TOILET_4 = 0x19;
+	
+	// TODO remaining ASSET_TYPE finals
 }

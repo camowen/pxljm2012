@@ -17,6 +17,16 @@ import game.networking.Enemies;
 
 public class Room {
 	
+	private static List<Room> rooms;
+	public static List<Room> getRooms() {
+		if(rooms == null) {
+			rooms = new ArrayList(6);
+			// TODO finish this shit!
+		}
+		
+		return rooms;
+	}
+	
 	protected List<Entity> entities;
 	public List<Entity> getEntities() {
 		return entities;

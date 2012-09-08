@@ -2,6 +2,7 @@ package game.networking;
 
 
 
+import game.Entity;
 import game.Mob;
 
 import java.io.IOException;
@@ -112,14 +113,16 @@ public class ClientNetworking {
 		
 		// TODO clear map asset list
 		
-		data = new byte[numAssets * 3];
-		socketIn.read(data, 0, numAssets * 3);
+		data = new byte[numAssets * 4];
+		socketIn.read(data, 0, numAssets * 4);
 		for(int i=0; i<numAssets; i++) {
-			byte assetID = data[i * 3];
-			double assetX  = data[i * 3 + 1] * 50.0;
-			double assetY  = data[i * 3  +2] * 50.0;
+			byte assetID = data[i * 4];
+			double assetX  = data[i * 4 + 1] * 25.0;
+			double assetY  = data[i * 4 + 2] * 25.0;
+			double rotation = data[i * 4 + 3] * Math.PI / 2;
 			
-			// TODO create Asset, add to map
+			Entity e = new Entity(assetX, assetY, rotation, assetID);
+			// TODO add entity to map
 		}
 	}
 	
