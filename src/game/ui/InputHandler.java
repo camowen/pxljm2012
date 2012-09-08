@@ -102,6 +102,10 @@ public class InputHandler implements KeyListener, MouseListener,
 		if(e.getKeyCode() == KeyEvent.VK_SPACE){
 			mob.shoot();
 		}
+		if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
+			//Exit code
+			System.exit(0);
+		}
 	}
 
 	@Override

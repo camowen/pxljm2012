@@ -36,6 +36,11 @@ public class ParkingLot extends Room {
 		noParking = ImageIO.read(new File(Globals.PARKINGLOT_NOPARKING));
 		
 		populate(); //To populate, put a creature token into play that is a copy of a creature token you control.
+		
+		north = this;
+		south = this;
+		west = this;
+		east = this;
 	}
 	
 	private void populate(){

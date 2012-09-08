@@ -37,7 +37,7 @@ public class GameFrame extends JFrame {
 		Graphics g = getBufferStrategy().getDrawGraphics();
 
 		g.clearRect(0, 0, Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT);
-		r.render(g, Globals.WINDOW_WIDTH/2-p.getX(), Globals.WINDOW_HEIGHT/2-p.getY());
+		r.render(g, Globals.WINDOW_WIDTH/2-p.getX(), Globals.WINDOW_HEIGHT/2-p.getY(),true);
 		p.render(g);
 		g.dispose();
 		getBufferStrategy().show();

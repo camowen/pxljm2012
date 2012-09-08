@@ -16,6 +16,11 @@ public class Room {
 	protected List<Entity> entities;
 	protected BufferedImage background;
 	
+	protected Room north;
+	protected Room east;
+	protected Room south;
+	protected Room west;
+	
 	public Room(){
 		
 		this.background = null;
@@ -41,7 +46,7 @@ public class Room {
 		
 	}
 	
-	public void render(Graphics g, int roomx, int roomy){
+	public void render(Graphics g, int roomx, int roomy, boolean hasPlayer){
 		double scaleFactor = (double)Globals.WINDOW_WIDTH/(double)background.getWidth();
 		AffineTransform at = new AffineTransform();
 		at.translate(roomx, roomy);
@@ -59,6 +64,12 @@ public class Room {
 				}
 			}
 		}
+		if(hasPlayer){
+		 north.render(g,roomx,roomy-600,false);
+		 east.render(g,roomx+600,roomy,false);
+		 south.render(g,roomx,roomy+600,false);
+		 west.render(g,roomx-600,roomy,false);
+		}
 	}
 	
 	public boolean canMove(double playerX, double playerY){
@@ -66,6 +77,21 @@ public class Room {
 			if(e.contains(playerX, playerY)){
 				return false;
 			}
+		}
+		if(playerX < 0){
+			//Move to west room
+			System.out.println("Moving to west room");
+		}
+		
+		if(playerX > 600){
+			//Move east
+			System.out.println("Moving to east room");
+		}
+		if(playerY < 0){
+			System.out.println("Moving to north room");
+		}
+		if(playerY > 600){
+			System.out.println("Moving to south room");
 		}
 		return true;
 	}
