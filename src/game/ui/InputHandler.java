@@ -55,7 +55,7 @@ public class InputHandler implements KeyListener, MouseListener,
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_LEFT && !left) {
+		if (e.getKeyCode() == KeyEvent.VK_A && !left) {
 			left = true;
 			if (up || down) {
 				double vy = mob.getVY();
@@ -66,7 +66,7 @@ public class InputHandler implements KeyListener, MouseListener,
 				mob.addVX(-Globals.MAX_VELOCITY);
 			}
 		}
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT && !right) {
+		if (e.getKeyCode() == KeyEvent.VK_D && !right) {
 			right = true;
 			if (up || down) {
 				double vy = mob.getVY();
@@ -77,7 +77,7 @@ public class InputHandler implements KeyListener, MouseListener,
 				mob.addVX(Globals.MAX_VELOCITY);
 			}
 		}
-		if (e.getKeyCode() == KeyEvent.VK_UP && !up) {
+		if (e.getKeyCode() == KeyEvent.VK_W && !up) {
 			up = true;
 			if (left || right) {
 				double vx = mob.getVX();
@@ -88,7 +88,7 @@ public class InputHandler implements KeyListener, MouseListener,
 				mob.addVY(-Globals.MAX_VELOCITY);
 			}
 		}
-		if (e.getKeyCode() == KeyEvent.VK_DOWN && !down) {
+		if (e.getKeyCode() == KeyEvent.VK_S && !down) {
 			down = true;
 			if (left || right) {
 				double vx = mob.getVX();
@@ -110,7 +110,7 @@ public class InputHandler implements KeyListener, MouseListener,
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_LEFT && left) {
+		if (e.getKeyCode() == KeyEvent.VK_A && left) {
 			left = false;
 			if(up || down){
 				mob.addVY(-mob.getVY());
@@ -119,10 +119,12 @@ public class InputHandler implements KeyListener, MouseListener,
 				} else {
 					mob.addVY(Globals.MAX_VELOCITY);
 				}
+				mob.addVX(-mob.getVX());
+			} else {
+				mob.addVX(Globals.MAX_VELOCITY);
 			}
-			mob.addVX(-mob.getVX());
 		}
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT && right) {
+		if (e.getKeyCode() == KeyEvent.VK_D && right) {
 			right = false;
 			if(up || down){
 				mob.addVY(-mob.getVY());
@@ -131,10 +133,12 @@ public class InputHandler implements KeyListener, MouseListener,
 				} else {
 					mob.addVY(Globals.MAX_VELOCITY);
 				}
+				mob.addVX(-mob.getVX());
+			} else {
+				mob.addVX(-Globals.MAX_VELOCITY);
 			}
-			mob.addVX(-mob.getVX());
 		}
-		if (e.getKeyCode() == KeyEvent.VK_UP && up) {
+		if (e.getKeyCode() == KeyEvent.VK_W && up) {
 			up = false;
 			if(left || right){
 				mob.addVX(-mob.getVX());
@@ -143,10 +147,12 @@ public class InputHandler implements KeyListener, MouseListener,
 				} else {
 					mob.addVX(Globals.MAX_VELOCITY);
 				}
+				mob.addVY(-mob.getVY());
+			} else {
+				mob.addVY(Globals.MAX_VELOCITY);
 			}
-			mob.addVY(-mob.getVY());
 		}
-		if (e.getKeyCode() == KeyEvent.VK_DOWN && down) {
+		if (e.getKeyCode() == KeyEvent.VK_S && down) {
 			down = false;
 			if(left || right){
 				mob.addVX(-mob.getVX());
@@ -155,8 +161,10 @@ public class InputHandler implements KeyListener, MouseListener,
 				} else {
 					mob.addVX(Globals.MAX_VELOCITY);
 				}
-			} 
-			mob.addVY(-mob.getVY());
+				mob.addVY(-mob.getVY());
+			} else {
+				mob.addVY(-Globals.MAX_VELOCITY);
+			}
 		}
 
 	}
