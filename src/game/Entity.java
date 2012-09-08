@@ -58,6 +58,16 @@ public class Entity {
 		hitbox = new Rectangle((int) x, (int) y, (int) Math.abs(op.getX()),
 				(int) Math.abs(op.getY()));
 	}
+	
+	public Entity(double x, double y, double rotation, double scale,
+			BufferedImage sprite, boolean passable){
+		this(x,y,rotation,scale,sprite);
+		this.passable = passable;
+	}
+	
+	public boolean isPassable(){
+		return passable;
+	}
 
 	public Entity(double x, double y) {
 		this.x = x;
@@ -73,7 +83,7 @@ public class Entity {
 	}
 
 	public void render(Graphics g, int roomx, int roomy) {
-		if (Globals.DEBUG_MODE) {
+		if (Globals.DEBUG_MODE && !passable) {
 			g.setColor(Color.RED);
 			g.fillRect(roomx + hitbox.x, roomy + hitbox.y, hitbox.width,
 					hitbox.height);

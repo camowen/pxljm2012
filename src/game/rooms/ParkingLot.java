@@ -23,8 +23,8 @@ public class ParkingLot extends Room {
 	private double parkingSpaceChance = 0.3;
 	private double noParkingChance = 0.3;
 	
-	private int[][] validDumpster = {{2,0,3,0},{8,0,9,0},{0,2,0,3},{11,2,11,3},
-									 {0,8,0,9},{11,8,11,9},{2,11,3,11},{8,11,9,11}};
+	private int[][] validDumpster = {{1,0,2,0},{9,0,10,0},{0,1,0,2},{11,1,11,2},
+									 {0,9,0,10},{11,9,11,10},{1,11,2,11},{9,11,10,11}};
 
 	public ParkingLot() throws IOException{
 		super();
@@ -45,6 +45,7 @@ public class ParkingLot extends Room {
 	
 	private void populate(){
 			dumpsters();
+			noParking();
 	}
 	
 	private void dumpsters(){
@@ -62,9 +63,33 @@ public class ParkingLot extends Room {
 					Entity e = new Entity(validDumpster[i][0]*50, validDumpster[i][1]*50, 0.0, scale, d);
 					entities.add(e);
 				}
+				double npy = 0, npx = 0;
+				if(validDumpster[i][1]<6){
+					npy = 1;
+				} else {
+					npy = 9;
+				}
+				if(validDumpster[i][0]<6){
+					npx = 1;
+				} else {
+					npx = 9;
+				}
+				Entity e = new Entity(npx*50,npy*50,0.00,scale,noParking,true);
+				entities.add(e);
 			}
 		}
 		
+	}
+	
+	private void noParking(){
+		Entity e = new Entity(0,5*50,0.00,0.5,noParking,true);
+		entities.add(e);
+		e = new Entity(5*50,0,0.00,0.5,noParking,true);
+		entities.add(e);
+		e = new Entity(10*50,5*50,0.00,0.5,noParking,true);
+		entities.add(e);
+		e = new Entity(5*50,10*50,0.00,0.5,noParking,true);
+		entities.add(e);
 	}
 
 }

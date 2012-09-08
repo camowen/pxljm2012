@@ -57,7 +57,7 @@ public class Player extends Mob {
 	public void shoot(){
 		if(!shooting){
 			shooting=true;
-			currentRoom.shoot(x, y, angle);
+			currentRoom.shoot(this,x, y, angle);
 		}
 	}
 	
@@ -124,6 +124,17 @@ public class Player extends Mob {
 		at.translate(-Globals.PLAYER_WIDTH/2, -Globals.PLAYER_HEIGHT/2);
 		Graphics2D g2d = (Graphics2D)g;
 		g2d.drawImage(sprite, at, null);
+	}
+	
+	public boolean contains(double x, double y) {
+		
+		double tx = this.x-x;
+		double ty = this.y-y;
+		
+		if(Math.sqrt(tx*tx+ty*ty) <= 25){
+			return true;
+		}
+		return false;
 	}
 	
 	public void move(long deltat){

@@ -132,7 +132,7 @@ public class Room {
 	
 	public boolean canMove(Player p, double playerX, double playerY){
 		for(Entity e : entities){
-			if(e.contains(playerX, playerY)){
+			if(!e.isPassable() && e.contains(playerX, playerY)){
 				return false;
 			}
 		}
@@ -158,7 +158,7 @@ public class Room {
 		return true;
 	}
 	
-    public Entity shoot(double playerX, double playerY, double angle){
+    public Entity shoot(Player me, double playerX, double playerY, double angle){
     	
     	boolean collide = false;
     	angle -= Math.PI/2.0;
@@ -167,10 +167,18 @@ public class Room {
     		double x = playerX+  r * Math.cos(angle);
     		double y = playerY + r * Math.sin(angle);
     		for(Entity e : entities){
-    			if(e.contains(x, y)){
+    			if(!e.isPassable() && e.contains(x, y)){
     				collide = true;
     				e.hit();
     				System.out.println(e);
+    				break;
+    			}
+    		}
+    		for(Player p : players){
+    			if(p!=me && p.contains(x, y)){
+    				collide = true;
+    				p.hit();
+    				System.out.println(p);
     				break;
     			}
     		}
