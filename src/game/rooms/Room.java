@@ -154,7 +154,7 @@ public class Room {
     	boolean collide = false;
     	angle -= Math.PI/2.0;
     	double r = 0.00;
-    	while(!collide && r < 1000.00){
+    	while(!collide && r < 850.00){
     		double x = playerX+  r * Math.cos(angle);
     		double y = playerY + r * Math.sin(angle);
     		for(Entity e : entities){
@@ -166,14 +166,14 @@ public class Room {
     			}
     		}
     		for(Mob m : Enemies.mobMap.values()){
-    			if(m!=me && m.contains(x, y)){
+    			if(m.contains(x, y)){
     				collide = true;
     				m.hit();
     				System.out.println(m);
     				break;
     			}
     		}
-    		r+=1.0;
+    		r+=2.0;
     	}
     	System.out.println(collide);
     	return null;
