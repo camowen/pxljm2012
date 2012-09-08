@@ -13,9 +13,12 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
+import game.Player;
+
 public class Room {
 	
 	protected List<Entity> entities;
+	protected List<Player> players;
 	protected BufferedImage background;
 	
 	protected Room north;
@@ -23,10 +26,13 @@ public class Room {
 	protected Room south;
 	protected Room west;
 	
+	protected boolean hasPlayer = false;
+	
 	public Room(){
 		
 		this.background = null;
 		entities = new ArrayList<Entity>();
+		players = new ArrayList<Player>();
 		
 		BufferedImage wall = new BufferedImage(265,10,BufferedImage.TYPE_4BYTE_ABGR);
 		Graphics2D w = wall.createGraphics();
@@ -48,6 +54,44 @@ public class Room {
 		
 	}
 	
+	public void render(Graphics g, int roomx, int roomy){
+		double scaleFactor = (double)Globals.WINDOW_WIDTH/(double)background.getWidth();
+		AffineTransform at = new AffineTransform();
+		at.translate(roomx, roomy);
+		at.scale(scaleFactor, scaleFactor);
+		Graphics2D g2d = (Graphics2D)g;
+		g2d.drawImage(background, at, null);
+		for(Entity e : entities){
+			e.render(g,roomx,roomy);
+		}
+
+//		for(Mob networkPlayer : Enemies.mobMap.values()) {
+//			networkPlayer.render(g, roomx, roomy);
+//		}
+		
+		
+		if(Globals.DEBUG_MODE){
+			g.setColor(Color.GREEN);
+			for(int x=0;x<12;x++){
+				for(int y=0;y<12;y++){
+					g.drawRect(roomx+x*50,roomy+y*50,50,50);
+				}
+			}
+		}
+		
+		for(Player p : players){
+			p.render(g);
+		}
+		
+//		if(hasPlayer){
+//		 north.render(g,roomx,roomy-600,false);
+//		 east.render(g,roomx+600,roomy,false);
+//		 south.render(g,roomx,roomy+600,false);
+//		 west.render(g,roomx-600,roomy,false);
+//		}
+	}
+	
+
 	public void render(Graphics g, int roomx, int roomy, boolean hasPlayer){
 		double scaleFactor = (double)Globals.WINDOW_WIDTH/(double)background.getWidth();
 		AffineTransform at = new AffineTransform();
@@ -59,10 +103,11 @@ public class Room {
 			e.render(g,roomx,roomy);
 		}
 
-		for(Mob networkPlayer : Enemies.mobMap.values()) {
-			networkPlayer.render(g, roomx, roomy);
-		}
-
+//		for(Mob networkPlayer : Enemies.mobMap.values()) {
+//			networkPlayer.render(g, roomx, roomy);
+//		}
+		
+		
 		if(Globals.DEBUG_MODE){
 			g.setColor(Color.GREEN);
 			for(int x=0;x<12;x++){
@@ -71,15 +116,21 @@ public class Room {
 				}
 			}
 		}
-		if(hasPlayer){
-		 north.render(g,roomx,roomy-600,false);
-		 east.render(g,roomx+600,roomy,false);
-		 south.render(g,roomx,roomy+600,false);
-		 west.render(g,roomx-600,roomy,false);
+		
+		for(Player p : players){
+			p.render(g);
+		}
+		
+	}
+	
+	public void removePlayer(Player p){
+		players.remove(p);
+		if(players.isEmpty()){
+			hasPlayer = false;
 		}
 	}
 	
-	public boolean canMove(double playerX, double playerY){
+	public boolean canMove(Player p, double playerX, double playerY){
 		for(Entity e : entities){
 			if(e.contains(playerX, playerY)){
 				return false;
@@ -88,17 +139,21 @@ public class Room {
 		if(playerX < 0){
 			//Move to west room
 			System.out.println("Moving to west room");
-		}
-		
-		if(playerX > 600){
+			removePlayer(p);
+			west.addPlayer(p, 600+playerX, playerY);
+		} else if(playerX > 600){
 			//Move east
 			System.out.println("Moving to east room");
-		}
-		if(playerY < 0){
+			removePlayer(p);
+			east.addPlayer(p, playerX-600, playerY);
+		}else if(playerY < 0){
 			System.out.println("Moving to north room");
-		}
-		if(playerY > 600){
+			removePlayer(p);
+			north.addPlayer(p, playerX, 600+playerY);
+		}else if(playerY > 600){
 			System.out.println("Moving to south room");
+			removePlayer(p);
+			south.addPlayer(p, playerX, playerY-600);
 		}
 		return true;
 	}
@@ -123,6 +178,12 @@ public class Room {
     	}
     	System.out.println(collide);
     	return null;
+    }
+    
+    public void addPlayer(Player p, double x, double y){
+    	this.players.add(p);
+    	this.hasPlayer = true;
+    	p.setPositionInRoom(x, y);
     }
 	
 }

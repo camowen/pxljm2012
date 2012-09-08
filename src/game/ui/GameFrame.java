@@ -22,7 +22,8 @@ public class GameFrame extends JFrame {
 		super(Globals.GAMENAME);
 		setSize(Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT);
 
-		setUndecorated(true);
+		setResizable(false);
+		
 		setVisible(true);
 		boolean done = false;
 		while (!done) {
@@ -40,8 +41,8 @@ public class GameFrame extends JFrame {
 		Graphics g = getBufferStrategy().getDrawGraphics();
 
 		g.clearRect(0, 0, Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT);
-		r.render(g, Globals.WINDOW_WIDTH/2-p.getX(), Globals.WINDOW_HEIGHT/2-p.getY(),true);
-		p.render(g);
+		r.render(g, Globals.WINDOW_WIDTH/2-p.getX(), Globals.WINDOW_HEIGHT/2-p.getY());
+		//p.render(g);
 		g.dispose();
 		getBufferStrategy().show();
 
@@ -56,17 +57,24 @@ public class GameFrame extends JFrame {
 			Player p = new Player("Daniel");
 			Room r = new ParkingLot();
 			p.setCurrentRoom(r);
+			r.addPlayer(p, 300, 300);
 			InputHandler ih = new InputHandler(p);
 			g.addKeyListener(ih);
 			g.addMouseListener(ih);
 			g.addMouseMotionListener(ih);
 			long start = System.currentTimeMillis();
+			long allTime = 0l;
+			int frame = 0;
 			while (true) {
 				long now = System.currentTimeMillis();
 				p.move(now - start);
+				allTime += (now - start);
 				start = now;
 				g.render(p, r);
-				
+				frame++;
+				if(frame%10==0){
+					System.out.printf("FPS: %f\n",frame/(allTime/1000.00));
+				}
 				if(Globals.CONNECTED)
 					ClientNetworking.poll();
 			}

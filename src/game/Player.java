@@ -132,7 +132,7 @@ public class Player extends Mob {
 		double dy = vy*seconds;
 		x += dx;
 		y += dy;
-		if(!currentRoom.canMove(x, y)){
+		if(!currentRoom.canMove(this,x, y)){
 			x -= dx;
 			y -= dy;
 		}
@@ -156,6 +156,11 @@ public class Player extends Mob {
 	//y within current room
 	public int getY() {
 		return (int)y;
+	}
+	
+	public void setPositionInRoom(double x, double y){
+		this.x = x;
+		this.y = y;
 	}
 
 }
