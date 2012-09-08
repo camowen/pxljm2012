@@ -90,36 +90,43 @@ public class Library extends Room {
 				if(type < 0.1){
 					//Book floor 1
 					e = new Entity(x*50,y*50,rotation,1,books1,true);
+					e.type = Globals.ASSET_TYPE_LIBRARY_BOOKS_1;
 					contents[x][y] = true;
 					num++;
 				} else if (type < 0.2){
 					//Book floor 2
 					e = new Entity(x*50,y*50,rotation,1,books2,true);
+					e.type = Globals.ASSET_TYPE_LIBRARY_BOOKS_2;
 					contents[x][y] = true;
 					num++;
 				} else if (type < 0.3){
 					//Book shelf 1
 					e = new Entity(x*50,y*50,rotation,1,shelf1);
+					e.type = Globals.ASSET_TYPE_LIBRARY_BOOKSHELF_1;
 					contents[x][y] = true;
 				} else if (type < 0.4){
 					//Book shelf 2
 					e = new Entity(x*50,y*50,rotation,1,shelf2);
+					e.type = Globals.ASSET_TYPE_LIBRARY_BOOKSHELF_2;
 					contents[x][y] = true;
 					num++;
 				} else if (type < 0.5){
 					//Book shelf 3
 					e = new Entity(x*50,y*50,rotation,1,shelf3);
+					e.type = Globals.ASSET_TYPE_LIBRARY_BOOKSHELF_MESS;
 					contents[x][y] = true;
 					num++;
 				} else if (type < 0.6){
 					//Coffee table
 					if(!contents[x+1][y]){
 						e = new Entity(x*50,y*50,0.00,1,coffeetable);
+						e.type = Globals.ASSET_TYPE_LIBRARY_COFFEETABLE;
 						contents[x][y] = true;
 						contents[x+1][y] = true;
 						num+=2;
 					} else if(!contents[x][y+1]){
 						e = new Entity(x*50,y*50,Math.random()<0.5?Math.PI/2.0:-Math.PI/2.0,1,coffeetable);
+						e.type = Globals.ASSET_TYPE_LIBRARY_COFFEETABLE;
 						contents[x][y] = true;
 						contents[x][y+1] = true;
 						num+=2;
@@ -128,11 +135,13 @@ public class Library extends Room {
 					//couch 1
 					if(!contents[x+1][y]){
 						e = new Entity(x*50,y*50,0.00,1,couch1);
+						e.type = Globals.ASSET_TYPE_LIBRARY_COUCH_1;
 						contents[x][y] = true;
 						contents[x+1][y] = true;
 						num+=2;
 					} else if(!contents[x][y+1]){
 						e = new Entity(x*50,y*50,Math.random()<0.5?Math.PI/2.0:-Math.PI/2.0,1,couch1);
+						e.type = Globals.ASSET_TYPE_LIBRARY_COUCH_1;
 						contents[x][y] = true;
 						contents[x][y+1] = true;
 						num+=2;
@@ -140,17 +149,20 @@ public class Library extends Room {
 				} else if (type < 0.8){
 					//couch 2
 					e = new Entity(x*50,y*50,rotation,1,couch2);
+					e.type = Globals.ASSET_TYPE_LIBRARY_COUCH_2;
 					contents[x][y] = true;
 					num++;
 				} else if (type < 0.9){
 					//desk
 					if(!contents[x+1][y]){
 						e = new Entity(x*50,y*50,Math.random()<0.5?0.00:Math.PI,1,desk);
+						e.type = Globals.ASSET_TYPE_LIBRARY_DESK;
 						contents[x][y] = true;
 						contents[x+1][y] = true;
 						num+=2;
 					} else if(!contents[x][y+1]){
 						e = new Entity(x*50,y*50,Math.random()<0.5?Math.PI/2.0:-Math.PI/2.0,1,desk);
+						e.type = Globals.ASSET_TYPE_LIBRARY_DESK;
 						contents[x][y] = true;
 						contents[x][y+1] = true;
 						num+=2;
@@ -176,12 +188,16 @@ public class Library extends Room {
 		g2d.setColor(Color.black);
 		g2d.fillRect(0, 0, 50, 50);
 		Entity e = new Entity(0, 0,0,1.0,wall);
+		e.type = Globals.ASSET_TYPE_IGNORE;
 		entities.add(e);
 		e = new Entity(0, 11*50,0,1.0,wall);
+		e.type = Globals.ASSET_TYPE_IGNORE;
 		entities.add(e);
 		e = new Entity(11*50, 0,0,1.0,wall);
+		e.type = Globals.ASSET_TYPE_IGNORE;
 		entities.add(e);
 		e = new Entity(11*50, 11*50,0,1.0,wall);
+		e.type = Globals.ASSET_TYPE_IGNORE;
 		entities.add(e);
 		
 	}
@@ -194,8 +210,10 @@ public class Library extends Room {
 			contents[i][6] = true;
 			if(i < 5 || i > 6){
 				Entity e = new Entity(i*50,0,0.00,1,Math.random()<0.5?shelf1:shelf2);
+				e.type = Globals.ASSET_TYPE_LIBRARY_BOOKSHELF_1;
 				entities.add(e);
 				e = new Entity(i*50,11*50,0.00,1,Math.random()<0.5?shelf1:shelf2);
+				e.type = Globals.ASSET_TYPE_LIBRARY_BOOKSHELF_2;
 				entities.add(e);
 			}
 		}
@@ -206,13 +224,17 @@ public class Library extends Room {
 			contents[6][i] = true;
 			if(i < 5 || i > 6){
 				Entity e = new Entity(0,i*50,Math.PI/2.0,1,Math.random()<0.5?shelf1:shelf2);
+				e.type = Globals.ASSET_TYPE_LIBRARY_BOOKSHELF_2;
 				entities.add(e);
 				e = new Entity(11*50,i*50,Math.PI/2.0,1,Math.random()<0.5?shelf1:shelf2);
+				e.type = Globals.ASSET_TYPE_LIBRARY_BOOKSHELF_1;
 				entities.add(e);
 			}
 		}
 		
 	}
+	
+	// TODO random bookshelf entity ID
 
 	private void clearContents() {
 		for(int i=0;i<12;i++){

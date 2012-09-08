@@ -113,6 +113,7 @@ public class Office extends Room{
 			vertiRot = -Math.PI/2.0;
 			break;
 		}
+		// TODO extract these out and set IDs
 		entities.add(new Entity(reflectX(0,quarter,1)*50,reflectY(0,quarter,1)*50, 0.00, 1.0, plant));
 		entities.add(new Entity(reflectX(4,quarter,1)*50,reflectY(2,quarter,1)*50, 0.00, 1.0, plant));
 		entities.add(new Entity(reflectX(2,quarter,1)*50,reflectY(2,quarter,1)*50, 0.00, 1.0, plant));
@@ -145,6 +146,7 @@ public class Office extends Room{
 			vertiRot = -Math.PI/2.0;
 			break;
 		}
+		// TODO extract these out and set IDs
 		entities.add(new Entity(reflectX(0,quarter,1)*50,reflectY(0,quarter,2)*50, vertiRot,1.0,cubical2));
 		entities.add(new Entity(reflectX(0,quarter,1)*50,reflectY(2,quarter,1)*50, vertiRot,1.0,cubical1));
 		entities.add(new Entity(reflectX(0,quarter,1)*50,reflectY(3,quarter,2)*50, vertiRot,1.0,cubical2));
@@ -177,6 +179,7 @@ public class Office extends Room{
 			vertiRot = -Math.PI/2.0;
 			break;
 		}
+		// TODO extract these out and set IDs
 		entities.add(new Entity(reflectX(0,quarter,1)*50,reflectY(1,quarter,1)*50, 0.00,1.0,plant));
 		entities.add(new Entity(reflectX(1,quarter,2)*50,reflectY(1,quarter,1)*50, horizRot,1.0,bossDesk));
 		entities.add(new Entity(reflectX(3,quarter,1)*50,reflectY(1,quarter,1)*50, 0.00,1.0,plant));
@@ -206,12 +209,13 @@ public class Office extends Room{
 			vertiRot = -Math.PI/2.0;
 			break;
 		}
+		// TODO extract these out and set IDs
 		entities.add(new Entity(reflectX(0,quarter,1)*50,reflectY(0,quarter,1)*50, 0.00,1.0,plant));
 		entities.add(new Entity(reflectX(4,quarter,1)*50,reflectY(0,quarter,1)*50, 0.00,1.0,plant));
 		entities.add(new Entity(reflectX(0,quarter,1)*50,reflectY(4,quarter,1)*50, 0.00,1.0,plant));
 		entities.add(new Entity(reflectX(4,quarter,1)*50,reflectY(4,quarter,1)*50, 0.00,1.0,plant));
 		entities.add(new Entity(reflectX(2,quarter,1)*50,reflectY(2,quarter,1)*50, 0.00,1.0,plant));
-
+		// TODO extract these out and set IDs
 		entities.add(new Entity(reflectX(1,quarter,1)*50,reflectY(0,quarter,1)*50, horizRot,1.0,cubical1));
 		entities.add(new Entity(reflectX(3,quarter,1)*50,reflectY(0,quarter,1)*50, horizRot,1.0,cubical1));
 		entities.add(new Entity(reflectX(0,quarter,1)*50,reflectY(2,quarter,1)*50, vertiRot,1.0,cubical1));

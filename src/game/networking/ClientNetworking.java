@@ -3,6 +3,7 @@ package game.networking;
 
 
 import game.Entity;
+import game.Globals;
 import game.Mob;
 import game.rooms.Room;
 
@@ -120,11 +121,14 @@ public class ClientNetworking {
 		socketIn.read(data, 0, numAssets * 4);
 		for(int i=0; i<numAssets; i++) {
 			byte assetID = data[i * 4];
+
 			double assetX  = data[i * 4 + 1] * 25.0;
 			double assetY  = data[i * 4 + 2] * 25.0;
 			double rotation = data[i * 4 + 3] * Math.PI / 2;
 			
-			System.out.println(assetID + " : "+assetX+", "+assetY+" @ "+rotation);
+			System.out.println("["+i*4 +"] "+assetID + " : "+assetX+", "+assetY+" @ "+rotation);
+			
+			if(assetID == Globals.ASSET_TYPE_IGNORE) continue;
 			
 			Entity e = new Entity(assetX, assetY, rotation, assetID);
 			Room.getRooms().get(map).getEntities().add(e);

@@ -169,24 +169,42 @@ public class Room {
     }
     
     public void populate(){
+    	Entity e;
+    	
     	entities.clear();
     	BufferedImage wall = new BufferedImage(265,10,BufferedImage.TYPE_4BYTE_ABGR);
 		Graphics2D w = wall.createGraphics();
 		w.setColor(Color.black);
 		w.fillRect(0, 0, 265, 5);
-		entities.add(new Entity(0, 0,0,1.0, wall));
-		entities.add(new Entity(335, 0,0,1.0, wall));
-		entities.add(new Entity(0, 595,0,1.0, wall));
-		entities.add(new Entity(335, 595,0,1.0, wall));
+		e = new Entity(0, 0,0,1.0, wall);
+		e.type = Globals.ASSET_TYPE_IGNORE;
+		entities.add(e);
+		e = new Entity(335, 0,0,1.0, wall);
+		e.type = Globals.ASSET_TYPE_IGNORE;
+		entities.add(e);
+		e = new Entity(0, 595,0,1.0, wall);
+		e.type = Globals.ASSET_TYPE_IGNORE;
+		entities.add(e);
+		e = new Entity(335, 595,0,1.0, wall);
+		e.type = Globals.ASSET_TYPE_IGNORE;
+		entities.add(e);
 		
 		wall = new BufferedImage(10,265,BufferedImage.TYPE_4BYTE_ABGR);
 		w = wall.createGraphics();
 		w.setColor(Color.black);
 		w.fillRect(0, 0, 5, 265);
-		entities.add(new Entity(0, 0,0,1.0, wall));
-		entities.add(new Entity(0, 335,0,1.0, wall));
-		entities.add(new Entity(595, 0,0,1.0, wall));
-		entities.add(new Entity(595, 335,0,1.0, wall));
+		e = new Entity(0, 0,0,1.0, wall);
+		e.type = Globals.ASSET_TYPE_IGNORE;
+		entities.add(e);
+		e = new Entity(0, 335,0,1.0, wall);
+		e.type = Globals.ASSET_TYPE_IGNORE;
+		entities.add(e);
+		e = new Entity(595, 0,0,1.0, wall);
+		e.type = Globals.ASSET_TYPE_IGNORE;
+		entities.add(e);
+		e = new Entity(595, 335,0,1.0, wall);
+		e.type = Globals.ASSET_TYPE_IGNORE;
+		entities.add(e);
     }
     
     public void setNorth(Room r){

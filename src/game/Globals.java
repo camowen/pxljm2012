@@ -63,6 +63,8 @@ public class Globals {
 	public static boolean CONNECTED = false;
 
 	// ASSET TYPE FINALS
+	public static final byte ASSET_TYPE_IGNORE = 0x71;
+	
 	public static final byte ASSET_TYPE_PARKINGLOT_BACKGROUND = 0x01;
 	public static final byte ASSET_TYPE_PARKINGLOT_CAR = 0x02;
 	public static final byte ASSET_TYPE_PARKINGLOT_NOPARKING = 0x03;
@@ -90,6 +92,13 @@ public class Globals {
 	public static final byte ASSET_TYPE_BATHROOM_TOILET_2 = 0x17;
 	public static final byte ASSET_TYPE_BATHROOM_TOILET_3 = 0x18;
 	public static final byte ASSET_TYPE_BATHROOM_TOILET_4 = 0x19;
+	
+	public static final byte ASSET_TYPE_OFFICE_BACKGROUND = 0x1a;
+	public static final byte ASSET_TYPE_OFFICE_BOSS_DESK = 0x1b;
+	public static final byte ASSET_TYPE_OFFICE_CUBICAL_1 = 0x1c;
+	public static final byte ASSET_TYPE_OFFICE_CUBICAL_2 = 0x1d;
+	public static final byte ASSET_TYPE_OFFICE_TABLE = 0x1e;
+	public static final byte ASSET_TYPE_OFFICE_PLANT = 0x1f;
 	
 	// TODO remaining ASSET_TYPE finals
 }

@@ -37,7 +37,7 @@ public class ClientConnection implements Runnable {
 	}
 	
 	private void syncMaps() throws IOException {
-		System.out.println("["+id+"]Syncing Maps...");
+		System.out.println("["+id+"]Syncing "+Server.rooms.size()+" Maps...");
 		for(byte i=0; i < Server.rooms.size(); i++)
 			syncRoom(i);
 	}
@@ -62,7 +62,7 @@ public class ClientConnection implements Runnable {
 			System.out.println(e.type+" : "+e.x+", "+e.y+" @ "+e.angle);
 		}
 		
-		sendPacket(packet, 0, 3 + numEntities*3);
+		sendPacket(packet, 0, 3 + numEntities*4);
 	}
 	
 	private void floodMap(byte[] packet, int off, int len) throws IOException {

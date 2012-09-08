@@ -62,10 +62,12 @@ public class ParkingLot extends Room {
 				if (validDumpster[i][0] == validDumpster[i][2]) {
 					Entity e = new Entity(validDumpster[i][0] * 50,
 							validDumpster[i][1] * 50, Math.PI / 2.0, scale, d);
+					e.type = Globals.ASSET_TYPE_PARKINGLOT_RUBBISHTIP;
 					entities.add(e);
 				} else {
 					Entity e = new Entity(validDumpster[i][0] * 50,
 							validDumpster[i][1] * 50, 0.0, scale, d);
+					e.type = Globals.ASSET_TYPE_PARKINGLOT_RUBBISHTIP;
 					entities.add(e);
 				}
 				if (Math.random() <= noParkingChance) {
@@ -82,6 +84,7 @@ public class ParkingLot extends Room {
 					}
 					Entity e = new Entity(npx * 50, npy * 50, 0.00, scale,
 							noParking, true);
+					e.type = Globals.ASSET_TYPE_PARKINGLOT_NOPARKING;
 					entities.add(e);
 				}
 			}
@@ -93,45 +96,59 @@ public class ParkingLot extends Room {
 		Entity e;
 		if (Math.random() <= noParkingChance) {
 			e = new Entity(1 * 50, 5 * 50, 0.00, 1, noParking, true);
+			e.type = Globals.ASSET_TYPE_PARKINGLOT_NOPARKING;
 			entities.add(e);
 		}
 		if (Math.random() <= noParkingChance) {
 			e = new Entity(5 * 50, 1 * 50, 0.00, 1, noParking, true);
+			e.type = Globals.ASSET_TYPE_PARKINGLOT_NOPARKING;
 			entities.add(e);
 		}
 		if (Math.random() <= noParkingChance) {
 			e = new Entity(9 * 50, 5 * 50, 0.00, 1, noParking, true);
+			e.type = Globals.ASSET_TYPE_PARKINGLOT_NOPARKING;
 			entities.add(e);
 		}
 		if (Math.random() <= noParkingChance) {
 			e = new Entity(5 * 50, 9 * 50, 0.00, 1, noParking, true);
+			e.type = Globals.ASSET_TYPE_PARKINGLOT_NOPARKING;
 			entities.add(e);
 		}
 	}
 
 	private void parkingSpaces() {
 		Entity e = new Entity(1 * 50, 3 * 50, 0.00, 1, parkingSpace, true);
+		e.type = Globals.ASSET_TYPE_PARKINGLOT_PARKINGSPACE;
 		entities.add(e);
 		e = new Entity(1 * 50, 7 * 50, 0.00, 1, parkingSpace, true);
+		e.type = Globals.ASSET_TYPE_PARKINGLOT_PARKINGSPACE;
 		entities.add(e);
 
 		e = new Entity(9 * 50, 3 * 50, Math.PI, 1, parkingSpace, true);
+		e.type = Globals.ASSET_TYPE_PARKINGLOT_PARKINGSPACE;
 		entities.add(e);
 		e = new Entity(9 * 50, 7 * 50, Math.PI, 1, parkingSpace, true);
+		e.type = Globals.ASSET_TYPE_PARKINGLOT_PARKINGSPACE;
 		entities.add(e);
 		
 		e = new Entity(6 * 50, 3 * 50, 0, 1, parkingSpace, true);
+		e.type = Globals.ASSET_TYPE_PARKINGLOT_PARKINGSPACE;
 		entities.add(e);
 		e = new Entity(6 * 50, 5 * 50, 0, 1, parkingSpace, true);
+		e.type = Globals.ASSET_TYPE_PARKINGLOT_PARKINGSPACE;
 		entities.add(e);
 		e = new Entity(6 * 50, 7 * 50, 0, 1, parkingSpace, true);
+		e.type = Globals.ASSET_TYPE_PARKINGLOT_PARKINGSPACE;
 		entities.add(e);
 		
 		e = new Entity(4 * 50, 3 * 50, Math.PI, 1, parkingSpace, true);
+		e.type = Globals.ASSET_TYPE_PARKINGLOT_PARKINGSPACE;
 		entities.add(e);
 		e = new Entity(4 * 50, 5 * 50, Math.PI, 1, parkingSpace, true);
+		e.type = Globals.ASSET_TYPE_PARKINGLOT_PARKINGSPACE;
 		entities.add(e);
 		e = new Entity(4 * 50, 7 * 50, Math.PI, 1, parkingSpace, true);
+		e.type = Globals.ASSET_TYPE_PARKINGLOT_PARKINGSPACE;
 		entities.add(e);
 		
 	}
@@ -142,9 +159,11 @@ public class ParkingLot extends Room {
 			if(Math.random()<carChance){
 				if(Math.random()<0.5){
 					e = new Entity(1*50,i*50,Math.random()<0.5?0.00:Math.PI,1,car);
+					e.type = Globals.ASSET_TYPE_PARKINGLOT_CAR;
 					entities.add(e);
 				} else {
 					e = new Entity(1*50,i*50,Math.random()<0.5?0.00:Math.PI,1,truck);
+					e.type = Globals.ASSET_TYPE_PARKINGLOT_TRUCK;
 					entities.add(e);
 				}
 			}
@@ -153,9 +172,11 @@ public class ParkingLot extends Room {
 			if(Math.random()<carChance){
 				if(Math.random()<0.5){
 					e = new Entity(1*50,i*50,Math.random()<0.5?0.00:Math.PI,1,car);
+					e.type = Globals.ASSET_TYPE_PARKINGLOT_CAR;
 					entities.add(e);
 				} else {
 					e = new Entity(1*50,i*50,Math.random()<0.5?0.00:Math.PI,1,truck);
+					e.type = Globals.ASSET_TYPE_PARKINGLOT_TRUCK;
 					entities.add(e);
 				}
 			}
@@ -164,9 +185,11 @@ public class ParkingLot extends Room {
 			if(Math.random()<carChance){
 				if(Math.random()<0.5){
 					e = new Entity(9*50,i*50,Math.random()<0.5?0.00:Math.PI,1,car);
+					e.type = Globals.ASSET_TYPE_PARKINGLOT_CAR;
 					entities.add(e);
 				} else {
 					e = new Entity(9*50,i*50,Math.random()<0.5?0.00:Math.PI,1,truck);
+					e.type = Globals.ASSET_TYPE_PARKINGLOT_TRUCK;
 					entities.add(e);
 				}
 			}
@@ -175,9 +198,11 @@ public class ParkingLot extends Room {
 			if(Math.random()<carChance){
 				if(Math.random()<0.5){
 					e = new Entity(9*50,i*50,Math.random()<0.5?0.00:Math.PI,1,car);
+					e.type = Globals.ASSET_TYPE_PARKINGLOT_CAR;
 					entities.add(e);
 				} else {
 					e = new Entity(9*50,i*50,Math.random()<0.5?0.00:Math.PI,1,truck);
+					e.type = Globals.ASSET_TYPE_PARKINGLOT_TRUCK;
 					entities.add(e);
 				}
 			}
@@ -187,9 +212,11 @@ public class ParkingLot extends Room {
 			if(Math.random()<carChance){
 				if(Math.random()<0.5){
 					e = new Entity(4*50,i*50,Math.random()<0.5?0.00:Math.PI,1,car);
+					e.type = Globals.ASSET_TYPE_PARKINGLOT_CAR;
 					entities.add(e);
 				} else {
 					e = new Entity(4*50,i*50,Math.random()<0.5?0.00:Math.PI,1,truck);
+					e.type = Globals.ASSET_TYPE_PARKINGLOT_TRUCK;
 					entities.add(e);
 				}
 			}
@@ -198,9 +225,11 @@ public class ParkingLot extends Room {
 			if(Math.random()<carChance){
 				if(Math.random()<0.5){
 					e = new Entity(6*50,i*50,Math.random()<0.5?0.00:Math.PI,1,car);
+					e.type = Globals.ASSET_TYPE_PARKINGLOT_CAR;
 					entities.add(e);
 				} else {
 					e = new Entity(6*50,i*50,Math.random()<0.5?0.00:Math.PI,1,truck);
+					e.type = Globals.ASSET_TYPE_PARKINGLOT_TRUCK;
 					entities.add(e);
 				}
 			}

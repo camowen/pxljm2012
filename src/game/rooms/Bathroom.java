@@ -62,6 +62,7 @@ public class Bathroom extends Room {
 			return toilet4;
 		}
 	}
+	// TODO RANDOM TOILET ASSET ID
 
 	private BufferedImage randomSink() {
 		double roll = Math.random();
@@ -71,21 +72,26 @@ public class Bathroom extends Room {
 			return sink2;
 		}
 	}
+	// TODO RANDOM SINK ASSET ID
 
 	private void bathroomStalls() {
 		for (int x = 0; x < 5; x++) {
 			Entity e = new Entity(x * 50, 0, 0.00, 1.00, randomToilet());
+			e.type = Globals.ASSET_TYPE_BATHROOM_TOILET_1;
 			entities.add(e);
 
 			if (x != 0 && x != 4) {
 				e = new Entity(x * 50, 2 * 50, Math.PI, 1.00, randomSink());
+				e.type = Globals.ASSET_TYPE_BATHROOM_SINK;
 				entities.add(e);
 
 				e = new Entity(x * 50, 2.5 * 50, 0.00, 1.00, randomSink());
+				e.type = Globals.ASSET_TYPE_BATHROOM_SINK2;
 				entities.add(e);
 			}
 
 			e = new Entity(x * 50, 4 * 50, Math.PI, 1.00, randomToilet());
+			e.type = Globals.ASSET_TYPE_BATHROOM_TOILET_2;
 			entities.add(e);
 		}
 
@@ -106,17 +112,21 @@ public class Bathroom extends Room {
 
 		for (int x = 7; x < 12; x++) {
 			Entity e = new Entity(x * 50, 7 * 50, 0.00, 1.00, randomToilet());
+			e.type = Globals.ASSET_TYPE_BATHROOM_TOILET_3;
 			entities.add(e);
 
 			if (x != 11 && x != 7) {
 				e = new Entity(x * 50, 9 * 50, Math.PI, 1.00, randomSink());
+				e.type = Globals.ASSET_TYPE_BATHROOM_SINK;
 				entities.add(e);
 
 				e = new Entity(x * 50, 9.5 * 50, 0.00, 1.00, randomSink());
+				e.type = Globals.ASSET_TYPE_BATHROOM_SINK2;
 				entities.add(e);
 			}
 
 			e = new Entity(x * 50, 11 * 50, Math.PI, 1.00, randomToilet());
+			e.type = Globals.ASSET_TYPE_BATHROOM_TOILET_4;
 			entities.add(e);
 		}
 	}
@@ -124,32 +134,38 @@ public class Bathroom extends Room {
 	private void lockersAndBenches() {
 		for (int x = 0; x < 4; x++) {
 			Entity e = new Entity(x * 50, 11.5 * 50, 0.00, 1.00, locker);
+			e.type = Globals.ASSET_TYPE_BATHROOM_LOCKER;
 			entities.add(e);
 		}
 		for (int y = 7; y < 11; y++) {
 			Entity e = new Entity(0, y * 50, Math.PI / 2.0, 1.00, locker);
+			e.type = Globals.ASSET_TYPE_BATHROOM_LOCKER;
 			entities.add(e);
 		}
 
 		for (double x = 1.5; x < 5; x += 2) {
 			for (double y = 7; y < 11; y += 1.5) {
 				Entity e = new Entity(x * 50, y * 50, 0.00, 1.00, bench);
+				e.type = Globals.ASSET_TYPE_BATHROOM_BENCH;
 				entities.add(e);
 			}
 		}
 		
 		for (int x = 7; x < 11; x++) {
 			Entity e = new Entity(x * 50, 0* 50, 0.00, 1.00, locker);
+			e.type = Globals.ASSET_TYPE_BATHROOM_LOCKER;
 			entities.add(e);
 		}
 		for (int y = 0; y < 4; y++) {
 			Entity e = new Entity(11.5*50, y * 50, Math.PI / 2.0, 1.00, locker);
+			e.type = Globals.ASSET_TYPE_BATHROOM_LOCKER;
 			entities.add(e);
 		}
 
 		for (double x = 6.5; x < 10; x += 2) {
 			for (double y = 2; y < 6; y += 1.5) {
 				Entity e = new Entity(x * 50, y * 50, 0.00, 1.00, bench);
+				e.type = Globals.ASSET_TYPE_BATHROOM_BENCH;
 				entities.add(e);
 			}
 		}
