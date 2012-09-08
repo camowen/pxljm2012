@@ -71,8 +71,11 @@ public class ClientNetworking {
 		float spdY = buf.getFloat();
 		float thta = buf.getFloat();
 		
-		if(!Enemies.mobMap.containsKey(pid))
+		if(!Enemies.mobMap.containsKey(pid)) {
+			Mob m = new Mob(xPos, yPos, thta);
+			m.id = pid;
 			Enemies.mobMap.put(pid, new Mob(xPos, yPos, thta));
+		}
 		else
 			Enemies.mobMap.get(pid).networkUpdate(xPos, yPos, spdX, spdY, thta);
 	}
@@ -123,8 +126,6 @@ public class ClientNetworking {
 		
 		Room.getRooms().get(map).getEntities().removeAll(removeUs);
 		
-		System.out.println("GOT MAP! "+map);
-		
 		data = new byte[numAssets * 4];
 		socketIn.read(data, 0, numAssets * 4);
 		for(int i=0; i<numAssets; i++) {
@@ -133,8 +134,6 @@ public class ClientNetworking {
 			double assetX  = data[i * 4 + 1] * 25.0;
 			double assetY  = data[i * 4 + 2] * 25.0;
 			double rotation = data[i * 4 + 3] * Math.PI / 2;
-			
-			System.out.println("["+i*4 +"] "+assetID + " : "+assetX+", "+assetY+" @ "+rotation);
 			
 			if(assetID == Globals.ASSET_TYPE_IGNORE) continue;
 			
@@ -145,7 +144,7 @@ public class ClientNetworking {
 	
 	// --- OUTBOUND ---
 	
-	public static void sendUpdate(float xPosition, float yPosition, float speedX, float speedY, float orientation) throws IOException {
+	public static void sendUpdate(float xPosition, float yPosition, float speedX, float speedY, float orientation) {
 		byte[] packet = new byte[21];
 		packet[0] = Protocol.PTYPE_UPDATE;
 		ByteBuffer buf = ByteBuffer.allocate(20);
@@ -160,7 +159,7 @@ public class ClientNetworking {
 		sendPacket(packet, 0, 21);
 	}
 	
-	public static void sendShot(byte hitPID, byte damage, float xPositionFrom, float yPositionFrom, float xPositionTo, float yPositionTo) throws IOException {
+	public static void sendShot(byte hitPID, byte damage, float xPositionFrom, float yPositionFrom, float xPositionTo, float yPositionTo) {
 		byte[] packet = new byte[19];
 		packet[0] = Protocol.PTYPE_SHOT;
 		packet[1] = hitPID;
@@ -177,7 +176,7 @@ public class ClientNetworking {
 		sendPacket(packet, 0, 19);
 	}
 	
-	public static void sendChangeRoom(byte roomID) throws IOException {
+	public static void sendChangeRoom(byte roomID) {
 		byte[] packet = new byte[2];
 		packet[0] = Protocol.PTYPE_ROOM;
 		packet[1] = roomID;
@@ -185,16 +184,20 @@ public class ClientNetworking {
 		sendPacket(packet, 0, 2);
 	}
 	
-	public static void sendDisconnect() throws IOException {
+	public static void sendDisconnect() {
 		byte[] packet = new byte[1];
 		packet[0] = Protocol.PTYPE_DISCONNECT;
 		
 		sendPacket(packet, 0, 1);
 	}
 	
-	private static void sendPacket(byte[] packet, int off, int len) throws IOException {
+	private static void sendPacket(byte[] packet, int off, int len) {
+		try {
 		socketOut.write(packet, off, len);
 		socketOut.flush();
+		} catch (IOException e) {
+			System.out.println("Error Writing to Socket: "+e);
+		}
 	}
 	
 }

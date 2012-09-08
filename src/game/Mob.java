@@ -9,6 +9,8 @@ import java.awt.image.BufferedImage;
 
 public class Mob extends Entity {
 
+	public byte id = -1;
+	
 	protected double vx = 0;
 	protected double vy = 0;
 

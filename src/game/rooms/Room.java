@@ -169,6 +169,8 @@ public class Room {
     			if(m.contains(x, y)){
     				collide = true;
     				m.hit();
+    				if(Globals.CONNECTED)
+    					ClientNetworking.sendShot(m.id, (byte) 1, (float) playerX, (float) playerY, (float) x, (float) y);
     				System.out.println(m);
     				break;
     			}
@@ -184,11 +186,7 @@ public class Room {
     	this.hasPlayer = true;
     	p.setCurrentRoom(this);
     	if(Globals.CONNECTED)
-	    	try {
-	    		ClientNetworking.sendChangeRoom(id);
-	    	} catch (IOException e) {
-	    		System.out.println(e);
-	    	}
+	    	ClientNetworking.sendChangeRoom(id);
     	//populate();
     	p.setPositionInRoom(x, y);
     }

@@ -9,6 +9,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.io.IOException;
 
 public class InputHandler implements KeyListener, MouseListener,
 		MouseMotionListener {
@@ -106,7 +107,7 @@ public class InputHandler implements KeyListener, MouseListener,
 		if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
 			//TODO Exit code
 			if(Globals.CONNECTED)
-				//ClientNetworking.
+				ClientNetworking.sendDisconnect();
 			System.exit(0);
 		}
 	}

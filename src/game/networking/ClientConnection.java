@@ -17,6 +17,8 @@ public class ClientConnection implements Runnable {
 	public byte map = 1;
 	private byte id = 0;
 	
+	private boolean run = true;
+	
 	public ClientConnection(Socket s, byte id) {
 		
 		try{
@@ -50,16 +52,12 @@ public class ClientConnection implements Runnable {
 		packet[1] = room;
 		packet[2] = numEntities;
 		
-		System.out.println("ROOM: "+room);
-		
 		for(int i=0; i<numEntities; i++) {
 			Entity e = Server.rooms.get(room).getEntities().get(i);
 			packet[3 + i*4] = e.type;
 			packet[4 + i*4] = (byte) (e.x / 25.0);
 			packet[5 + i*4] = (byte) (e.y / 25.0);
 			packet[6 + i*4] = (byte) (e.angle * 2 / Math.PI);
-			
-			System.out.println(e.type+" : "+e.x+", "+e.y+" @ "+e.angle);
 		}
 		
 		sendPacket(packet, 0, 3 + numEntities*4);
@@ -80,7 +78,7 @@ public class ClientConnection implements Runnable {
 
 	@Override
 	public void run() {
-		while(socket.isConnected()) {
+		while(run) {
 			byte[] packet = new byte[50];
 			
 			try{
@@ -115,11 +113,12 @@ public class ClientConnection implements Runnable {
 					floodMap(packet, 0, 3);
 					
 					socket.close();
+					run = false;
 					break;
 				}
 				
 			} catch(IOException e) {
-				System.out.println(e);
+				System.out.println("["+id+"] Error: "+e);
 			}
 		}
 		System.out.println("ClientConnection "+id+" disconnected.");
