@@ -1,9 +1,7 @@
 package game;
 
 import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.geom.AffineTransform;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 public class Mob extends Entity {
@@ -26,20 +24,10 @@ public class Mob extends Entity {
 		this.x=x;
 		this.y=y;
 		this.angle = angle;
-		
+		passable = true;
 		sprite = new BufferedImage(Globals.PLAYER_WIDTH, Globals.PLAYER_HEIGHT, BufferedImage.TYPE_4BYTE_ABGR);
+		hitbox = new Rectangle((int)x,(int)y,sprite.getWidth(), sprite.getHeight());
 		setImage();
-	}
-	
-	public void render(Graphics g, int roomx, int roomy){
-		//g.fillRect((int)x, (int)y, Globals.PLAYER_WIDTH, Globals.PLAYER_HEIGHT);
-		
-		AffineTransform at = new AffineTransform();
-		at.translate(roomx+x, roomy+y);
-		at.rotate(angle);
-		at.translate(-Globals.PLAYER_WIDTH/2, -Globals.PLAYER_HEIGHT/2);
-		Graphics2D g2d = (Graphics2D)g;
-		g2d.drawImage(sprite, at, null);
 	}
 	
 	public void move(long deltat){
@@ -93,5 +81,16 @@ public class Mob extends Entity {
 	
 	public double getVY(){
 		return vy;
+	}
+	
+    public boolean contains(double x, double y) {
+		
+		double tx = this.x-x;
+		double ty = this.y-y;
+		
+		if(Math.sqrt(tx*tx+ty*ty) <= 25){
+			return true;
+		}
+		return false;
 	}
 }

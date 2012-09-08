@@ -18,16 +18,16 @@ public class Entity {
 	private double angle;
 	private double scale;
 
-	private boolean passable;
+	protected boolean passable;
 
 	private boolean hit = false;
 
 	private int health = 100;
 
 	private BufferedImage sprite;
-	private Rectangle hitbox;
+	protected Rectangle hitbox;
 	
-	private AffineTransform affine;
+    protected AffineTransform affine;
 
 	public Entity(double x, double y, double rotation, double scale,
 			BufferedImage sprite) {

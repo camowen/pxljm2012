@@ -2,6 +2,7 @@ package game.rooms;
 
 import game.Entity;
 import game.Globals;
+import game.Mob;
 import game.Player;
 
 import java.awt.Color;
@@ -11,6 +12,8 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
+
+import game.networking.Enemies;
 
 public class Room {
 	
@@ -43,9 +46,9 @@ public class Room {
 			e.render(g,roomx,roomy);
 		}
 
-//		for(Mob networkPlayer : Enemies.mobMap.values()) {
-//			networkPlayer.render(g, roomx, roomy);
-//		}
+		for(Mob networkPlayer : Enemies.mobMap.values()) {
+			networkPlayer.render(g, roomx, roomy);
+		}
 		
 		
 		if(Globals.DEBUG_MODE){
@@ -81,9 +84,9 @@ public class Room {
 			e.render(g,roomx,roomy);
 		}
 
-//		for(Mob networkPlayer : Enemies.mobMap.values()) {
-//			networkPlayer.render(g, roomx, roomy);
-//		}
+		for(Mob networkPlayer : Enemies.mobMap.values()) {
+			networkPlayer.render(g, roomx, roomy);
+		}
 		
 		
 		if(Globals.DEBUG_MODE){
@@ -152,11 +155,11 @@ public class Room {
     				break;
     			}
     		}
-    		for(Player p : players){
-    			if(p!=me && p.contains(x, y)){
+    		for(Mob m : Enemies.mobMap.values()){
+    			if(m!=me && m.contains(x, y)){
     				collide = true;
-    				p.hit();
-    				System.out.println(p);
+    				m.hit();
+    				System.out.println(m);
     				break;
     			}
     		}
