@@ -139,6 +139,7 @@ public class Room {
     public void addPlayer(Player p, double x, double y){
     	this.players.add(p);
     	this.hasPlayer = true;
+    	p.setCurrentRoom(this);
     	populate();
     	p.setPositionInRoom(x, y);
     }
@@ -162,6 +163,22 @@ public class Room {
 		entities.add(new Entity(0, 335,0,1.0, wall));
 		entities.add(new Entity(595, 0,0,1.0, wall));
 		entities.add(new Entity(595, 335,0,1.0, wall));
+    }
+    
+    public void setNorth(Room r){
+    	north = r;
+    }
+    
+    public void setSouth(Room r){
+    	south = r;
+    }
+    
+    public void setEast(Room r){
+    	east = r;
+    }
+    
+    public void setWest(Room r){
+    	west = r;
     }
 	
 }

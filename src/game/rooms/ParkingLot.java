@@ -55,7 +55,7 @@ public class ParkingLot extends Room {
 		for (int i = 0; i < validDumpster.length; i++) {
 			if (Math.random() <= dumpsterChance) {
 				// Rotation?[i]
-				double scale = 0.5;
+				double scale = 1.0;
 				BufferedImage d = new BufferedImage(dumpster.getWidth(),
 						dumpster.getHeight(), dumpster.getType());
 				d.setData(dumpster.getData());
@@ -92,46 +92,46 @@ public class ParkingLot extends Room {
 	private void noParking() {
 		Entity e;
 		if (Math.random() <= noParkingChance) {
-			e = new Entity(1 * 50, 5 * 50, 0.00, 0.5, noParking, true);
+			e = new Entity(1 * 50, 5 * 50, 0.00, 1, noParking, true);
 			entities.add(e);
 		}
 		if (Math.random() <= noParkingChance) {
-			e = new Entity(5 * 50, 1 * 50, 0.00, 0.5, noParking, true);
+			e = new Entity(5 * 50, 1 * 50, 0.00, 1, noParking, true);
 			entities.add(e);
 		}
 		if (Math.random() <= noParkingChance) {
-			e = new Entity(9 * 50, 5 * 50, 0.00, 0.5, noParking, true);
+			e = new Entity(9 * 50, 5 * 50, 0.00, 1, noParking, true);
 			entities.add(e);
 		}
 		if (Math.random() <= noParkingChance) {
-			e = new Entity(5 * 50, 9 * 50, 0.00, 0.5, noParking, true);
+			e = new Entity(5 * 50, 9 * 50, 0.00, 1, noParking, true);
 			entities.add(e);
 		}
 	}
 
 	private void parkingSpaces() {
-		Entity e = new Entity(1 * 50, 3 * 50, 0.00, 0.5, parkingSpace, true);
+		Entity e = new Entity(1 * 50, 3 * 50, 0.00, 1, parkingSpace, true);
 		entities.add(e);
-		e = new Entity(1 * 50, 7 * 50, 0.00, 0.5, parkingSpace, true);
+		e = new Entity(1 * 50, 7 * 50, 0.00, 1, parkingSpace, true);
 		entities.add(e);
 
-		e = new Entity(9 * 50, 3 * 50, Math.PI, 0.5, parkingSpace, true);
+		e = new Entity(9 * 50, 3 * 50, Math.PI, 1, parkingSpace, true);
 		entities.add(e);
-		e = new Entity(9 * 50, 7 * 50, Math.PI, 0.5, parkingSpace, true);
-		entities.add(e);
-		
-		e = new Entity(6 * 50, 3 * 50, 0, 0.5, parkingSpace, true);
-		entities.add(e);
-		e = new Entity(6 * 50, 5 * 50, 0, 0.5, parkingSpace, true);
-		entities.add(e);
-		e = new Entity(6 * 50, 7 * 50, 0, 0.5, parkingSpace, true);
+		e = new Entity(9 * 50, 7 * 50, Math.PI, 1, parkingSpace, true);
 		entities.add(e);
 		
-		e = new Entity(4 * 50, 3 * 50, Math.PI, 0.5, parkingSpace, true);
+		e = new Entity(6 * 50, 3 * 50, 0, 1, parkingSpace, true);
 		entities.add(e);
-		e = new Entity(4 * 50, 5 * 50, Math.PI, 0.5, parkingSpace, true);
+		e = new Entity(6 * 50, 5 * 50, 0, 1, parkingSpace, true);
 		entities.add(e);
-		e = new Entity(4 * 50, 7 * 50, Math.PI, 0.5, parkingSpace, true);
+		e = new Entity(6 * 50, 7 * 50, 0, 1, parkingSpace, true);
+		entities.add(e);
+		
+		e = new Entity(4 * 50, 3 * 50, Math.PI, 1, parkingSpace, true);
+		entities.add(e);
+		e = new Entity(4 * 50, 5 * 50, Math.PI, 1, parkingSpace, true);
+		entities.add(e);
+		e = new Entity(4 * 50, 7 * 50, Math.PI, 1, parkingSpace, true);
 		entities.add(e);
 		
 	}
@@ -141,10 +141,10 @@ public class ParkingLot extends Room {
 		for(int i=3;i<=4;i++){
 			if(Math.random()<carChance){
 				if(Math.random()<0.5){
-					e = new Entity(1*50,i*50,Math.random()<0.5?0.00:Math.PI,0.5,car);
+					e = new Entity(1*50,i*50,Math.random()<0.5?0.00:Math.PI,1,car);
 					entities.add(e);
 				} else {
-					e = new Entity(1*50,i*50,Math.random()<0.5?0.00:Math.PI,0.5,truck);
+					e = new Entity(1*50,i*50,Math.random()<0.5?0.00:Math.PI,1,truck);
 					entities.add(e);
 				}
 			}
@@ -152,10 +152,10 @@ public class ParkingLot extends Room {
 		for(int i=7;i<=8;i++){
 			if(Math.random()<carChance){
 				if(Math.random()<0.5){
-					e = new Entity(1*50,i*50,Math.random()<0.5?0.00:Math.PI,0.5,car);
+					e = new Entity(1*50,i*50,Math.random()<0.5?0.00:Math.PI,1,car);
 					entities.add(e);
 				} else {
-					e = new Entity(1*50,i*50,Math.random()<0.5?0.00:Math.PI,0.5,truck);
+					e = new Entity(1*50,i*50,Math.random()<0.5?0.00:Math.PI,1,truck);
 					entities.add(e);
 				}
 			}
@@ -163,10 +163,10 @@ public class ParkingLot extends Room {
 		for(int i=3;i<=4;i++){
 			if(Math.random()<carChance){
 				if(Math.random()<0.5){
-					e = new Entity(9*50,i*50,Math.random()<0.5?0.00:Math.PI,0.5,car);
+					e = new Entity(9*50,i*50,Math.random()<0.5?0.00:Math.PI,1,car);
 					entities.add(e);
 				} else {
-					e = new Entity(9*50,i*50,Math.random()<0.5?0.00:Math.PI,0.5,truck);
+					e = new Entity(9*50,i*50,Math.random()<0.5?0.00:Math.PI,1,truck);
 					entities.add(e);
 				}
 			}
@@ -174,10 +174,10 @@ public class ParkingLot extends Room {
 		for(int i=7;i<=8;i++){
 			if(Math.random()<carChance){
 				if(Math.random()<0.5){
-					e = new Entity(9*50,i*50,Math.random()<0.5?0.00:Math.PI,0.5,car);
+					e = new Entity(9*50,i*50,Math.random()<0.5?0.00:Math.PI,1,car);
 					entities.add(e);
 				} else {
-					e = new Entity(9*50,i*50,Math.random()<0.5?0.00:Math.PI,0.5,truck);
+					e = new Entity(9*50,i*50,Math.random()<0.5?0.00:Math.PI,1,truck);
 					entities.add(e);
 				}
 			}
@@ -186,10 +186,10 @@ public class ParkingLot extends Room {
 		for(int i=3;i<=8;i++){
 			if(Math.random()<carChance){
 				if(Math.random()<0.5){
-					e = new Entity(4*50,i*50,Math.random()<0.5?0.00:Math.PI,0.5,car);
+					e = new Entity(4*50,i*50,Math.random()<0.5?0.00:Math.PI,1,car);
 					entities.add(e);
 				} else {
-					e = new Entity(4*50,i*50,Math.random()<0.5?0.00:Math.PI,0.5,truck);
+					e = new Entity(4*50,i*50,Math.random()<0.5?0.00:Math.PI,1,truck);
 					entities.add(e);
 				}
 			}
@@ -197,10 +197,10 @@ public class ParkingLot extends Room {
 		for(int i=3;i<=8;i++){
 			if(Math.random()<carChance){
 				if(Math.random()<0.5){
-					e = new Entity(6*50,i*50,Math.random()<0.5?0.00:Math.PI,0.5,car);
+					e = new Entity(6*50,i*50,Math.random()<0.5?0.00:Math.PI,1,car);
 					entities.add(e);
 				} else {
-					e = new Entity(6*50,i*50,Math.random()<0.5?0.00:Math.PI,0.5,truck);
+					e = new Entity(6*50,i*50,Math.random()<0.5?0.00:Math.PI,1,truck);
 					entities.add(e);
 				}
 			}
