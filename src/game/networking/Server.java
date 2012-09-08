@@ -6,6 +6,8 @@ import game.rooms.Library;
 import game.rooms.Office;
 import game.rooms.ParkingLot;
 import game.rooms.Room;
+import game.rooms.Stairs;
+import game.rooms.Warehouse;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -31,6 +33,8 @@ public class Server {
 			rooms.add(Globals.ROOM_LIBRARY, new Library());
 			rooms.add(Globals.ROOM_BATHROOM, new Bathroom());
 			rooms.add(Globals.ROOM_OFFICE, new Office());
+			rooms.add(Globals.ROOM_WAREHOUSE, new Warehouse());
+			rooms.add(Globals.ROOM_STAIRS, new Stairs());
 			
 			ServerSocket ss = new ServerSocket(PORT);
 			System.out.println("Server Listening on port "+ss.getLocalPort());

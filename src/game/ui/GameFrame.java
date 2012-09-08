@@ -52,27 +52,26 @@ public class GameFrame extends JFrame {
 		try {
 			GameFrame g = new GameFrame();
 			
-			//Globals.CONNECTED = ClientNetworking.init("192.168.0.130", 8008);
-			Globals.CONNECTED = false;
+			Globals.CONNECTED = ClientNetworking.init("192.168.0.130", 8008);
+			//Globals.CONNECTED = false;
 			Player p = new Player("Daniel");
 			
-			//Room r = Room.getRooms().get((int) (1+Math.random()*3));
-			Room r = new Warehouse();
+			Room r = Room.getRooms().get((int) (1+Math.random()*3));
 			p.setCurrentRoom(r);
 			r.addPlayer(p, 300, 300);
 			
-//			for(int room=0; room<Room.getRooms().size(); room++) {
-//				int westExit = (int) (Math.random()*Room.getRooms().size());
-//				int eastExit = (int) (Math.random()*Room.getRooms().size());
-//				int northExit = (int) (Math.random()*Room.getRooms().size());
-//				int southExit = (int) (Math.random()*Room.getRooms().size());
-//				
-//				Room.getRooms().get(room).setWest(Room.getRooms().get(westExit));
-//				Room.getRooms().get(room).setEast(Room.getRooms().get(eastExit));
-//				Room.getRooms().get(room).setNorth(Room.getRooms().get(northExit));
-//				Room.getRooms().get(room).setSouth(Room.getRooms().get(southExit));
-//			}
-//			
+			for(int room=0; room<Room.getRooms().size(); room++) {
+				int westExit = (int) (Math.random()*Room.getRooms().size());
+				int eastExit = (int) (Math.random()*Room.getRooms().size());
+				int northExit = (int) (Math.random()*Room.getRooms().size());
+				int southExit = (int) (Math.random()*Room.getRooms().size());
+				
+				Room.getRooms().get(room).setWest(Room.getRooms().get(westExit));
+				Room.getRooms().get(room).setEast(Room.getRooms().get(eastExit));
+				Room.getRooms().get(room).setNorth(Room.getRooms().get(northExit));
+				Room.getRooms().get(room).setSouth(Room.getRooms().get(southExit));
+			}
+			
 			InputHandler ih = new InputHandler(p);
 			g.addKeyListener(ih);
 			g.addMouseListener(ih);
