@@ -17,7 +17,6 @@ public class Office extends Room{
 	private BufferedImage plant;
 	private BufferedImage table;
 	
-	
 	public Office() throws IOException {
 		super();
 		background = ImageIO.read(new File(Globals.OFFICE_BACKGROUND));
@@ -58,7 +57,9 @@ public class Office extends Room{
 			}
 		}
 		
-		entities.add(new Mob(300,150));
+		Entity m = new Mob(300, 150);
+		m.type = Globals.ASSET_TYPE_IGNORE;
+		entities.add(m);
 	}
 	
 	/*   0  1

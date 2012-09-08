@@ -12,6 +12,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.nio.ByteBuffer;
+import java.util.HashSet;
+import java.util.Set;
 
 
 public class ClientNetworking {
@@ -113,7 +115,13 @@ public class ClientNetworking {
 		byte map = data[0];
 		byte numAssets = data[1];
 		
-		Room.getRooms().get(map).getEntities().clear();
+		Set<Entity> removeUs = new HashSet<Entity>();
+		
+		for(Entity e : Room.getRooms().get(map).getEntities())
+			if(e.type != Globals.ASSET_TYPE_IGNORE)
+				removeUs.add(e);
+		
+		Room.getRooms().get(map).getEntities().removeAll(removeUs);
 		
 		System.out.println("GOT MAP! "+map);
 		
