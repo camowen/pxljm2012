@@ -1,5 +1,6 @@
 package game;
 
+import game.networking.ClientNetworking;
 import game.rooms.Room;
 
 import java.awt.Color;
@@ -8,6 +9,7 @@ import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
@@ -135,6 +137,15 @@ public class Player extends Mob {
 			y -= dy;
 		}
 		pointAt();
+		
+		if(Globals.CONNECTED) {
+			try{
+				ClientNetworking.sendUpdate((float) x, (float) y, (float) vx, (float) vy, (float) angle);
+			} catch (IOException e) {
+				System.out.println(e);
+			}
+		}
+		
 	}
 
 	//x within current room

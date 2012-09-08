@@ -1,7 +1,10 @@
 package game.ui;
 
 import game.Globals;
+import game.Mob;
 import game.Player;
+import game.networking.ClientNetworking;
+import game.networking.Enemies;
 import game.rooms.ParkingLot;
 import game.rooms.Room;
 
@@ -47,6 +50,9 @@ public class GameFrame extends JFrame {
 	public static void main(String[] args) {
 		try {
 			GameFrame g = new GameFrame();
+			
+			Globals.CONNECTED = ClientNetworking.init("localhost", 8008);
+			
 			Player p = new Player("Daniel");
 			Room r = new ParkingLot();
 			p.setCurrentRoom(r);
@@ -60,6 +66,9 @@ public class GameFrame extends JFrame {
 				p.move(now - start);
 				start = now;
 				g.render(p, r);
+				
+				if(Globals.CONNECTED)
+					ClientNetworking.poll();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

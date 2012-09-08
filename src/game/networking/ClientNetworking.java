@@ -1,6 +1,9 @@
 package game.networking;
 
 
+
+import game.Mob;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -10,27 +13,26 @@ import java.nio.ByteBuffer;
 
 public class ClientNetworking {
 	
-	private OutputStream socketOut;
-	private InputStream socketIn;
+	private static OutputStream socketOut;
+	private static InputStream socketIn;
 	
-	public ClientNetworking(String host, int port) {	
+	public static boolean init(String host, int port) {
 		try{
 			Socket s = new Socket(host, port);
 			socketOut = s.getOutputStream();
 			socketIn = s.getInputStream();
-			
-			sendUpdate(5, 4, 3, 2, 1);
 		} catch(IOException e) {
-			System.out.println(e);
+			return false;
 		}
+		
+		return true;
 	}
 	
-	public void poll() {
+	public static void poll() {
 		try{
 			while(socketIn.available() != 0) {
 				byte[] data = new byte[100];
 				socketIn.read(data, 0, 1);
-				System.out.println("GOT! "+data[0]);
 				switch(data[0]) {
 				case Protocol.PTYPE_UPDATE:
 					getUpdate();
@@ -51,7 +53,7 @@ public class ClientNetworking {
 		}
 	}
 	
-	private void getUpdate() throws IOException {
+	private static void getUpdate() throws IOException {
 		byte[] data = new byte[21];
 		socketIn.read(data, 0, 21);
 		
@@ -64,14 +66,13 @@ public class ClientNetworking {
 		float spdY = buf.getFloat();
 		float thta = buf.getFloat();
 		
-		System.out.printf("GOT UPDATE! %f %f %f %f %f\n", xPos, yPos, spdX, spdY, thta);
-		// TODO if mob {pid} does not exist
-		//         new mob (x, y, dx, dy, 0)
-		//      else
-		//         update mob {pid} with (x, y, dx, dy, 0)
+		if(!Enemies.mobMap.containsKey(pid))
+			Enemies.mobMap.put(pid, new Mob(xPos, yPos, thta));
+		else
+			Enemies.mobMap.get(pid).networkUpdate(xPos, yPos, spdX, spdY, thta);
 	}
 	
-	private void getDespawn() throws IOException {
+	private static void getDespawn() throws IOException {
 		byte[] data = new byte[2];
 		socketIn.read(data, 0, 2);
 		
@@ -83,7 +84,7 @@ public class ClientNetworking {
 			// draw blood splatter
 	}
 	
-	private void getRoomSync() throws IOException {
+	private static void getRoomSync() throws IOException {
 		byte[] data = new byte[2];
 		socketIn.read(data, 0, 2);
 		
@@ -105,7 +106,7 @@ public class ClientNetworking {
 	
 	// --- OUTBOUND ---
 	
-	public void sendUpdate(float xPosition, float yPosition, float speedX, float speedY, float orientation) throws IOException {
+	public static void sendUpdate(float xPosition, float yPosition, float speedX, float speedY, float orientation) throws IOException {
 		byte[] packet = new byte[21];
 		packet[0] = Protocol.PTYPE_UPDATE;
 		ByteBuffer buf = ByteBuffer.allocate(20);
@@ -120,7 +121,7 @@ public class ClientNetworking {
 		sendPacket(packet, 0, 21);
 	}
 	
-	public void sendShoot(byte type, float xPosition, float yPosition, float orientation) throws IOException {
+	public static void sendShoot(byte type, float xPosition, float yPosition, float orientation) throws IOException {
 		byte[] packet = new byte[14];
 		packet[0] = Protocol.PTYPE_SHOOT;
 		packet[1] = type;
@@ -134,17 +135,9 @@ public class ClientNetworking {
 		sendPacket(packet, 2, 14);
 	}
 	
-	private void sendPacket(byte[] packet, int off, int len) throws IOException {
+	private static void sendPacket(byte[] packet, int off, int len) throws IOException {
 		socketOut.write(packet, off, len);
 		socketOut.flush();
-	}
-	
-	public static void main(String[] args) {
-		ClientNetworking cn = new ClientNetworking("localhost", 8008);
-		while(true) {
-			cn.poll();
-			try{ Thread.sleep(100); } catch(InterruptedException e) {}
-		}
 	}
 	
 }

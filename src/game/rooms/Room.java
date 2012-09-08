@@ -2,6 +2,8 @@ package game.rooms;
 
 import game.Entity;
 import game.Globals;
+import game.Mob;
+import game.networking.Enemies;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -50,6 +52,9 @@ public class Room {
 		g2d.drawImage(background, at, null);
 		for(Entity e : entities){
 			e.render(g,roomx,roomy);
+		}
+		for(Mob networkPlayer : Enemies.mobMap.values()) {
+			networkPlayer.render(g, roomx, roomy);
 		}
 	}
 	

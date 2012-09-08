@@ -28,13 +28,14 @@ public class Mob extends Entity {
 		this.angle = angle;
 		
 		sprite = new BufferedImage(Globals.PLAYER_WIDTH, Globals.PLAYER_HEIGHT, BufferedImage.TYPE_4BYTE_ABGR);
+		setImage();
 	}
 	
-	public void render(Graphics g){
+	public void render(Graphics g, int roomx, int roomy){
 		//g.fillRect((int)x, (int)y, Globals.PLAYER_WIDTH, Globals.PLAYER_HEIGHT);
 		
 		AffineTransform at = new AffineTransform();
-		at.translate(x,y);
+		at.translate(roomx+x, roomy+y);
 		at.rotate(angle);
 		at.translate(-Globals.PLAYER_WIDTH/2, -Globals.PLAYER_HEIGHT/2);
 		Graphics2D g2d = (Graphics2D)g;
@@ -48,6 +49,19 @@ public class Mob extends Entity {
 		x += dx;
 		y += dy;
 		pointAt();
+	}
+	
+	public void setImage() {
+		sprite.getGraphics().setColor(Color.RED);
+		sprite.getGraphics().fillRect(0, 0, 50, 50);
+	}
+	
+	public void networkUpdate(double xLoc, double yLoc, double dX, double dY, double orientation) {
+		x = xLoc;
+		y = yLoc;
+		vx = dX;
+		vy = dY;
+		angle = orientation;
 	}
 	
 	public void pointAt(){
