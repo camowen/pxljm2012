@@ -183,11 +183,12 @@ public class Room {
     	this.players.add(p);
     	this.hasPlayer = true;
     	p.setCurrentRoom(this);
-    	try {
-    		ClientNetworking.sendChangeRoom(id);
-    	} catch (IOException e) {
-    		System.out.println(e);
-    	}
+    	if(Globals.CONNECTED)
+	    	try {
+	    		ClientNetworking.sendChangeRoom(id);
+	    	} catch (IOException e) {
+	    		System.out.println(e);
+	    	}
     	//populate();
     	p.setPositionInRoom(x, y);
     }
