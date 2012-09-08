@@ -17,7 +17,7 @@ public class Mob extends Entity {
 	protected double targetX = 0.00;
 	protected double targetY = 0.00;
 	
-	protected BufferedImage sprite;
+	//protected BufferedImage sprite;
 	
 	public Mob(double x, double y, double angle){
 		super(x,y);

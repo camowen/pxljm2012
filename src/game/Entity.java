@@ -24,7 +24,7 @@ public class Entity {
 
 	private int health = 100;
 
-	private BufferedImage sprite;
+	protected BufferedImage sprite;
 	protected Rectangle hitbox;
 	
     protected AffineTransform affine;

@@ -52,7 +52,7 @@ public class GameFrame extends JFrame {
 		try {
 			GameFrame g = new GameFrame();
 			
-			Globals.CONNECTED = ClientNetworking.init("localhost", 8008);
+			Globals.CONNECTED = ClientNetworking.init("192.168.0.130", 8008);
 			
 			Player p = new Player("Daniel");
 			Room r = new ParkingLot();
