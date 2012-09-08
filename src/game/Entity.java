@@ -22,7 +22,7 @@ public class Entity {
 
 	private boolean hit = false;
 
-	private int health;
+	private int health = 100;
 
 	private BufferedImage sprite;
 	private Rectangle hitbox;

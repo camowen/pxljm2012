@@ -51,15 +51,15 @@ public class ClientConnection implements Runnable {
 				case Protocol.PTYPE_UPDATE:
 					packet[1] = id;
 					socketIn.read(packet, 2, 20);
-					floodMap(packet, 0, 20);
+					floodMap(packet, 0, 22);
 					break;
 				case Protocol.PTYPE_DESPAWN:
 					socketIn.read(packet, 1, 2);
 					floodMap(packet, 0, 3);
 					break;
-				case Protocol.PTYPE_SHOOT:
-					socketIn.read(packet, 1, 13);
-					floodMap(packet, 0, 13);
+				case Protocol.PTYPE_SHOT:
+					socketIn.read(packet, 1, 18);
+					floodMap(packet, 0, 19);
 					break;
 				case Protocol.PTYPE_ROOM:
 					socketIn.read(packet, 0, 1);

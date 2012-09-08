@@ -37,8 +37,8 @@ public class ClientNetworking {
 				case Protocol.PTYPE_UPDATE:
 					getUpdate();
 					break;
-				case Protocol.PTYPE_SHOOT:
-					
+				case Protocol.PTYPE_SHOT:
+					getShot();
 					break;
 				case Protocol.PTYPE_DESPAWN:
 					getDespawn();
@@ -70,6 +70,25 @@ public class ClientNetworking {
 			Enemies.mobMap.put(pid, new Mob(xPos, yPos, thta));
 		else
 			Enemies.mobMap.get(pid).networkUpdate(xPos, yPos, spdX, spdY, thta);
+	}
+	
+	private static void getShot() throws IOException {
+		byte[] data = new byte[18];
+		socketIn.read(data, 0, 18);
+		
+		byte pid = data[0];
+		byte dmg = data[1];
+		
+		ByteBuffer buf = ByteBuffer.wrap(data, 2, 16);
+		float fromX = buf.getFloat();
+		float fromY = buf.getFloat();
+		float toX = buf.getFloat();
+		float toY = buf.getFloat();
+		
+		// TODO create shot graphic (Line(fromX, fromY, toX, toY)
+		if(pid == 0x0f) {
+			// do {dmg} damage to our player
+		}
 	}
 	
 	private static void getDespawn() throws IOException {
@@ -121,18 +140,21 @@ public class ClientNetworking {
 		sendPacket(packet, 0, 21);
 	}
 	
-	public static void sendShoot(byte type, float xPosition, float yPosition, float orientation) throws IOException {
-		byte[] packet = new byte[14];
-		packet[0] = Protocol.PTYPE_SHOOT;
-		packet[1] = type;
-		ByteBuffer buf = ByteBuffer.allocate(12);
-		buf.putFloat(xPosition);
-		buf.putFloat(yPosition);
-		buf.putFloat(orientation);
-		buf.rewind();
-		buf.get(packet, 2, 12);
+	public static void sendShot(byte hitPID, byte damage, float xPositionFrom, float yPositionFrom, float xPositionTo, float yPositionTo) throws IOException {
+		byte[] packet = new byte[19];
+		packet[0] = Protocol.PTYPE_SHOT;
+		packet[1] = hitPID;
+		packet[2] = damage;
 		
-		sendPacket(packet, 2, 14);
+		ByteBuffer buf = ByteBuffer.allocate(16);
+		buf.putFloat(xPositionFrom);
+		buf.putFloat(yPositionFrom);
+		buf.putFloat(xPositionTo);
+		buf.putFloat(yPositionTo);
+		
+		buf.get(packet, 3, 16);
+		
+		sendPacket(packet, 0, 19);
 	}
 	
 	private static void sendPacket(byte[] packet, int off, int len) throws IOException {
