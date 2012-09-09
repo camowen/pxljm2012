@@ -136,7 +136,7 @@ public class Room {
 		}
 	}
 
-	public boolean canMove(Player p, double playerX, double playerY) {
+	public synchronized boolean canMove(Player p, double playerX, double playerY) {
 		for (Entity e : entities) {
 			if (e instanceof Mob) {
 				if (((Mob) e).contains(p)) {

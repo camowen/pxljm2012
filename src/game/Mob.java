@@ -176,7 +176,7 @@ public class Mob extends Entity {
 		return false;
 	}
 	
-	public void render(Graphics g, int roomx, int roomy) {
+	public synchronized void render(Graphics g, int roomx, int roomy) {
 		if(dead) return;
 		
 		Graphics2D s = (Graphics2D) sprite.getGraphics();
@@ -215,7 +215,7 @@ public class Mob extends Entity {
 		g2d.drawImage(sprite, at, null);
 	}
 	
-	public void kill() {
+	public synchronized void kill() {
 		
 		// Generate gibs
 		dead = true;
