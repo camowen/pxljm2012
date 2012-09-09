@@ -93,7 +93,8 @@ public class ClientConnection implements Runnable {
 					floodMap(packet, 0, 20);
 					break;
 				case Protocol.PTYPE_DESPAWN:
-					socketIn.read(packet, 1, 2);
+					socketIn.read(packet, 2, 1);
+					packet[1] = id;
 					floodMap(packet, 0, 3);
 					break;
 				case Protocol.PTYPE_SHOT:

@@ -38,8 +38,8 @@ public class Player extends Mob {
 	public static BufferedImage splatter4;
 	public static BufferedImage splatter5;
 
-	private Room currentRoom;
-
+	public static Room currentRoom;
+	
 	private int walkFrame = 0;
 	private int shootFrame = 0;
 
@@ -241,6 +241,7 @@ public class Player extends Mob {
 	}
 	
 	public void kill() {
+		ClientNetworking.sendDeath();
 		// Generate gibs
 		dead = true;
 		if(Math.random()>0.5)
@@ -278,6 +279,7 @@ public class Player extends Mob {
 				currentRoom.getEntities().add(b);
 			}
 		}
+
 	}
 
 }

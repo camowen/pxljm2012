@@ -24,6 +24,7 @@ public class Room {
 
 	public byte id = 0;
 
+	public static BufferedImage fxLayer = new BufferedImage(Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT, BufferedImage.TYPE_INT_ARGB);
 	private static List<Room> rooms;
 
 	public static List<Room> getRooms() {
@@ -116,6 +117,12 @@ public class Room {
 		for (Player p : players) {
 			p.render(g);
 		}
+		
+		//Graphics2D s = (Graphics2D) fxLayer.getGraphics();
+		//s.setBackground(new Color(0, 0, 0, 0));
+		//s.clearRect(0, 0, Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT);
+		
+		//g.drawImage(fxLayer, roomx, roomy, null);
 
 	}
 
@@ -224,7 +231,7 @@ public class Room {
     	boolean collide = false;
     	angle -= Math.PI/2.0;
     	double r = 0.00;
-    	double x = 0, y=0;
+    	double x = 0, y = 0;
     	while(!collide && r < 850.00){
     		x = playerX+  r * Math.cos(angle);
     		y = playerY + r * Math.sin(angle);
@@ -247,6 +254,7 @@ public class Room {
     		}
     		r+=2.0;
     	}
+    	
     	if (collide) {
 			try {
 				BufferedImage shot = ImageIO.read(new File(Globals.FX_SHOT));
@@ -258,6 +266,7 @@ public class Room {
 
 			}
 		}
+
     	return null;
     }
     

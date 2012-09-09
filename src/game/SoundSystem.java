@@ -50,6 +50,8 @@ public class SoundSystem {
 	}
 
 	public static void play(final Clip c) {
+		if(c == null) return;
+		
 		new Thread() {
 			public void run() {
 				c.setMicrosecondPosition(0);

@@ -30,6 +30,9 @@ public class Mob extends Entity {
 		scale = 1.0;
 		this.angle = angle;
 		passable = true;
+		
+		health = 3;
+		
 		sprite = new BufferedImage(Globals.PLAYER_HEIGHT, Globals.PLAYER_WIDTH, BufferedImage.TYPE_4BYTE_ABGR);
 		Graphics2D g = sprite.createGraphics();
 		g.setColor(Color.GREEN);
@@ -136,6 +139,7 @@ public class Mob extends Entity {
 			SoundSystem.play(Globals.SFX_HIT5);
 		}
 		if (health <= 0) {
+			//kill();
 			dead = true;
 		}
 		
