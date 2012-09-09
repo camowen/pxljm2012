@@ -12,7 +12,7 @@ public class Globals {
 	public static final int WINDOW_HEIGHT = 600;
 	public static final int WINDOW_WIDTH = 600;
 	
-	public static final int RESPAWN_TIME = 250;
+	public static final int RESPAWN_TIME = 1000;
 	
 	public static final int PLAYER_HEIGHT = 256;
 	public static final int PLAYER_WIDTH = 256;

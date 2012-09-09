@@ -212,7 +212,7 @@ public class Player extends Mob {
 						(float) vy, (float) angle);
 			}
 		} else {
-			respawn--;
+			respawn-=deltat;
 			
 			Graphics2D g = currentRoom.fxLayer.createGraphics();
 			g.setBackground(new Color(0,0,0,Color.TRANSLUCENT));
