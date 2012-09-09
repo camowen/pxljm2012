@@ -10,6 +10,8 @@ public class Protocol {
 	public static final byte PTYPE_SHOT = 0x11;
 	public static final byte PTYPE_ROOM = 0x21;
 	
+	public static final byte PTYPE_ID = 0x41;
+	
 	public static final byte PTYPE_SYNC_ROOM = 0x71;
 	
 	// Update Packet

@@ -100,10 +100,6 @@ public class ClientConnection implements Runnable {
 				case Protocol.PTYPE_SHOT:
 					socketIn.read(packet, 1, 18);
 					System.out.println("["+id+"] "+packet[1]+" got shot");
-					if(packet[1] == id)
-						packet[1] = 0x0f;
-					else
-						packet[1] = 0x00;
 					
 					//floodMap(packet, 0, 19);
 					for(ClientConnection c : Server.clients) {
