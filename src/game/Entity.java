@@ -59,7 +59,7 @@ public class Entity {
 		this.sprite=sprite;
 		hitbox = new Rectangle((int) x, (int) y, (int) Math.abs(op.getX()),
 				(int) Math.abs(op.getY()));
-		System.out.println(hitbox);
+//		System.out.println(hitbox);
 	}
 	
 	public Entity(double x, double y, double rotation, double scale,

@@ -49,7 +49,7 @@ public class Room {
 				r.id = Globals.ROOM_STAIRS;
 				rooms.add(Globals.ROOM_STAIRS, r);
 			} catch (IOException e) {
-				System.out.println(e);
+				//System.out.println(e);
 			}
 		}
 
@@ -140,16 +140,16 @@ public class Room {
 		}
 		if (playerX < 0) {
 			// Move to west room
-			System.out.println("Moving to west room");
+//			System.out.println("Moving to west room");
 			removePlayer(p);
 			west.addPlayer(p, 600 + playerX, playerY);
 		} else if (playerX > 600) {
 			// Move east
-			System.out.println("Moving to east room");
+//			System.out.println("Moving to east room");
 			removePlayer(p);
 			east.addPlayer(p, playerX - 600, playerY);
 		} else if (playerY < 0) {
-			System.out.println("Moving to north room");
+//			System.out.println("Moving to north room");
 			removePlayer(p);
 			north.addPlayer(p, playerX, 600 + playerY);
 		} else if (playerY > 600) {
@@ -174,7 +174,7 @@ public class Room {
 				if (!e.isPassable() && e.contains(x, y)) {
 					collide = true;
 					e.hit();
-					System.out.println(e);
+//					System.out.println(e);
 					break;
 				}
 			}
@@ -186,7 +186,7 @@ public class Room {
 						ClientNetworking.sendShot(m.id, (byte) 1,
 								(float) playerX, (float) playerY, (float) x,
 								(float) y);
-					System.out.println(m);
+//					System.out.println(m);
 					break;
 				}
 			}
@@ -195,8 +195,7 @@ public class Room {
 		if (collide) {
 			try {
 				BufferedImage shot = ImageIO.read(new File(Globals.FX_SHOT));
-				Entity e = new TransientEntity(x, y, Math.random() * Math.PI
-						* 2, 1.00, shot, 3, false);
+				Entity e = new TransientEntity(x-shot.getWidth()/2, y-shot.getHeight()/2, 2, 1.00, shot, 3, false);
 				synchronized (this) {
 					entities.add(e);
 				}

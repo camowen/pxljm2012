@@ -22,16 +22,24 @@ public class GameFrame extends JFrame {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
+		setBackground(Color.black);
+		getGraphics().setColor(Color.WHITE);
+		getGraphics().drawString("Now loading TIME FLUX!", 250, 250);
+		createBufferStrategy(2);
 		boolean done = false;
 		while (!done) {
 			try {
-				createBufferStrategy(2);
+				setBackground(Color.BLACK);
+				Graphics g = getBufferStrategy().getDrawGraphics();
+				g.setColor(Color.white);
+				g.drawString("Now loading TIME FLUX!", 250, 250);
+				g.dispose();
+				getBufferStrategy().show();
 				done = true;
 			} catch (Exception e) {
 			}
 		}
-		setBackground(Color.BLACK);
-		getBufferStrategy().show();
+		
 	}
 
 	public void render(Player p) {
@@ -54,8 +62,12 @@ public class GameFrame extends JFrame {
 
 	public static void main(String[] args) {
 		try {
-			SoundSystem.Init();
+			
 			GameFrame g = new GameFrame();
+			
+			SoundSystem.Init();
+//			SoundSystem.playForever(SoundSystem.BG_MUSIC);
+			
 			
 			//Globals.CONNECTED = ClientNetworking.init("192.168.0.130", 8008);
 			Globals.CONNECTED = false;

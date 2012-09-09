@@ -73,6 +73,12 @@ public class Player extends Mob {
 	public void shoot() {
 		if (!shooting) {
 			shooting = true;
+//			double r = Math.random();
+//			if(r < 0.5){
+				SoundSystem.play(Globals.SFX_SHOT);
+//			} else {
+//				SoundSystem.play(SoundSystem.SFX_SHOT2);
+//			}
 			currentRoom.shoot(this, x, y, angle);
 		}
 	}
@@ -103,6 +109,7 @@ public class Player extends Mob {
 		s.setBackground(new Color(0, 0, 0, 0));
 		s.clearRect(0, 0, Globals.PLAYER_WIDTH, Globals.PLAYER_HEIGHT);
 		if (vx != 0.0 || vy != 0.0) {
+			SoundSystem.startRunning();
 			if (walkFrame < 10) {
 				s.drawImage(feetStep1, 0, 0, null);
 				walkFrame++;
@@ -114,6 +121,7 @@ public class Player extends Mob {
 				}
 			}
 		} else {
+			SoundSystem.stopRunning();
 			s.drawImage(feetIdle, 0, 0, null);
 		}
 
@@ -195,7 +203,11 @@ public class Player extends Mob {
 	public void kill() {
 		// Generate gibs
 		dead = true;
-		SoundSystem.play(SoundSystem.SFX_SPLATTER);
+		if(Math.random()>0.5)
+			SoundSystem.play(Globals.SFX_SPLATTER);
+		else
+			SoundSystem.play(Globals.SFX_SPLAT);
+		
 		synchronized (currentRoom) {
 			Entity b = new TransientEntity(x, y, Math.random()*Math.PI*2, 1.00, blood, 1000);
 			currentRoom.getEntities().add(b);

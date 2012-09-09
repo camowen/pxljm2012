@@ -100,7 +100,7 @@ public class Furnace extends Room {
 		boolean canMove = super.canMove(p, playerX, playerY);
 		if(canMove && falls &&(0<playerX && playerX < 600 && 0 < playerY && playerY<600)){
 			//TODO: Kill the player, dramatically\
-			System.out.println("Fall! (" + playerX + "," + playerY+")");
+			//System.out.println("Fall! (" + playerX + "," + playerY+")");
 			p.kill();
 			return true;
 		} else {

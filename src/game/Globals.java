@@ -97,6 +97,11 @@ public class Globals {
 	public static final String SFX_RUNNING = "sound/fx/sound_run.wav";
 	public static final String SFX_SPLAT = "sound/fx/splat.wav";
 	public static final String SFX_SPLATTER = "sound/fx/splatter2.wav";
+	public static final String SFX_HIT1 = "sound/fx/hit1.wav";
+	public static final String SFX_HIT2 = "sound/fx/hit2.wav";
+	public static final String SFX_HIT3 = "sound/fx/hit3.wav";
+	public static final String SFX_HIT4 = "sound/fx/hit4.wav";
+	public static final String SFX_HIT5 = "sound/fx/hit5.wav";
 	
 	public static final String MUS_BG = "sound/music/mus.mp3";
 
