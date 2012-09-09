@@ -1,14 +1,15 @@
 package game;
 
-import javax.sound.sampled.AudioInputStream;
 
 public class Globals {
 	
 	public static final String GAMENAME = "TIME FLUX";
-	public static final boolean DEBUG_MODE = true;
+	public static final boolean DEBUG_MODE = false;
 	
 	public static final int WINDOW_HEIGHT = 600;
 	public static final int WINDOW_WIDTH = 600;
+	
+	public static final int RESPAWN_TIME = 250;
 	
 	public static final int PLAYER_HEIGHT = 256;
 	public static final int PLAYER_WIDTH = 256;

@@ -69,6 +69,8 @@ public class Player extends Mob {
 			splatter4 = ImageIO.read(new File(Globals.FX_SPLATTER4));
 			splatter5 = ImageIO.read(new File(Globals.FX_SPLATTER5));
 
+			health = 5;
+			
 			sprite = new BufferedImage(Globals.PLAYER_WIDTH,
 					Globals.PLAYER_WIDTH, BufferedImage.TYPE_4BYTE_ABGR);
 		} catch (Exception e) {
@@ -167,7 +169,17 @@ public class Player extends Mob {
 		Graphics2D g2d = (Graphics2D) g;
 		if (!dead) {
 			g2d.drawImage(sprite, at, null);
-		}
+			
+			//Graphics2D gr = currentRoom.fxLayer.createGraphics();
+			//g.setBackground(new Color(0,0,0,Color.TRANSLUCENT));
+			g.clearRect(25,550,100,25);
+			g.setColor(Color.RED);
+			g.fillRect(25, 550, health*20, 25);
+			g.setColor(Color.black);
+			g.drawRect(25,550,100,25);
+			g.setColor(Color.WHITE);
+			g.drawString(health + " / 5", 65, 567);
+		} 
 	}
 
 	public boolean contains(double x, double y) {
@@ -200,7 +212,20 @@ public class Player extends Mob {
 			}
 		} else {
 			respawn--;
+			
+			Graphics2D g = currentRoom.fxLayer.createGraphics();
+			g.setBackground(new Color(0,0,0,Color.TRANSLUCENT));
+			g.clearRect(150,150,300,20);
+			g.setColor(Color.GREEN);
+			g.fillRect(150, 150, (int)((Globals.RESPAWN_TIME-respawn)*(300.0/Globals.RESPAWN_TIME)), 20);
+			g.setColor(Color.black);
+			g.drawRect(150,150,300,20);
+			g.setColor(Color.WHITE);
+			g.drawString("Respawning!", 275, 165);
+			
+			
 			if (respawn <= 0) {
+				g.clearRect(149,149,302,22);
 				dead = false;
 				health = 5;
 				x = 300;
@@ -213,6 +238,7 @@ public class Player extends Mob {
 				currentRoom = Room.getRooms().get(randomRoom);
 				currentRoom.addPlayer(this, 300, 300);
 			}
+			g.dispose();
 		}
 
 	}
@@ -240,7 +266,7 @@ public class Player extends Mob {
 				ClientNetworking.sendDeath();
 			}
 			super.kill();
-			respawn = 1500;
+			respawn = Globals.RESPAWN_TIME;
 			vx = 0.00;
 			vy = 0.00;
 		}

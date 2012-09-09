@@ -122,7 +122,7 @@ public class Room {
 		//s.setBackground(new Color(0, 0, 0, 0));
 		//s.clearRect(0, 0, Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT);
 		
-		//g.drawImage(fxLayer, roomx, roomy, null);
+		g.drawImage(fxLayer, roomx, roomy, null);
 
 	}
 
