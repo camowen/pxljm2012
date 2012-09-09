@@ -21,7 +21,7 @@ public class Mob extends Entity {
 	protected double targetX = 0.00;
 	protected double targetY = 0.00;
 
-	protected boolean dead = false;
+	public boolean dead = false;
 
 	private int walkFrame = 0;
 
@@ -49,23 +49,23 @@ public class Mob extends Entity {
 	}
 
 	// Make zombies
-	public Mob(double x, double y) {
-		super(x, y);
-		this.x = x;
-		this.y = y;
-		scale = 1.0;
-		passable = false;
-		health = 5;
-		sprite = new BufferedImage(50, 50, BufferedImage.TYPE_4BYTE_ABGR);
-		Graphics2D g = sprite.createGraphics();
-		g.setColor(Color.GREEN);
-		g.fillOval(12, 12, 25, 25);
-		g.setColor(Color.white);
-		g.fillOval(20, 0, 10, 10);
-
-		hitbox = new Rectangle((int) x, (int) y, sprite.getWidth(),
-				sprite.getHeight());
-	}
+//	public Mob(double x, double y) {
+//		super(x, y);
+//		this.x = x;
+//		this.y = y;
+//		scale = 1.0;
+//		passable = false;
+//		health = 5;
+//		sprite = new BufferedImage(50, 50, BufferedImage.TYPE_4BYTE_ABGR);
+//		Graphics2D g = sprite.createGraphics();
+//		g.setColor(Color.GREEN);
+//		g.fillOval(12, 12, 25, 25);
+//		g.setColor(Color.white);
+//		g.fillOval(20, 0, 10, 10);
+//
+//		hitbox = new Rectangle((int) x, (int) y, sprite.getWidth(),
+//				sprite.getHeight());
+//	}
 
 	public void update(long deltat) {
 		double seconds = (deltat / 1000.00);

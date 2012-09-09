@@ -244,8 +244,11 @@ public class Room {
     				break;
     			}
     		}
+    		if(collide){
+    			break;
+    		}
     		for(Mob m : Enemies.mobMap.values()){
-    			if(m.contains(x, y)){
+    			if(m.contains(x, y) && !m.dead){
     				collide = true;
     				m.hit();
     				if(Globals.CONNECTED)
