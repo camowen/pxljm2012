@@ -99,7 +99,7 @@ public class Globals {
 	public static final String SFX_ROCKET = "sound/fx/rocket.wav";
 	public static final String SFX_SHOT = "sound/fx/shot.wav";
 	public static final String SFX_SHOT2 = "sound/fx/shot2.wav";
-	public static final String SFX_RUNNING = "sound/fx/sound_run.wav";
+	public static final String SFX_RUNNING = "sound/fx/run3.wav";
 	public static final String SFX_SPLAT = "sound/fx/splat.wav";
 	public static final String SFX_SPLATTER = "sound/fx/splatter2.wav";
 	public static final String SFX_HIT1 = "sound/fx/hit1.wav";

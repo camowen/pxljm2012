@@ -9,7 +9,7 @@ import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
+import java.util.concurrent.SynchronousQueue;
 
 import javax.imageio.ImageIO;
 
@@ -18,7 +18,7 @@ public class Player extends Mob {
 	// private String name;
 
 	public static Player player;
-	
+
 	public static BufferedImage feetIdle;
 	public static BufferedImage feetStep1;
 	public static BufferedImage feetStep2;
@@ -39,7 +39,7 @@ public class Player extends Mob {
 	public static BufferedImage splatter5;
 
 	public static Room currentRoom;
-	
+
 	private int walkFrame = 0;
 	private int shootFrame = 0;
 
@@ -74,7 +74,7 @@ public class Player extends Mob {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		player = this;
 	}
 
@@ -87,14 +87,14 @@ public class Player extends Mob {
 	}
 
 	public void shoot() {
-		if (!shooting) {
+		if (!shooting && !dead) {
 			shooting = true;
-//			double r = Math.random();
-//			if(r < 0.5){
-				SoundSystem.play(Globals.SFX_SHOT);
-//			} else {
-//				SoundSystem.play(SoundSystem.SFX_SHOT2);
-//			}
+			// double r = Math.random();
+			// if(r < 0.5){
+			SoundSystem.play(Globals.SFX_SHOT);
+			// } else {
+			// SoundSystem.play(SoundSystem.SFX_SHOT2);
+			// }
 			currentRoom.shoot(this, x, y, angle);
 		}
 	}
@@ -114,12 +114,9 @@ public class Player extends Mob {
 		targetY = y;
 	}
 
-	public void render(Graphics g) {
+	public synchronized void render(Graphics g) {
 		// g.fillRect((int)x, (int)y, Globals.PLAYER_WIDTH,
 		// Globals.PLAYER_HEIGHT);
-		if (dead) {
-			return;
-		}
 
 		Graphics2D s = (Graphics2D) sprite.getGraphics();
 		s.setBackground(new Color(0, 0, 0, 0));
@@ -168,7 +165,9 @@ public class Player extends Mob {
 		at.rotate(angle);
 		at.translate(-Globals.PLAYER_WIDTH / 2, -Globals.PLAYER_HEIGHT / 2);
 		Graphics2D g2d = (Graphics2D) g;
-		g2d.drawImage(sprite, at, null);
+		if (!dead) {
+			g2d.drawImage(sprite, at, null);
+		}
 	}
 
 	public boolean contains(double x, double y) {
@@ -182,21 +181,38 @@ public class Player extends Mob {
 		return false;
 	}
 
-	public void update(long deltat) {
-		double seconds = (deltat / 1000.00);
-		double dx = vx * seconds;
-		double dy = vy * seconds;
-		x += dx;
-		y += dy;
-		if (!currentRoom.canMove(this, x, y)) {
-			x -= dx;
-			y -= dy;
-		}
-		pointAt();
+	public synchronized void update(long deltat) {
+		if (!dead) {
+			double seconds = (deltat / 1000.00);
+			double dx = vx * seconds;
+			double dy = vy * seconds;
+			x += dx;
+			y += dy;
+			if (!currentRoom.canMove(this, x, y)) {
+				x -= dx;
+				y -= dy;
+			}
+			pointAt();
 
-		if (Globals.CONNECTED) {
-			ClientNetworking.sendUpdate((float) x, (float) y, (float) vx,
-					(float) vy, (float) angle);
+			if (Globals.CONNECTED) {
+				ClientNetworking.sendUpdate((float) x, (float) y, (float) vx,
+						(float) vy, (float) angle);
+			}
+		} else {
+			respawn--;
+			if (respawn <= 0) {
+				dead = false;
+				health = 5;
+				x = 300;
+				y = 300;
+				int randomRoom = (int) (Math.random() * Room.getRooms().size());
+				while (randomRoom == Globals.ROOM_PARKINGLOT
+						|| randomRoom == Globals.ROOM_WAREHOUSE) {
+					randomRoom = (int) (Math.random() * Room.getRooms().size());
+				}
+				currentRoom = Room.getRooms().get(randomRoom);
+				currentRoom.addPlayer(this, 300, 300);
+			}
 		}
 
 	}
@@ -216,11 +232,18 @@ public class Player extends Mob {
 		this.y = y;
 	}
 
-	public void kill(){
-		if(Globals.CONNECTED){
-			ClientNetworking.sendDeath();
+	int respawn = 0;
+
+	public synchronized void kill() {
+		if (!dead) {
+			if (Globals.CONNECTED) {
+				ClientNetworking.sendDeath();
+			}
+			super.kill();
+			respawn = 1500;
+			vx = 0.00;
+			vy = 0.00;
 		}
-		super.kill();
 	}
 
 }
