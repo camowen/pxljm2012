@@ -6,6 +6,7 @@ public class Globals {
 	
 	public static final String GAMENAME = "TIME FLUX";
 	public static final boolean DEBUG_MODE = true;
+	public static final boolean AUDIO_ENABLED = false;
 	
 	public static final int WINDOW_HEIGHT = 600;
 	public static final int WINDOW_WIDTH = 600;

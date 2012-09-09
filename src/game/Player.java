@@ -9,7 +9,6 @@ import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.util.concurrent.SynchronousQueue;
 
 import javax.imageio.ImageIO;
 
@@ -122,7 +121,8 @@ public class Player extends Mob {
 		s.setBackground(new Color(0, 0, 0, 0));
 		s.clearRect(0, 0, Globals.PLAYER_WIDTH, Globals.PLAYER_HEIGHT);
 		if (vx != 0.0 || vy != 0.0) {
-			SoundSystem.startRunning();
+			if(Globals.AUDIO_ENABLED)
+				SoundSystem.startRunning();
 			if (walkFrame < 10) {
 				s.drawImage(feetStep1, 0, 0, null);
 				walkFrame++;
@@ -134,7 +134,8 @@ public class Player extends Mob {
 				}
 			}
 		} else {
-			SoundSystem.stopRunning();
+			if(Globals.AUDIO_ENABLED)
+				SoundSystem.stopRunning();
 			s.drawImage(feetIdle, 0, 0, null);
 		}
 
