@@ -30,7 +30,7 @@ public class Mob extends Entity {
 		scale = 1.0;
 		this.angle = angle;
 		passable = true;
-		sprite = new BufferedImage(50, 50, BufferedImage.TYPE_4BYTE_ABGR);
+		sprite = new BufferedImage(Globals.PLAYER_HEIGHT, Globals.PLAYER_WIDTH, BufferedImage.TYPE_4BYTE_ABGR);
 		Graphics2D g = sprite.createGraphics();
 		g.setColor(Color.GREEN);
 		g.fillOval(12, 12, 25, 25);
@@ -126,6 +126,8 @@ public class Mob extends Entity {
 		if (health <= 0) {
 			dead = true;
 		}
+		
+		System.out.println("I GOT HIT!");
 	}
 
 	public boolean contains(Player p) {
@@ -145,26 +147,14 @@ public class Mob extends Entity {
 		if (dead)
 			return false;
 		
-		double tx = (this.x+25) -x;
-		double ty = (this.y+25) - y;
+		double tx = (this.x) - x;
+		double ty = (this.y) - y;
 
 		if (Math.sqrt(tx * tx + ty * ty) <= 25) {
 			return true;
 		}
 		return false;
 	}
-
-//	public void render(Graphics g, int roomx, int roomy) {
-//		if (!dead) {
-//			AffineTransform at = new AffineTransform();
-//			at.translate(roomx+x, roomy+y);
-//			at.translate(25, 25);
-//			at.rotate(angle);
-//			at.translate(-25, -25);
-//			Graphics2D g2d = (Graphics2D) g;
-//			g2d.drawImage(sprite, at, null);
-//		}
-//	}
 	
 	public void render(Graphics g, int roomx, int roomy) {
 		if(dead) return;
@@ -198,9 +188,9 @@ public class Mob extends Entity {
 		
 		AffineTransform at = new AffineTransform();
 		at.translate(roomx+x, roomy+y);
-		at.translate(25, 25);
+		at.scale(0.25, 0.25);
 		at.rotate(angle);
-		at.translate(-25, -25);
+		at.translate(-Globals.PLAYER_WIDTH/2, -Globals.PLAYER_HEIGHT/2);
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.drawImage(sprite, at, null);
 	}

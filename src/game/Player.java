@@ -17,6 +17,8 @@ public class Player extends Mob {
 
 	// private String name;
 
+	public static Player player;
+	
 	public static BufferedImage feetIdle;
 	public static BufferedImage feetStep1;
 	public static BufferedImage feetStep2;
@@ -39,7 +41,9 @@ public class Player extends Mob {
 	private boolean shooting = false;
 
 	public Player(String name) {
+
 		super(300, 300, 0);
+
 		try {
 			feetIdle = ImageIO.read(new File(Globals.CHARACTER_FEET_IDLE));
 			feetStep1 = ImageIO.read(new File(Globals.CHARACTER_FEET_1));
@@ -60,6 +64,8 @@ public class Player extends Mob {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		player = this;
 	}
 
 	public Room getCurrentRoom() {

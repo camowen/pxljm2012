@@ -160,39 +160,94 @@ public class Room {
 		return true;
 	}
 
-	public Entity shoot(Player me, double playerX, double playerY, double angle) {
-
-		boolean collide = false;
-		angle -= Math.PI / 2.0;
-		double r = 0.00;
-		double x = 0.00;
-		double y = 0.00;
-		while (!collide && r < 850.00) {
-			x = playerX + r * Math.cos(angle);
-			y = playerY + r * Math.sin(angle);
-			for (Entity e : entities) {
-				if (!e.isPassable() && e.contains(x, y)) {
-					collide = true;
-					e.hit();
-//					System.out.println(e);
-					break;
-				}
-			}
-			for (Mob m : Enemies.mobMap.values()) {
-				if (m.contains(x, y)) {
-					collide = true;
-					m.hit();
-					if (Globals.CONNECTED)
-						ClientNetworking.sendShot(m.id, (byte) 1,
-								(float) playerX, (float) playerY, (float) x,
-								(float) y);
-//					System.out.println(m);
-					break;
-				}
-			}
-			r += 2.0;
-		}
-		if (collide) {
+//	public Entity shoot(Player me, double playerX, double playerY, double angle) {
+//
+//		boolean collide = false;
+//		angle -= Math.PI / 2.0;
+//		double r = 0.00;
+//		double x = 0.00;
+//		double y = 0.00;
+//		while (!collide && r < 850.00) {
+//			x = playerX + r * Math.cos(angle);
+//			y = playerY + r * Math.sin(angle);
+//			for (Entity e : entities) {
+//				if (!e.isPassable() && e.contains(x, y)) {
+//					collide = true;
+//					e.hit();
+////					System.out.println(e);
+//					break;
+//				}
+//			}
+//			for (Mob m : Enemies.mobMap.values()) {
+//				if (m.contains(x, y)) {
+//					collide = true;
+//					m.hit();
+//					if (Globals.CONNECTED)
+//						ClientNetworking.sendShot(m.id, (byte) 1,
+//								(float) playerX, (float) playerY, (float) x,
+//								(float) y);
+////					System.out.println(m);
+//					break;
+//				}
+//			}
+//			r += 2.0;
+//		}
+//		if (collide) {
+//			try {
+//				BufferedImage shot = ImageIO.read(new File(Globals.FX_SHOT));
+//				Entity e = new TransientEntity(x-shot.getWidth()/2, y-shot.getHeight()/2, 2, 1.00, shot, 3, false);
+//				synchronized (this) {
+//					entities.add(e);
+//				}
+//			} catch (Exception e) {
+//
+//			}
+//		}
+//		// System.out.println(collide);
+//		return null;
+//	}
+	 
+    public void addPlayer(Player p, double x, double y){
+    	this.players.add(p);
+    	this.hasPlayer = true;
+    	p.setCurrentRoom(this);
+    	if(Globals.CONNECTED) {
+    		Enemies.mobMap.clear();
+	    	ClientNetworking.sendChangeRoom(id);
+    	}
+    	
+    	p.setPositionInRoom(x, y);
+    }
+	
+    public Entity shoot(Player me, double playerX, double playerY, double angle){
+    	
+    	boolean collide = false;
+    	angle -= Math.PI/2.0;
+    	double r = 0.00;
+    	double x = 0, y=0;
+    	while(!collide && r < 850.00){
+    		x = playerX+  r * Math.cos(angle);
+    		y = playerY + r * Math.sin(angle);
+    		for(Entity e : entities){
+    			if(!e.isPassable() && e.contains(x, y)){
+    				collide = true;
+    				e.hit();
+    				System.out.println(e);
+    				break;
+    			}
+    		}
+    		for(Mob m : Enemies.mobMap.values()){
+    			if(m.contains(x, y)){
+    				collide = true;
+    				m.hit();
+    				if(Globals.CONNECTED)
+    					ClientNetworking.sendShot(m.id, (byte) 1, (float) playerX, (float) playerY, (float) x, (float) y);
+    				break;
+    			}
+    		}
+    		r+=2.0;
+    	}
+    	if (collide) {
 			try {
 				BufferedImage shot = ImageIO.read(new File(Globals.FX_SHOT));
 				Entity e = new TransientEntity(x-shot.getWidth()/2, y-shot.getHeight()/2, 2, 1.00, shot, 3, false);
@@ -203,26 +258,14 @@ public class Room {
 
 			}
 		}
-		// System.out.println(collide);
-		return null;
-	}
-
-	public void addPlayer(Player p, double x, double y) {
-		this.players.add(p);
-		this.hasPlayer = true;
-		p.setCurrentRoom(this);
-		if (Globals.CONNECTED)
-			ClientNetworking.sendChangeRoom(id);
-		// populate();
-		p.setPositionInRoom(x, y);
-	}
-
-	public void populate() {
-		Entity e;
-
-		entities.clear();
-		BufferedImage wall = new BufferedImage(265, 10,
-				BufferedImage.TYPE_4BYTE_ABGR);
+    	return null;
+    }
+    
+    public void populate(){
+    	Entity e;
+    	
+    	entities.clear();
+    	BufferedImage wall = new BufferedImage(265,10,BufferedImage.TYPE_4BYTE_ABGR);
 		Graphics2D w = wall.createGraphics();
 		w.setColor(Color.black);
 		w.fillRect(0, 0, 265, 5);

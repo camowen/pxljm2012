@@ -59,7 +59,6 @@ public class Entity {
 		this.sprite=sprite;
 		hitbox = new Rectangle((int) x, (int) y, (int) Math.abs(op.getX()),
 				(int) Math.abs(op.getY()));
-//		System.out.println(hitbox);
 	}
 	
 	public Entity(double x, double y, double rotation, double scale,
@@ -210,6 +209,34 @@ public class Entity {
 			break;
 		case Globals.ASSET_TYPE_OFFICE_TABLE:
 			imageName = Globals.OFFICE_TABLE;
+			break;
+		case Globals.ASSET_TYPE_WAREHOUSE_BACKGROUND:
+			imageName = Globals.WAREHOUSE_BACKGROUND;
+			passable = true;
+			break;
+		case Globals.ASSET_TYPE_WAREHOUSE_CCUBE:
+			imageName = Globals.WAREHOUSE_CCUBE;
+			break;
+		case Globals.ASSET_TYPE_WAREHOUSE_CRATE_1:
+			imageName = Globals.WAREHOUSE_CRATE_1;
+			break;
+		case Globals.ASSET_TYPE_WAREHOUSE_CRATE_2:
+			imageName = Globals.WAREHOUSE_CRATE_2;
+			break;
+		case Globals.ASSET_TYPE_WAREHOUSE_CRATE_3:
+			imageName = Globals.WAREHOUSE_CRATE_3;
+			break;
+		case Globals.ASSET_TYPE_WAREHOUSE_FLOOR:
+			imageName = Globals.WAREHOUSE_FLOOR;
+			passable = true;
+			break;
+		case Globals.ASSET_TYPE_FURNACE_BACKGROUND:
+			imageName = Globals.FURNACE_BACKGROUND;
+			passable = true;
+			break;
+		case Globals.ASSET_TYPE_FURNACE_TILE:
+			imageName = Globals.FURNACE_TILE;
+			passable = true;
 			break;
 		default:
 			System.out.println("INVALID ASSET TYPE! ("+entityType+")");

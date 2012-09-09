@@ -64,9 +64,11 @@ public class ClientConnection implements Runnable {
 	}
 	
 	private void floodMap(byte[] packet, int off, int len) throws IOException {
-		for(ClientConnection c : Server.clients) {
-			if((c.map == map) && (c.id != id)) {
-				c.sendPacket(packet, off, len);
+		synchronized (Server.clients) {
+			for(ClientConnection c : Server.clients) {
+				if((c.map == map) && (c.id != id)) {
+					c.sendPacket(packet, off, len);
+				}
 			}
 		}
 	}
@@ -96,6 +98,7 @@ public class ClientConnection implements Runnable {
 					break;
 				case Protocol.PTYPE_SHOT:
 					socketIn.read(packet, 1, 18);
+					System.out.println("["+id+"] "+packet[1]+" got shot");
 					if(packet[1] == id)
 						packet[1] = 0x0f;
 					else
@@ -121,6 +124,10 @@ public class ClientConnection implements Runnable {
 			} catch(IOException e) {
 				System.out.println("["+id+"] Error: "+e);
 			}
+		}
+		
+		synchronized(Server.clients) {
+			Server.clients.remove(this);
 		}
 		System.out.println("ClientConnection "+id+" disconnected.");
 	}

@@ -50,7 +50,9 @@ public class Server {
 	}
 	
 	public static void floodClients(byte[] packet, int off, int len) throws IOException {
-		for(ClientConnection c : clients)
-			c.sendPacket(packet, off, len);
+		synchronized (clients) {
+			for(ClientConnection c : clients)
+				c.sendPacket(packet, off, len);
+		}
 	}
 }
