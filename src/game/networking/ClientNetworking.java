@@ -52,6 +52,8 @@ public class ClientNetworking {
 				case Protocol.PTYPE_SYNC_ROOM:
 					getRoomSync();
 					break;
+				default:	
+					break;
 				}
 			}
 		} catch(IOException e) {
