@@ -117,9 +117,7 @@ public class Room {
 			}
 		}
 
-		for (Player p : players) {
-			p.render(g);
-		}
+		Player.player.render(g);
 		
 		//Graphics2D s = (Graphics2D) fxLayer.getGraphics();
 		//s.setBackground(new Color(0, 0, 0, 0));
