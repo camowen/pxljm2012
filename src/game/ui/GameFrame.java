@@ -66,7 +66,7 @@ public class GameFrame extends JFrame {
 			GameFrame g = new GameFrame();
 			
 			SoundSystem.Init();
-//			SoundSystem.playForever(SoundSystem.BG_MUSIC);
+			//SoundSystem.playForever(SoundSystem.BG_MUSIC);
 			
 			
 			//Globals.CONNECTED = ClientNetworking.init("192.168.0.130", 8008);

@@ -32,6 +32,11 @@ public class Player extends Mob {
 	public static BufferedImage organ3;
 	public static BufferedImage bone;
 	public static BufferedImage rib;
+	public static BufferedImage splatter1;
+	public static BufferedImage splatter2;
+	public static BufferedImage splatter3;
+	public static BufferedImage splatter4;
+	public static BufferedImage splatter5;
 
 	private Room currentRoom;
 
@@ -58,6 +63,11 @@ public class Player extends Mob {
 			organ1 = ImageIO.read(new File(Globals.FX_ORGAN_1));
 			organ2 = ImageIO.read(new File(Globals.FX_ORGAN_2));
 			organ3 = ImageIO.read(new File(Globals.FX_ORGAN_3));
+			splatter1 = ImageIO.read(new File(Globals.FX_SPLATTER1));
+			splatter2 = ImageIO.read(new File(Globals.FX_SPLATTER2));
+			splatter3 = ImageIO.read(new File(Globals.FX_SPLATTER3));
+			splatter4 = ImageIO.read(new File(Globals.FX_SPLATTER4));
+			splatter5 = ImageIO.read(new File(Globals.FX_SPLATTER5));
 
 			sprite = new BufferedImage(Globals.PLAYER_WIDTH,
 					Globals.PLAYER_WIDTH, BufferedImage.TYPE_4BYTE_ABGR);
@@ -206,6 +216,30 @@ public class Player extends Mob {
 		this.y = y;
 	}
 
+	private BufferedImage randomBloodSplatter(){
+		double r = Math.random();
+		if(r<0.2){
+			return splatter1;
+		} else if(r<0.4){
+			return splatter2;
+		} else if(r<0.6){
+			return splatter3;
+		} else if(r<0.8){
+			return splatter4;
+		} else {
+			return splatter5;
+		}
+	}
+	
+	
+	private int scatterX(){
+		return (int)(x - 25 + (Math.random()*50-25));
+	}
+	
+	private int scatterY(){
+		return (int)(y - 25 + (Math.random()*50-25));
+	}
+	
 	public void kill() {
 		// Generate gibs
 		dead = true;
@@ -217,29 +251,30 @@ public class Player extends Mob {
 		synchronized (currentRoom) {
 			Entity b = new TransientEntity(x, y, Math.random()*Math.PI*2, 1.00, blood, 1000);
 			currentRoom.getEntities().add(b);
-
-			for (int i = 0; i < (int) (Math.random() * 6); i++) {
-				b = new TransientEntity(x, y, Math.random()*Math.PI*2, 1.00, blood, 20, true);
+			
+			for (int i = 0; i < (int) (2+Math.random() * 4); i++) {
+				b = new TransientEntity(scatterX(), scatterY(), Math.random()*Math.PI*2, 1.00, randomBloodSplatter(), 1000);
 				currentRoom.getEntities().add(b);
 			}
+			
 			for (int i = 0; i < (int) (Math.random() * 3); i++) {
-				b = new TransientEntity(x, y, Math.random()*Math.PI*2, 1.00, rib, 20, true);
+				b = new TransientEntity(x, y, Math.random()*Math.PI*2, 1.00, rib, 60, true);
 				currentRoom.getEntities().add(b);
 			}
 			for (int i = 0; i < (int) (Math.random() * 6); i++) {
-				b = new TransientEntity(x, y, Math.random()*Math.PI*2, 1.00, bone, 20, true);
+				b = new TransientEntity(x, y, Math.random()*Math.PI*2, 1.00, bone, 60, true);
 				currentRoom.getEntities().add(b);
 			}
 			for (int i = 0; i < (int) (Math.random() * 2); i++) {
-				b = new TransientEntity(x, y, Math.random()*Math.PI*2, 1.00, organ1, 20, true);
+				b = new TransientEntity(x, y, Math.random()*Math.PI*2, 1.00, organ1, 60, true);
 				currentRoom.getEntities().add(b);
 			}
 			for (int i = 0; i < (int) (Math.random() * 2); i++) {
-				b = new TransientEntity(x, y, Math.random()*Math.PI*2, 1.00, organ2, 20, true);
+				b = new TransientEntity(x, y, Math.random()*Math.PI*2, 1.00, organ2, 60, true);
 				currentRoom.getEntities().add(b);
 			}
 			for (int i = 0; i < (int) (Math.random() * 2); i++) {
-				b = new TransientEntity(x, y, Math.random()*Math.PI*2, 1.00, organ3, 20, true);
+				b = new TransientEntity(x, y, Math.random()*Math.PI*2, 1.00, organ3, 60, true);
 				currentRoom.getEntities().add(b);
 			}
 		}

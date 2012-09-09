@@ -27,26 +27,26 @@ public class SoundSystem {
 						new FileInputStream(Globals.SFX_RUNNING)));
 		RUNNING.open(inputStream2);
 		RUNNING.loop(Clip.LOOP_CONTINUOUSLY);
-
+		RUNNING.stop();
 		// MP3s
-		// File file = new File(Globals.MUS_BG);
-		// AudioInputStream in= AudioSystem.getAudioInputStream(file);
-		// AudioInputStream din = null;
-		// AudioFormat baseFormat = in.getFormat();
-		// AudioFormat decodedFormat = new
-		// AudioFormat(AudioFormat.Encoding.PCM_SIGNED,
-		// baseFormat.getSampleRate(),
-		// 16,
-		// baseFormat.getChannels(),
-		// baseFormat.getChannels() * 2,
-		// baseFormat.getSampleRate(),
-		// false);
-		// din = AudioSystem.getAudioInputStream(decodedFormat, in);
-		// BG_MUSIC = AudioSystem.getClip();
-		// //AudioInputStream inputStream10 =
-		// AudioSystem.getAudioInputStream(new BufferedInputStream(new
-		// FileInputStream(Globals.MUS_BG)));
-		// BG_MUSIC.open(din);
+//		 File file = new File(Globals.MUS_BG);
+//		 AudioInputStream in= AudioSystem.getAudioInputStream(file);
+//		 AudioInputStream din = null;
+//		 AudioFormat baseFormat = in.getFormat();
+//		 AudioFormat decodedFormat = new
+//		 AudioFormat(AudioFormat.Encoding.PCM_SIGNED,
+//		 baseFormat.getSampleRate(),
+//		 16,
+//		 baseFormat.getChannels(),
+//		 baseFormat.getChannels() * 2,
+//		 baseFormat.getSampleRate(),
+//		 false);
+//		 din = AudioSystem.getAudioInputStream(decodedFormat, in);
+//		 BG_MUSIC = AudioSystem.getClip();
+//		 //AudioInputStream inputStream10 =
+//		 AudioSystem.getAudioInputStream(new BufferedInputStream(new
+//		 FileInputStream(Globals.MUS_BG)));
+//		 BG_MUSIC.open(din);
 	}
 
 	public static void play(final Clip c) {

@@ -123,6 +123,18 @@ public class Mob extends Entity {
 
 	public void hit() {
 		health--;
+		double r = Math.random();
+		if(r<0.2){
+			SoundSystem.play(Globals.SFX_HIT1);
+		} else if(r<0.4){
+			SoundSystem.play(Globals.SFX_HIT2);
+		} else if(r<0.6){
+			SoundSystem.play(Globals.SFX_HIT3);
+		} else if(r<0.8){
+			SoundSystem.play(Globals.SFX_HIT4);
+		} else {
+			SoundSystem.play(Globals.SFX_HIT5);
+		}
 		if (health <= 0) {
 			dead = true;
 		}

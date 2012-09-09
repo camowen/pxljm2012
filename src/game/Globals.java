@@ -87,6 +87,11 @@ public class Globals {
 	public static final String FX_EXPLOSION= "img/fx/explosion.png";
 	public static final String FX_SHOT = "img/fx/shot.png";
 	public static final String FX_SMOKE = "img/fx/smoke.png";
+	public static final String FX_SPLATTER1 = "img/fx/bloodSplatter1.png";
+	public static final String FX_SPLATTER2 = "img/fx/bloodSplatter2.png";
+	public static final String FX_SPLATTER3 = "img/fx/bloodSplatter3.png";
+	public static final String FX_SPLATTER4 = "img/fx/bloodSplatter4.png";
+	public static final String FX_SPLATTER5 = "img/fx/bloodSplatter5.png";
 	
 	public static final String SFX_EXPLOSION = "sound/fx/explosion.wav";
 	public static final String SFX_RELOAD = "sound/fx/reload.wav";
