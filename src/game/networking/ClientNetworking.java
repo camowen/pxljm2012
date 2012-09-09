@@ -109,9 +109,10 @@ public class ClientNetworking {
 		byte pid = data[0];
 		byte despawnType = data[1];
 		
-		Enemies.mobMap.remove(pid);
-		if(despawnType == Protocol.DESPAWN_TYPE_DEATH)
-			Enemies.mobMap.get(pid).kill();
+		Mob m = Enemies.mobMap.remove(pid);
+		if(despawnType == Protocol.DESPAWN_TYPE_DEATH) {
+			m.kill();
+		}
 	}
 	
 	private static void getRoomSync() throws IOException {
