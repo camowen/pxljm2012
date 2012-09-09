@@ -73,8 +73,13 @@ public class GameFrame extends JFrame {
 		try {
 			GameFrame g = new GameFrame();
 			
-			//Globals.CONNECTED = ClientNetworking.init("192.168.0.130", 8008);
-			Globals.CONNECTED = false;
+			String hostname = "localhost";
+			
+			if(args.length > 0)
+				hostname = args[0];
+			
+			Globals.CONNECTED = ClientNetworking.init(hostname, 8008);
+			//Globals.CONNECTED = false;
 			Player p = new Player("Daniel");
 			
 			Room r = Room.getRooms().get((int) (1+Math.random()*3));
