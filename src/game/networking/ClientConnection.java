@@ -117,6 +117,7 @@ public class ClientConnection implements Runnable {
 					packet[2] = Protocol.DESPAWN_TYPE_DISCONNECT;
 					floodMap(packet, 0, 3);
 					
+					Server.clients.remove(this);
 					socket.close();
 					run = false;
 					break;
