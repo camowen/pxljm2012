@@ -226,7 +226,7 @@ public class Player extends Mob {
 			
 			
 			if (respawn <= 0) {
-				g.clearRect(149,149,302,22);
+				g.clearRect(0,0,600,600);
 				dead = false;
 				health = 5;
 				x = 300;
