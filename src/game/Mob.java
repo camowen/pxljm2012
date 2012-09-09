@@ -1,5 +1,7 @@
 package game;
 
+import game.networking.ClientNetworking;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -139,7 +141,7 @@ public class Mob extends Entity {
 			SoundSystem.play(Globals.SFX_HIT5);
 		}
 		if (health <= 0) {
-			//kill();
+			kill();
 			dead = true;
 		}
 		
@@ -210,4 +212,72 @@ public class Mob extends Entity {
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.drawImage(sprite, at, null);
 	}
+	
+	public void kill() {
+		
+		// Generate gibs
+		dead = true;
+		if(Math.random()>0.5)
+			SoundSystem.play(Globals.SFX_SPLATTER);
+		else
+			SoundSystem.play(Globals.SFX_SPLAT);
+		
+		synchronized (Player.currentRoom) {
+			Entity b = new TransientEntity(x, y, Math.random()*Math.PI*2, 1.00, Player.blood, 1000);
+			Player.currentRoom.getEntities().add(b);
+			
+			for (int i = 0; i < (int) (2+Math.random() * 4); i++) {
+				b = new TransientEntity(scatterX(), scatterY(), Math.random()*Math.PI*2, 1.00, randomBloodSplatter(), 1000);
+				Player.currentRoom.getEntities().add(b);
+			}
+			
+			for (int i = 0; i < (int) (Math.random() * 3); i++) {
+				b = new TransientEntity(x, y, Math.random()*Math.PI*2, 1.00, Player.rib, 60, true);
+				Player.currentRoom.getEntities().add(b);
+			}
+			for (int i = 0; i < (int) (Math.random() * 6); i++) {
+				b = new TransientEntity(x, y, Math.random()*Math.PI*2, 1.00, Player.bone, 60, true);
+				Player.currentRoom.getEntities().add(b);
+			}
+			for (int i = 0; i < (int) (Math.random() * 2); i++) {
+				b = new TransientEntity(x, y, Math.random()*Math.PI*2, 1.00, Player.organ1, 60, true);
+				Player.currentRoom.getEntities().add(b);
+			}
+			for (int i = 0; i < (int) (Math.random() * 2); i++) {
+				b = new TransientEntity(x, y, Math.random()*Math.PI*2, 1.00, Player.organ2, 60, true);
+				Player.currentRoom.getEntities().add(b);
+			}
+			for (int i = 0; i < (int) (Math.random() * 2); i++) {
+				b = new TransientEntity(x, y, Math.random()*Math.PI*2, 1.00, Player.organ3, 60, true);
+				Player.currentRoom.getEntities().add(b);
+			}
+		}
+
+	}
+	
+	private BufferedImage randomBloodSplatter(){
+		double r = Math.random();
+		if(r<0.2){
+			return Player.splatter1;
+		} else if(r<0.4){
+			return Player.splatter2;
+		} else if(r<0.6){
+			return Player.splatter3;
+		} else if(r<0.8){
+			return Player.splatter4;
+		} else {
+			return Player.splatter5;
+		}
+	}
+	
+	
+	private int scatterX(){
+		return (int)(x - 25 + (Math.random()*50-25));
+	}
+	
+	private int scatterY(){
+		return (int)(y - 25 + (Math.random()*50-25));
+	}
+	
+	
 }
