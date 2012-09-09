@@ -130,6 +130,7 @@ public class ClientConnection implements Runnable {
 				
 			} catch(IOException e) {
 				System.out.println("["+id+"] Error: "+e);
+				run = false;
 			}
 		}
 		
