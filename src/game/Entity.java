@@ -108,6 +108,8 @@ public class Entity {
 	}
 	
 	public Entity(double x, double y, double rotation, byte entityType) throws IOException {
+		type = entityType;
+		
 		String imageName = "";
 		switch(entityType) {
 		case Globals.ASSET_TYPE_BATHROOM_BACKROUND:
