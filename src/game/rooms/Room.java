@@ -124,8 +124,8 @@ public class Room {
 		//Graphics2D s = (Graphics2D) fxLayer.getGraphics();
 		//s.setBackground(new Color(0, 0, 0, 0));
 		//s.clearRect(0, 0, Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT);
-		
-		g.drawImage(fxLayer, roomx, roomy, null);
+	
+		g.drawImage(fxLayer, 0, 0, null);
 
 	}
 

@@ -12,7 +12,7 @@ import java.awt.image.BufferedImage;
 public class Mob extends Entity {
 
 	public byte id = -1;
-	
+
 	protected double vx = 0;
 	protected double vy = 0;
 
@@ -22,7 +22,7 @@ public class Mob extends Entity {
 	protected double targetY = 0.00;
 
 	protected boolean dead = false;
-	
+
 	private int walkFrame = 0;
 
 	public Mob(double x, double y, double angle) {
@@ -32,10 +32,11 @@ public class Mob extends Entity {
 		scale = 1.0;
 		this.angle = angle;
 		passable = true;
-		
+
 		health = 3;
-		
-		sprite = new BufferedImage(Globals.PLAYER_HEIGHT, Globals.PLAYER_WIDTH, BufferedImage.TYPE_4BYTE_ABGR);
+
+		sprite = new BufferedImage(Globals.PLAYER_HEIGHT, Globals.PLAYER_WIDTH,
+				BufferedImage.TYPE_4BYTE_ABGR);
 		Graphics2D g = sprite.createGraphics();
 		g.setColor(Color.GREEN);
 		g.fillOval(12, 12, 25, 25);
@@ -44,7 +45,7 @@ public class Mob extends Entity {
 
 		hitbox = new Rectangle((int) x, (int) y, sprite.getWidth(),
 				sprite.getHeight());
-		//setImage();
+		// setImage();
 	}
 
 	// Make zombies
@@ -111,12 +112,12 @@ public class Mob extends Entity {
 	}
 
 	public void addVX(double vx) {
-		if(!dead)
+		if (!dead)
 			this.vx += vx;
 	}
 
 	public void addVY(double vy) {
-		if(!dead)
+		if (!dead)
 			this.vy += vy;
 	}
 
@@ -131,13 +132,13 @@ public class Mob extends Entity {
 	public void hit() {
 		health--;
 		double r = Math.random();
-		if(r<0.2){
+		if (r < 0.2) {
 			SoundSystem.play(Globals.SFX_HIT1);
-		} else if(r<0.4){
+		} else if (r < 0.4) {
 			SoundSystem.play(Globals.SFX_HIT2);
-		} else if(r<0.6){
+		} else if (r < 0.6) {
 			SoundSystem.play(Globals.SFX_HIT3);
-		} else if(r<0.8){
+		} else if (r < 0.8) {
 			SoundSystem.play(Globals.SFX_HIT4);
 		} else {
 			SoundSystem.play(Globals.SFX_HIT5);
@@ -146,27 +147,27 @@ public class Mob extends Entity {
 			kill();
 			dead = true;
 		}
-		
+
 		System.out.println("I GOT HIT!");
 	}
 
 	public boolean contains(Player p) {
 		if (dead)
 			return false;
-		
-		double tx = (this.x+25) - p.getX();
-		double ty = (this.y+25) - p.getY();
+
+		double tx = (this.x + 25) - p.getX();
+		double ty = (this.y + 25) - p.getY();
 
 		if (Math.sqrt(tx * tx + ty * ty) <= 25) {
 			return true;
 		}
 		return false;
 	}
-	
+
 	public boolean contains(int x, int y) {
 		if (dead)
 			return false;
-		
+
 		double tx = (this.x) - x;
 		double ty = (this.y) - y;
 
@@ -175,111 +176,122 @@ public class Mob extends Entity {
 		}
 		return false;
 	}
-	
+
 	public synchronized void render(Graphics g, int roomx, int roomy) {
-		if(dead) return;
-		
 		Graphics2D s = (Graphics2D) sprite.getGraphics();
 		s.setBackground(new Color(0, 0, 0, 0));
 		s.clearRect(0, 0, Globals.PLAYER_WIDTH, Globals.PLAYER_HEIGHT);
-		if(vx != 0.0 || vy != 0.0){
-			if(walkFrame < 10){
+		if (vx != 0.0 || vy != 0.0) {
+			if (walkFrame < 10) {
 				s.drawImage(Player.feetStep1, 0, 0, null);
 				walkFrame++;
 			} else {
 				s.drawImage(Player.feetStep2, 0, 0, null);
 				walkFrame++;
-				if(walkFrame >=20){
+				if (walkFrame >= 20) {
 					walkFrame = 0;
 				}
 			}
 		} else {
-			s.drawImage(Player.feetIdle,0,0,null);
+			s.drawImage(Player.feetIdle, 0, 0, null);
 		}
-		
+
 		s.drawImage(Player.armsIdle, 0, 0, null);
-		
-		s.drawImage(Player.character,0,0,null);
-		
-		if(Globals.DEBUG_MODE){
+
+		s.drawImage(Player.character, 0, 0, null);
+
+		if (Globals.DEBUG_MODE) {
 			s.setColor(Color.red);
-			s.drawOval(Globals.PLAYER_WIDTH/4, Globals.PLAYER_HEIGHT/4, Globals.PLAYER_WIDTH/2, Globals.PLAYER_HEIGHT/2);
+			s.drawOval(Globals.PLAYER_WIDTH / 4, Globals.PLAYER_HEIGHT / 4,
+					Globals.PLAYER_WIDTH / 2, Globals.PLAYER_HEIGHT / 2);
 		}
-		
+
 		AffineTransform at = new AffineTransform();
-		at.translate(roomx+x, roomy+y);
+		at.translate(roomx + x, roomy + y);
 		at.scale(0.25, 0.25);
 		at.rotate(angle);
-		at.translate(-Globals.PLAYER_WIDTH/2, -Globals.PLAYER_HEIGHT/2);
-		Graphics2D g2d = (Graphics2D) g;
-		g2d.drawImage(sprite, at, null);
+		at.translate(-Globals.PLAYER_WIDTH / 2, -Globals.PLAYER_HEIGHT / 2);
+		if (!dead) {
+			Graphics2D g2d = (Graphics2D) g;
+			g2d.drawImage(sprite, at, null);
+		}
 	}
-	
+
 	public synchronized void kill() {
-		
+
 		// Generate gibs
 		dead = true;
-		if(Math.random()>0.5)
+		if (Math.random() > 0.5)
 			SoundSystem.play(Globals.SFX_SPLATTER);
 		else
 			SoundSystem.play(Globals.SFX_SPLAT);
-		
+
 		synchronized (Player.currentRoom) {
-			Entity b = new TransientEntity(scatterX(), scatterY(), Math.random()*Math.PI*2, 1.00, Player.blood, 1000);
+			Entity b = new TransientEntity(scatterX(), scatterY(),
+					Math.random() * Math.PI * 2, 1.00, Player.blood, 1000);
 			Player.currentRoom.getEntities().add(b);
-			
-			for (int i = 0; i < (int) (2+Math.random() * 4); i++) {
-				b = new TransientEntity(scatterX(), scatterY(), Math.random()*Math.PI*2, 1.00, randomBloodSplatter(), 1000);
+
+			for (int i = 0; i < (int) (2 + Math.random() * 4); i++) {
+				b = new TransientEntity(scatterX(), scatterY(), Math.random()
+						* Math.PI * 2, 1.00, randomBloodSplatter(), 1000);
 				Player.currentRoom.getEntities().add(b);
 			}
-			
+
 			for (int i = 0; i < (int) (Math.random() * 3); i++) {
-				b = new TransientEntity(scatterX(), scatterY(), Math.random()*Math.PI*2, 1.00, Player.rib, (int)(Math.random()*500+500));
+				b = new TransientEntity(scatterX(), scatterY(), Math.random()
+						* Math.PI * 2, 1.00, Player.rib,
+						(int) (Math.random() * 500 + 500));
 				Player.currentRoom.getEntities().add(b);
 			}
 			for (int i = 0; i < (int) (Math.random() * 6); i++) {
-				b = new TransientEntity(scatterX(), scatterY(), Math.random()*Math.PI*2, 1.00, Player.bone,  (int)(Math.random()*500+500));
+				b = new TransientEntity(scatterX(), scatterY(), Math.random()
+						* Math.PI * 2, 1.00, Player.bone,
+						(int) (Math.random() * 500 + 500));
 				Player.currentRoom.getEntities().add(b);
 			}
 			for (int i = 0; i < (int) (Math.random() * 2); i++) {
-				b = new TransientEntity(scatterX(), scatterY(), Math.random()*Math.PI*2, 1.00, Player.organ1,  (int)(Math.random()*500+500));
+				b = new TransientEntity(scatterX(), scatterY(), Math.random()
+						* Math.PI * 2, 1.00, Player.organ1,
+						(int) (Math.random() * 500 + 500));
 				Player.currentRoom.getEntities().add(b);
 			}
 			for (int i = 0; i < (int) (Math.random() * 2); i++) {
-				b = new TransientEntity(scatterX(), scatterY(), Math.random()*Math.PI*2, 1.00, Player.organ2,  (int)(Math.random()*500+500));
+				b = new TransientEntity(scatterX(), scatterY(), Math.random()
+						* Math.PI * 2, 1.00, Player.organ2,
+						(int) (Math.random() * 500 + 500));
 				Player.currentRoom.getEntities().add(b);
 			}
 			for (int i = 0; i < (int) (Math.random() * 2); i++) {
-				b = new TransientEntity(scatterX(), scatterY(), Math.random()*Math.PI*2, 1.00, Player.organ3,  (int)(Math.random()*500+500));
+				b = new TransientEntity(scatterX(), scatterY(), Math.random()
+						* Math.PI * 2, 1.00, Player.organ3,
+						(int) (Math.random() * 500 + 500));
 				Player.currentRoom.getEntities().add(b);
 			}
 		}
 
 	}
-	
-	private BufferedImage randomBloodSplatter(){
+
+	private BufferedImage randomBloodSplatter() {
 		double r = Math.random();
-		if(r<0.2){
+		if (r < 0.2) {
 			return Player.splatter1;
-		} else if(r<0.4){
+		} else if (r < 0.4) {
 			return Player.splatter2;
-		} else if(r<0.6){
+		} else if (r < 0.6) {
 			return Player.splatter3;
-		} else if(r<0.8){
+		} else if (r < 0.8) {
 			return Player.splatter4;
 		} else {
 			return Player.splatter5;
 		}
 	}
-	
-	
-	private int scatterX(){
-		return (int)(x - 25 + (Math.random()*100-50));
+
+	private int scatterX() {
+		return (int) (x - 25 + (Math.random() * 100 - 50));
 	}
-	
-	private int scatterY(){
-		return (int)(y - 25 + (Math.random()*100-50));
+
+	private int scatterY() {
+		return (int) (y - 25 + (Math.random() * 100 - 50));
 	}
-	
-	
+
 }
