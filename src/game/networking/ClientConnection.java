@@ -104,7 +104,16 @@ public class ClientConnection implements Runnable {
 						packet[1] = 0x0f;
 					else
 						packet[1] = 0x00;
-					floodMap(packet, 0, 19);
+					
+					//floodMap(packet, 0, 19);
+					for(ClientConnection c : Server.clients) {
+						if(c.id == packet[1])
+							packet[1] = 0x0f;
+						else
+							packet[1] = 0x00;
+						
+						c.sendPacket(packet,0, 19);
+					}
 					break;
 				case Protocol.PTYPE_ROOM:
 					socketIn.read(packet, 0, 1);

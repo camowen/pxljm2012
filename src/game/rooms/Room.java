@@ -49,6 +49,9 @@ public class Room {
 				r = new Stairs();
 				r.id = Globals.ROOM_STAIRS;
 				rooms.add(Globals.ROOM_STAIRS, r);
+				r = new Furnace();
+				r.id = Globals.ROOM_FURNACE;
+				rooms.add(Globals.ROOM_FURNACE, r);
 			} catch (IOException e) {
 				//System.out.println(e);
 			}

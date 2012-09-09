@@ -95,6 +95,7 @@ public class ClientNetworking {
 		float fromY = buf.getFloat();
 		float toX = buf.getFloat();
 		float toY = buf.getFloat();
+		System.out.println(pid+" got hit!");
 		
 		// TODO create shot graphic (Line(fromX, fromY, toX, toY)
 		if(pid == 0x0f) {

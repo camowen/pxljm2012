@@ -25,6 +25,7 @@ public class Globals {
 	public static final int ROOM_OFFICE = 3;
 	public static final int ROOM_WAREHOUSE = 4;
 	public static final int ROOM_STAIRS = 5;
+	public static final int ROOM_FURNACE = 6;
 	
 	public static final String PARKINGLOT_BACKGROUND = "img/parkinglot/bg_carpark.png";
 	public static final String PARKINGLOT_CAR = "img/parkinglot/carpark_car_100x50.png";

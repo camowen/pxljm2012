@@ -2,6 +2,7 @@ package game.networking;
 
 import game.Globals;
 import game.rooms.Bathroom;
+import game.rooms.Furnace;
 import game.rooms.Library;
 import game.rooms.Office;
 import game.rooms.ParkingLot;
@@ -35,6 +36,7 @@ public class Server {
 			rooms.add(Globals.ROOM_OFFICE, new Office());
 			rooms.add(Globals.ROOM_WAREHOUSE, new Warehouse());
 			rooms.add(Globals.ROOM_STAIRS, new Stairs());
+			rooms.add(Globals.ROOM_FURNACE, new Furnace());
 			
 			ServerSocket ss = new ServerSocket(PORT);
 			System.out.println("Server Listening on port "+ss.getLocalPort());
