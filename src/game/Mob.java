@@ -33,7 +33,7 @@ public class Mob extends Entity {
 		this.angle = angle;
 		passable = true;
 
-		health = 3;
+		health = 5;
 
 		sprite = new BufferedImage(Globals.PLAYER_HEIGHT, Globals.PLAYER_WIDTH,
 				BufferedImage.TYPE_4BYTE_ABGR);
@@ -218,54 +218,59 @@ public class Mob extends Entity {
 	}
 
 	public synchronized void kill() {
+		if (!dead) {
+			if (Globals.CONNECTED) {
+				ClientNetworking.sendDeath();
+			}
+			// Generate gibs
+			dead = true;
+			if (Math.random() > 0.5)
+				SoundSystem.play(Globals.SFX_SPLATTER);
+			else
+				SoundSystem.play(Globals.SFX_SPLAT);
 
-		// Generate gibs
-		dead = true;
-		if (Math.random() > 0.5)
-			SoundSystem.play(Globals.SFX_SPLATTER);
-		else
-			SoundSystem.play(Globals.SFX_SPLAT);
+			synchronized (Player.currentRoom) {
+				Entity b = new TransientEntity(scatterX(), scatterY(),
+						Math.random() * Math.PI * 2, 1.00, Player.blood, 1000);
+				Player.currentRoom.getEntities().add(b);
 
-		synchronized (Player.currentRoom) {
-			Entity b = new TransientEntity(scatterX(), scatterY(),
-					Math.random() * Math.PI * 2, 1.00, Player.blood, 1000);
-			Player.currentRoom.getEntities().add(b);
+				for (int i = 0; i < (int) (2 + Math.random() * 4); i++) {
+					b = new TransientEntity(scatterX(), scatterY(),
+							Math.random() * Math.PI * 2, 1.00,
+							randomBloodSplatter(), 1000);
+					Player.currentRoom.getEntities().add(b);
+				}
 
-			for (int i = 0; i < (int) (2 + Math.random() * 4); i++) {
-				b = new TransientEntity(scatterX(), scatterY(), Math.random()
-						* Math.PI * 2, 1.00, randomBloodSplatter(), 1000);
-				Player.currentRoom.getEntities().add(b);
-			}
-
-			for (int i = 0; i < (int) (Math.random() * 3); i++) {
-				b = new TransientEntity(scatterX(), scatterY(), Math.random()
-						* Math.PI * 2, 1.00, Player.rib,
-						(int) (Math.random() * 500 + 500));
-				Player.currentRoom.getEntities().add(b);
-			}
-			for (int i = 0; i < (int) (Math.random() * 6); i++) {
-				b = new TransientEntity(scatterX(), scatterY(), Math.random()
-						* Math.PI * 2, 1.00, Player.bone,
-						(int) (Math.random() * 500 + 500));
-				Player.currentRoom.getEntities().add(b);
-			}
-			for (int i = 0; i < (int) (Math.random() * 2); i++) {
-				b = new TransientEntity(scatterX(), scatterY(), Math.random()
-						* Math.PI * 2, 1.00, Player.organ1,
-						(int) (Math.random() * 500 + 500));
-				Player.currentRoom.getEntities().add(b);
-			}
-			for (int i = 0; i < (int) (Math.random() * 2); i++) {
-				b = new TransientEntity(scatterX(), scatterY(), Math.random()
-						* Math.PI * 2, 1.00, Player.organ2,
-						(int) (Math.random() * 500 + 500));
-				Player.currentRoom.getEntities().add(b);
-			}
-			for (int i = 0; i < (int) (Math.random() * 2); i++) {
-				b = new TransientEntity(scatterX(), scatterY(), Math.random()
-						* Math.PI * 2, 1.00, Player.organ3,
-						(int) (Math.random() * 500 + 500));
-				Player.currentRoom.getEntities().add(b);
+				for (int i = 0; i < (int) (Math.random() * 3); i++) {
+					b = new TransientEntity(scatterX(), scatterY(),
+							Math.random() * Math.PI * 2, 1.00, Player.rib,
+							(int) (Math.random() * 500 + 500));
+					Player.currentRoom.getEntities().add(b);
+				}
+				for (int i = 0; i < (int) (Math.random() * 6); i++) {
+					b = new TransientEntity(scatterX(), scatterY(),
+							Math.random() * Math.PI * 2, 1.00, Player.bone,
+							(int) (Math.random() * 500 + 500));
+					Player.currentRoom.getEntities().add(b);
+				}
+				for (int i = 0; i < (int) (Math.random() * 2); i++) {
+					b = new TransientEntity(scatterX(), scatterY(),
+							Math.random() * Math.PI * 2, 1.00, Player.organ1,
+							(int) (Math.random() * 500 + 500));
+					Player.currentRoom.getEntities().add(b);
+				}
+				for (int i = 0; i < (int) (Math.random() * 2); i++) {
+					b = new TransientEntity(scatterX(), scatterY(),
+							Math.random() * Math.PI * 2, 1.00, Player.organ2,
+							(int) (Math.random() * 500 + 500));
+					Player.currentRoom.getEntities().add(b);
+				}
+				for (int i = 0; i < (int) (Math.random() * 2); i++) {
+					b = new TransientEntity(scatterX(), scatterY(),
+							Math.random() * Math.PI * 2, 1.00, Player.organ3,
+							(int) (Math.random() * 500 + 500));
+					Player.currentRoom.getEntities().add(b);
+				}
 			}
 		}
 

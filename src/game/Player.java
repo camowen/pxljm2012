@@ -263,9 +263,6 @@ public class Player extends Mob {
 
 	public synchronized void kill() {
 		if (!dead) {
-			if (Globals.CONNECTED) {
-				ClientNetworking.sendDeath();
-			}
 			super.kill();
 			respawn = Globals.RESPAWN_TIME;
 			vx = 0.00;
