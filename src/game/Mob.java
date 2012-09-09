@@ -145,7 +145,6 @@ public class Mob extends Entity {
 		}
 		if (health <= 0) {
 			kill();
-			dead = true;
 		}
 
 		System.out.println("I GOT HIT!");
