@@ -127,7 +127,8 @@ public class Mob extends Entity {
 	public void hit() {
 		health--;
 		if (health <= 0) {
-			kill();
+			//kill();
+			dead = true;
 		}
 		
 		System.out.println("I GOT HIT!");
@@ -157,41 +158,6 @@ public class Mob extends Entity {
 			return true;
 		}
 		return false;
-	}
-	
-	public void kill() {
-		// Generate gibs
-		dead = true;
-		SoundSystem.play(SoundSystem.SFX_SPLATTER);
-		synchronized (Player.currentRoom) {
-			Entity b = new TransientEntity(x, y, Math.random()*Math.PI*2, 1.00, Player.blood, 1000);
-			Player.currentRoom.getEntities().add(b);
-
-			for (int i = 0; i < (int) (Math.random() * 6); i++) {
-				b = new TransientEntity(x, y, Math.random()*Math.PI*2, 1.00, Player.blood, 20, true);
-				Player.currentRoom.getEntities().add(b);
-			}
-			for (int i = 0; i < (int) (Math.random() * 3); i++) {
-				b = new TransientEntity(x, y, Math.random()*Math.PI*2, 1.00, Player.rib, 20, true);
-				Player.currentRoom.getEntities().add(b);
-			}
-			for (int i = 0; i < (int) (Math.random() * 6); i++) {
-				b = new TransientEntity(x, y, Math.random()*Math.PI*2, 1.00, Player.bone, 20, true);
-				Player.currentRoom.getEntities().add(b);
-			}
-			for (int i = 0; i < (int) (Math.random() * 2); i++) {
-				b = new TransientEntity(x, y, Math.random()*Math.PI*2, 1.00, Player.organ1, 20, true);
-				Player.currentRoom.getEntities().add(b);
-			}
-			for (int i = 0; i < (int) (Math.random() * 2); i++) {
-				b = new TransientEntity(x, y, Math.random()*Math.PI*2, 1.00, Player.organ2, 20, true);
-				Player.currentRoom.getEntities().add(b);
-			}
-			for (int i = 0; i < (int) (Math.random() * 2); i++) {
-				b = new TransientEntity(x, y, Math.random()*Math.PI*2, 1.00, Player.organ3, 20, true);
-				Player.currentRoom.getEntities().add(b);
-			}
-		}
 	}
 	
 	public void render(Graphics g, int roomx, int roomy) {

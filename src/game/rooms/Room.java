@@ -13,9 +13,12 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.imageio.ImageIO;
 
 public class Room {
 
@@ -47,7 +50,7 @@ public class Room {
 				r.id = Globals.ROOM_STAIRS;
 				rooms.add(Globals.ROOM_STAIRS, r);
 			} catch (IOException e) {
-				System.out.println(e);
+				//System.out.println(e);
 			}
 		}
 
@@ -144,16 +147,16 @@ public class Room {
 		}
 		if (playerX < 0) {
 			// Move to west room
-			System.out.println("Moving to west room");
+//			System.out.println("Moving to west room");
 			removePlayer(p);
 			west.addPlayer(p, 600 + playerX, playerY);
 		} else if (playerX > 600) {
 			// Move east
-			System.out.println("Moving to east room");
+//			System.out.println("Moving to east room");
 			removePlayer(p);
 			east.addPlayer(p, playerX - 600, playerY);
 		} else if (playerY < 0) {
-			System.out.println("Moving to north room");
+//			System.out.println("Moving to north room");
 			removePlayer(p);
 			north.addPlayer(p, playerX, 600 + playerY);
 		} else if (playerY > 600) {
@@ -163,6 +166,65 @@ public class Room {
 		}
 		return true;
 	}
+
+//	public Entity shoot(Player me, double playerX, double playerY, double angle) {
+//
+//		boolean collide = false;
+//		angle -= Math.PI / 2.0;
+//		double r = 0.00;
+//		double x = 0.00;
+//		double y = 0.00;
+//		while (!collide && r < 850.00) {
+//			x = playerX + r * Math.cos(angle);
+//			y = playerY + r * Math.sin(angle);
+//			for (Entity e : entities) {
+//				if (!e.isPassable() && e.contains(x, y)) {
+//					collide = true;
+//					e.hit();
+////					System.out.println(e);
+//					break;
+//				}
+//			}
+//			for (Mob m : Enemies.mobMap.values()) {
+//				if (m.contains(x, y)) {
+//					collide = true;
+//					m.hit();
+//					if (Globals.CONNECTED)
+//						ClientNetworking.sendShot(m.id, (byte) 1,
+//								(float) playerX, (float) playerY, (float) x,
+//								(float) y);
+////					System.out.println(m);
+//					break;
+//				}
+//			}
+//			r += 2.0;
+//		}
+//		if (collide) {
+//			try {
+//				BufferedImage shot = ImageIO.read(new File(Globals.FX_SHOT));
+//				Entity e = new TransientEntity(x-shot.getWidth()/2, y-shot.getHeight()/2, 2, 1.00, shot, 3, false);
+//				synchronized (this) {
+//					entities.add(e);
+//				}
+//			} catch (Exception e) {
+//
+//			}
+//		}
+//		// System.out.println(collide);
+//		return null;
+//	}
+	 
+    public void addPlayer(Player p, double x, double y){
+    	this.players.add(p);
+    	this.hasPlayer = true;
+    	p.setCurrentRoom(this);
+    	if(Globals.CONNECTED) {
+    		Enemies.mobMap.clear();
+	    	ClientNetworking.sendChangeRoom(id);
+    	}
+    	
+    	p.setPositionInRoom(x, y);
+    }
 	
     public Entity shoot(Player me, double playerX, double playerY, double angle){
     	
@@ -192,25 +254,20 @@ public class Room {
     		}
     		r+=2.0;
     	}
-    	System.out.println(collide);
     	
-    	Graphics2D d = (Graphics2D) fxLayer.getGraphics();
-    	
-    	d.setColor(Color.WHITE);
-    	d.drawLine((int) playerX, (int) playerY, (int) x, (int) y);
+    	if (collide) {
+			try {
+				BufferedImage shot = ImageIO.read(new File(Globals.FX_SHOT));
+				Entity e = new TransientEntity(x-shot.getWidth()/2, y-shot.getHeight()/2, 2, 1.00, shot, 3, false);
+				synchronized (this) {
+					entities.add(e);
+				}
+			} catch (Exception e) {
+
+			}
+		}
+
     	return null;
-    }
-    
-    public void addPlayer(Player p, double x, double y){
-    	this.players.add(p);
-    	this.hasPlayer = true;
-    	p.setCurrentRoom(this);
-    	if(Globals.CONNECTED) {
-    		Enemies.mobMap.clear();
-	    	ClientNetworking.sendChangeRoom(id);
-    	}
-    	
-    	p.setPositionInRoom(x, y);
     }
     
     public void populate(){
