@@ -90,7 +90,7 @@ public class ClientConnection implements Runnable {
 				case Protocol.PTYPE_UPDATE:
 					packet[1] = id;
 					socketIn.read(packet, 2, 20);
-					floodMap(packet, 0, 20);
+					floodMap(packet, 0, 22);
 					break;
 				case Protocol.PTYPE_DESPAWN:
 					socketIn.read(packet, 2, 1);
