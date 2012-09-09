@@ -57,9 +57,6 @@ public class Office extends Room{
 			}
 		}
 		
-		Entity m = new Mob(300, 150);
-		m.type = Globals.ASSET_TYPE_IGNORE;
-		entities.add(m);
 	}
 	
 	/*   0  1

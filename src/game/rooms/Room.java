@@ -13,17 +13,15 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.imageio.ImageIO;
 
 public class Room {
 
 	public byte id = 0;
 
+	public static BufferedImage fxLayer = new BufferedImage(Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT, BufferedImage.TYPE_INT_ARGB);
 	private static List<Room> rooms;
 
 	public static List<Room> getRooms() {
@@ -116,6 +114,12 @@ public class Room {
 		for (Player p : players) {
 			p.render(g);
 		}
+		
+		Graphics2D s = (Graphics2D) fxLayer.getGraphics();
+		s.setBackground(new Color(0, 0, 0, 0));
+		s.clearRect(0, 0, Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT);
+		
+		g.drawImage(fxLayer, roomx, roomy, null);
 
 	}
 
@@ -165,9 +169,10 @@ public class Room {
     	boolean collide = false;
     	angle -= Math.PI/2.0;
     	double r = 0.00;
+    	double x = 0, y = 0;
     	while(!collide && r < 850.00){
-    		double x = playerX+  r * Math.cos(angle);
-    		double y = playerY + r * Math.sin(angle);
+    		x = playerX+  r * Math.cos(angle);
+    		y = playerY + r * Math.sin(angle);
     		for(Entity e : entities){
     			if(!e.isPassable() && e.contains(x, y)){
     				collide = true;
@@ -188,6 +193,11 @@ public class Room {
     		r+=2.0;
     	}
     	System.out.println(collide);
+    	
+    	Graphics2D d = (Graphics2D) fxLayer.getGraphics();
+    	
+    	d.setColor(Color.WHITE);
+    	d.drawLine((int) playerX, (int) playerY, (int) x, (int) y);
     	return null;
     }
     

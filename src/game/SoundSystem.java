@@ -68,10 +68,14 @@ public class SoundSystem {
 	}
 	
 	public static void play(Clip c){
+		if(c == null) return;
+		
 		c.start();
 	}
 	
 	public static void playForever(Clip c){
+		if(c == null) return;
+		
 		c.loop(Clip.LOOP_CONTINUOUSLY);
 		c.start();
 	}

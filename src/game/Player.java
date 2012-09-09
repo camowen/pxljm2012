@@ -33,8 +33,8 @@ public class Player extends Mob {
 	public static BufferedImage bone;
 	public static BufferedImage rib;
 
-	private Room currentRoom;
-
+	public static Room currentRoom;
+	
 	private int walkFrame = 0;
 	private int shootFrame = 0;
 
@@ -199,38 +199,9 @@ public class Player extends Mob {
 	}
 
 	public void kill() {
-		// Generate gibs
-		dead = true;
-		SoundSystem.play(SoundSystem.SFX_SPLATTER);
-		synchronized (currentRoom) {
-			Entity b = new TransientEntity(x, y, Math.random()*Math.PI*2, 1.00, blood, 1000);
-			currentRoom.getEntities().add(b);
-
-			for (int i = 0; i < (int) (Math.random() * 6); i++) {
-				b = new TransientEntity(x, y, Math.random()*Math.PI*2, 1.00, blood, 20, true);
-				currentRoom.getEntities().add(b);
-			}
-			for (int i = 0; i < (int) (Math.random() * 3); i++) {
-				b = new TransientEntity(x, y, Math.random()*Math.PI*2, 1.00, rib, 20, true);
-				currentRoom.getEntities().add(b);
-			}
-			for (int i = 0; i < (int) (Math.random() * 6); i++) {
-				b = new TransientEntity(x, y, Math.random()*Math.PI*2, 1.00, bone, 20, true);
-				currentRoom.getEntities().add(b);
-			}
-			for (int i = 0; i < (int) (Math.random() * 2); i++) {
-				b = new TransientEntity(x, y, Math.random()*Math.PI*2, 1.00, organ1, 20, true);
-				currentRoom.getEntities().add(b);
-			}
-			for (int i = 0; i < (int) (Math.random() * 2); i++) {
-				b = new TransientEntity(x, y, Math.random()*Math.PI*2, 1.00, organ2, 20, true);
-				currentRoom.getEntities().add(b);
-			}
-			for (int i = 0; i < (int) (Math.random() * 2); i++) {
-				b = new TransientEntity(x, y, Math.random()*Math.PI*2, 1.00, organ3, 20, true);
-				currentRoom.getEntities().add(b);
-			}
-		}
+		super.kill();
+		
+		ClientNetworking.sendDeath();
 	}
 
 }

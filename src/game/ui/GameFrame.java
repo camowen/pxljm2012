@@ -55,10 +55,15 @@ public class GameFrame extends JFrame {
 	public static void main(String[] args) {
 		try {
 			SoundSystem.Init();
+		} catch (Exception e) {
+			// shhhhhhhh....
+		}
+		
+		try {
 			GameFrame g = new GameFrame();
 			
-			//Globals.CONNECTED = ClientNetworking.init("192.168.0.130", 8008);
-			Globals.CONNECTED = false;
+			Globals.CONNECTED = ClientNetworking.init("192.168.0.130", 8008);
+			//Globals.CONNECTED = false;
 			Player p = new Player("Daniel");
 			
 			Room r = Room.getRooms().get((int) (1+Math.random()*3));
