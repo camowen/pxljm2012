@@ -177,7 +177,6 @@ public class Room {
     				m.hit();
     				if(Globals.CONNECTED)
     					ClientNetworking.sendShot(m.id, (byte) 1, (float) playerX, (float) playerY, (float) x, (float) y);
-    				System.out.println(m);
     				break;
     			}
     		}
@@ -191,9 +190,11 @@ public class Room {
     	this.players.add(p);
     	this.hasPlayer = true;
     	p.setCurrentRoom(this);
-    	if(Globals.CONNECTED)
+    	if(Globals.CONNECTED) {
+    		Enemies.mobMap.clear();
 	    	ClientNetworking.sendChangeRoom(id);
-    	//populate();
+    	}
+    	
     	p.setPositionInRoom(x, y);
     }
     

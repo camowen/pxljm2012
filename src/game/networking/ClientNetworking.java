@@ -5,6 +5,7 @@ package game.networking;
 import game.Entity;
 import game.Globals;
 import game.Mob;
+import game.Player;
 import game.rooms.Room;
 
 import java.io.IOException;
@@ -75,9 +76,11 @@ public class ClientNetworking {
 			Mob m = new Mob(xPos, yPos, thta);
 			m.id = pid;
 			Enemies.mobMap.put(pid, new Mob(xPos, yPos, thta));
+		} else {
+			Mob m = Enemies.mobMap.get(pid);
+			m.networkUpdate(xPos, yPos, spdX, spdY, thta);
+			m.id = pid;
 		}
-		else
-			Enemies.mobMap.get(pid).networkUpdate(xPos, yPos, spdX, spdY, thta);
 	}
 	
 	private static void getShot() throws IOException {
@@ -95,7 +98,7 @@ public class ClientNetworking {
 		
 		// TODO create shot graphic (Line(fromX, fromY, toX, toY)
 		if(pid == 0x0f) {
-			// do {dmg} damage to our player
+			Player.player.hit();
 		}
 	}
 	
@@ -171,6 +174,7 @@ public class ClientNetworking {
 		buf.putFloat(xPositionTo);
 		buf.putFloat(yPositionTo);
 		
+		buf.rewind();
 		buf.get(packet, 3, 16);
 		
 		sendPacket(packet, 0, 19);
