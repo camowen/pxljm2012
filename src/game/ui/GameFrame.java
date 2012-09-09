@@ -2,6 +2,7 @@ package game.ui;
 
 import game.Globals;
 import game.Player;
+import game.SoundSystem;
 import game.networking.ClientNetworking;
 import game.rooms.Room;
 
@@ -53,10 +54,11 @@ public class GameFrame extends JFrame {
 
 	public static void main(String[] args) {
 		try {
+			SoundSystem.Init();
 			GameFrame g = new GameFrame();
 			
-			Globals.CONNECTED = ClientNetworking.init("192.168.0.130", 8008);
-			//Globals.CONNECTED = false;
+			//Globals.CONNECTED = ClientNetworking.init("192.168.0.130", 8008);
+			Globals.CONNECTED = false;
 			Player p = new Player("Daniel");
 			
 			Room r = Room.getRooms().get((int) (1+Math.random()*3));
@@ -82,7 +84,10 @@ public class GameFrame extends JFrame {
 			long start = System.currentTimeMillis();
 			while (true) {
 				long now = System.currentTimeMillis();
-				p.move(now - start);
+				p.update(now - start);
+				for(Room room : Room.getRooms()){
+					room.update(now-start);
+				}
 				start = now;
 				g.render(p);
 				

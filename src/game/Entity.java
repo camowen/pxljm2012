@@ -271,5 +271,9 @@ public class Entity {
 		hitbox = new Rectangle((int) x, (int) y, (int) Math.abs(op.getX()),
 				(int) Math.abs(op.getY()));
 	}
+	
+	public void update(long millis){
+		
+	}
 
 }
