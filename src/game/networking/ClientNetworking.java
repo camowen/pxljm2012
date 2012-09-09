@@ -113,7 +113,7 @@ public class ClientNetworking {
 		byte despawnType = data[1];
 		
 		Mob m = Enemies.mobMap.remove(pid);
-		if(despawnType == Protocol.DESPAWN_TYPE_DEATH) {
+		if(despawnType == Protocol.DESPAWN_TYPE_DEATH && m!= null) {
 			m.kill();
 		}
 	}
