@@ -61,7 +61,7 @@ public class Mob extends Entity {
 				sprite.getHeight());
 	}
 
-	public void move(long deltat) {
+	public void update(long deltat) {
 		double seconds = (deltat / 1000.00);
 		double dx = vx * seconds;
 		double dy = vy * seconds;

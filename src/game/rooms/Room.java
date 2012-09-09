@@ -4,23 +4,26 @@ import game.Entity;
 import game.Globals;
 import game.Mob;
 import game.Player;
+import game.TransientEntity;
+import game.networking.ClientNetworking;
+import game.networking.Enemies;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import game.networking.ClientNetworking;
-import game.networking.Enemies;
+import javax.imageio.ImageIO;
 
 public class Room {
 
 	public byte id = 0;
-	
+
 	private static List<Room> rooms;
 
 	public static List<Room> getRooms() {
@@ -36,7 +39,7 @@ public class Room {
 				r = new Bathroom();
 				r.id = Globals.ROOM_BATHROOM;
 				rooms.add(Globals.ROOM_BATHROOM, r);
-				r  = new Office();
+				r = new Office();
 				r.id = Globals.ROOM_OFFICE;
 				rooms.add(Globals.ROOM_OFFICE, r);
 				r = new Warehouse();
@@ -88,11 +91,13 @@ public class Room {
 		at.scale(scaleFactor, scaleFactor);
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.drawImage(background, at, null);
-		for (Entity e : entities) {
-			if (e instanceof Mob) {
-				((Mob) e).pointAt(players.get(0));
+		synchronized (this) {
+			for (Entity e : entities) {
+				if (e instanceof Mob) {
+					((Mob) e).pointAt(players.get(0));
+				}
+				e.render(g, roomx, roomy);
 			}
-			e.render(g, roomx, roomy);
 		}
 
 		for (Mob networkPlayer : Enemies.mobMap.values()) {
@@ -124,9 +129,9 @@ public class Room {
 	public boolean canMove(Player p, double playerX, double playerY) {
 		for (Entity e : entities) {
 			if (e instanceof Mob) {
-				 if(((Mob)e).contains(p)){
-					 return false;
-				 }
+				if (((Mob) e).contains(p)) {
+					return false;
+				}
 			} else {
 				if (!e.isPassable() && e.contains(playerX, playerY)) {
 					return false;
@@ -154,101 +159,126 @@ public class Room {
 		}
 		return true;
 	}
-	
-    public Entity shoot(Player me, double playerX, double playerY, double angle){
-    	
-    	boolean collide = false;
-    	angle -= Math.PI/2.0;
-    	double r = 0.00;
-    	while(!collide && r < 850.00){
-    		double x = playerX+  r * Math.cos(angle);
-    		double y = playerY + r * Math.sin(angle);
-    		for(Entity e : entities){
-    			if(!e.isPassable() && e.contains(x, y)){
-    				collide = true;
-    				e.hit();
-    				System.out.println(e);
-    				break;
-    			}
-    		}
-    		for(Mob m : Enemies.mobMap.values()){
-    			if(m.contains(x, y)){
-    				collide = true;
-    				m.hit();
-    				if(Globals.CONNECTED)
-    					ClientNetworking.sendShot(m.id, (byte) 1, (float) playerX, (float) playerY, (float) x, (float) y);
-    				System.out.println(m);
-    				break;
-    			}
-    		}
-    		r+=2.0;
-    	}
-    	System.out.println(collide);
-    	return null;
-    }
-    
-    public void addPlayer(Player p, double x, double y){
-    	this.players.add(p);
-    	this.hasPlayer = true;
-    	p.setCurrentRoom(this);
-    	if(Globals.CONNECTED)
-	    	ClientNetworking.sendChangeRoom(id);
-    	//populate();
-    	p.setPositionInRoom(x, y);
-    }
-    
-    public void populate(){
-    	Entity e;
-    	
-    	entities.clear();
-    	BufferedImage wall = new BufferedImage(265,10,BufferedImage.TYPE_4BYTE_ABGR);
+
+	public Entity shoot(Player me, double playerX, double playerY, double angle) {
+
+		boolean collide = false;
+		angle -= Math.PI / 2.0;
+		double r = 0.00;
+		double x = 0.00;
+		double y = 0.00;
+		while (!collide && r < 850.00) {
+			x = playerX + r * Math.cos(angle);
+			y = playerY + r * Math.sin(angle);
+			for (Entity e : entities) {
+				if (!e.isPassable() && e.contains(x, y)) {
+					collide = true;
+					e.hit();
+					System.out.println(e);
+					break;
+				}
+			}
+			for (Mob m : Enemies.mobMap.values()) {
+				if (m.contains(x, y)) {
+					collide = true;
+					m.hit();
+					if (Globals.CONNECTED)
+						ClientNetworking.sendShot(m.id, (byte) 1,
+								(float) playerX, (float) playerY, (float) x,
+								(float) y);
+					System.out.println(m);
+					break;
+				}
+			}
+			r += 2.0;
+		}
+		if (collide) {
+			try {
+				BufferedImage shot = ImageIO.read(new File(Globals.FX_SHOT));
+				Entity e = new TransientEntity(x, y, Math.random() * Math.PI
+						* 2, 1.00, shot, 3, false);
+				synchronized (this) {
+					entities.add(e);
+				}
+			} catch (Exception e) {
+
+			}
+		}
+		// System.out.println(collide);
+		return null;
+	}
+
+	public void addPlayer(Player p, double x, double y) {
+		this.players.add(p);
+		this.hasPlayer = true;
+		p.setCurrentRoom(this);
+		if (Globals.CONNECTED)
+			ClientNetworking.sendChangeRoom(id);
+		// populate();
+		p.setPositionInRoom(x, y);
+	}
+
+	public void populate() {
+		Entity e;
+
+		entities.clear();
+		BufferedImage wall = new BufferedImage(265, 10,
+				BufferedImage.TYPE_4BYTE_ABGR);
 		Graphics2D w = wall.createGraphics();
 		w.setColor(Color.black);
 		w.fillRect(0, 0, 265, 5);
-		e = new Entity(0, 0,0,1.0, wall);
+		e = new Entity(0, 0, 0, 1.0, wall);
 		e.type = Globals.ASSET_TYPE_IGNORE;
 		entities.add(e);
-		e = new Entity(335, 0,0,1.0, wall);
+		e = new Entity(335, 0, 0, 1.0, wall);
 		e.type = Globals.ASSET_TYPE_IGNORE;
 		entities.add(e);
-		e = new Entity(0, 595,0,1.0, wall);
+		e = new Entity(0, 595, 0, 1.0, wall);
 		e.type = Globals.ASSET_TYPE_IGNORE;
 		entities.add(e);
-		e = new Entity(335, 595,0,1.0, wall);
+		e = new Entity(335, 595, 0, 1.0, wall);
 		e.type = Globals.ASSET_TYPE_IGNORE;
 		entities.add(e);
-		
-		wall = new BufferedImage(10,265,BufferedImage.TYPE_4BYTE_ABGR);
+
+		wall = new BufferedImage(10, 265, BufferedImage.TYPE_4BYTE_ABGR);
 		w = wall.createGraphics();
 		w.setColor(Color.black);
 		w.fillRect(0, 0, 5, 265);
-		e = new Entity(0, 0,0,1.0, wall);
+		e = new Entity(0, 0, 0, 1.0, wall);
 		e.type = Globals.ASSET_TYPE_IGNORE;
 		entities.add(e);
-		e = new Entity(0, 335,0,1.0, wall);
+		e = new Entity(0, 335, 0, 1.0, wall);
 		e.type = Globals.ASSET_TYPE_IGNORE;
 		entities.add(e);
-		e = new Entity(595, 0,0,1.0, wall);
+		e = new Entity(595, 0, 0, 1.0, wall);
 		e.type = Globals.ASSET_TYPE_IGNORE;
 		entities.add(e);
-		e = new Entity(595, 335,0,1.0, wall);
+		e = new Entity(595, 335, 0, 1.0, wall);
 		e.type = Globals.ASSET_TYPE_IGNORE;
 		entities.add(e);
-    }
-    
-    public void setNorth(Room r){
-    	north = r;
-    }
-    
-    public void setSouth(Room r){
-    	south = r;
-    }
-    
-    public void setEast(Room r){
-    	east = r;
-    }
-    
-    public void setWest(Room r){
-    	west = r;
-    }
+	}
+
+	public void setNorth(Room r) {
+		north = r;
+	}
+
+	public void setSouth(Room r) {
+		south = r;
+	}
+
+	public void setEast(Room r) {
+		east = r;
+	}
+
+	public void setWest(Room r) {
+		west = r;
+	}
+
+	public void update(long l) {
+		for (Entity e : entities) {
+			if (e instanceof TransientEntity) {
+				e.update(l);
+			}
+		}
+	}
 }

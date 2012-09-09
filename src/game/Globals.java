@@ -1,5 +1,7 @@
 package game;
 
+import javax.sound.sampled.AudioInputStream;
+
 public class Globals {
 	
 	public static final String GAMENAME = "TIME FLUX";
@@ -74,6 +76,31 @@ public class Globals {
 	public static final String CHARACTER_FEET_IDLE = "img/char/char_feetStand_blue.png";
 	public static final String CHARACTER_FEET_1 = "img/char/char_feet1_blue.png";
 	public static final String CHARACTER_FEET_2 = "img/char/char_feet2_blue.png";
+	
+	public static final String FX_BLOOD = "img/fx/blood.png";
+	public static final String FX_BONE = "img/fx/body_bone.png";
+	public static final String FX_ORGAN_1 = "img/fx/body_organ1.png";
+	public static final String FX_ORGAN_2 = "img/fx/body_organ2.png";
+	public static final String FX_ORGAN_3 = "img/fx/body_organ3.png";
+	public static final String FX_RIB = "img/fx/body_rib.png";
+	public static final String FX_CROSSHAIR = "img/fx/crosshair.png";
+	public static final String FX_EXPLOSION= "img/fx/explosion.png";
+	public static final String FX_SHOT = "img/fx/shot.png";
+	public static final String FX_SMOKE = "img/fx/smoke.png";
+	
+	public static final String SFX_EXPLOSION = "sound/fx/explosion.wav";
+	public static final String SFX_RELOAD = "sound/fx/reload.wav";
+	public static final String SFX_RELOAD2 = "sound/fx/reload2.wav";
+	public static final String SFX_ROCKET = "sound/fx/rocket.wav";
+	public static final String SFX_SHOT = "sound/fx/shot.wav";
+	public static final String SFX_SHOT2 = "sound/fx/shot2.wav";
+	public static final String SFX_RUNNING = "sound/fx/sound_run.wav";
+	public static final String SFX_SPLAT = "sound/fx/splat.wav";
+	public static final String SFX_SPLATTER = "sound/fx/splatter2.wav";
+	
+	public static final String MUS_BG = "sound/music/mus.mp3";
+
+	
 	
 	public static boolean CONNECTED = false;
 

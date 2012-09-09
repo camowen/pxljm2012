@@ -110,6 +110,9 @@ public class InputHandler implements KeyListener, MouseListener,
 				ClientNetworking.sendDisconnect();
 			System.exit(0);
 		}
+		if(e.getKeyCode() == KeyEvent.VK_P){
+			mob.kill();
+		}
 	}
 
 	@Override
