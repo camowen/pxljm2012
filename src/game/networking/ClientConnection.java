@@ -106,7 +106,7 @@ public class ClientConnection implements Runnable {
 						if(c.id == packet[1])
 							packet[1] = 0x0f;
 						else
-							packet[1] = 0x00;
+							packet[1] = 0x0f;
 						
 						c.sendPacket(packet,0, 19);
 					}
